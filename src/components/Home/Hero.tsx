@@ -914,7 +914,6 @@ const Hero: React.FC = () => {
             transform: none;
           }
 
-          /* Top ribbon — visible, scaled */
           .az-top-ribbon {
             top: 40px;
             right: -210px;
@@ -946,7 +945,6 @@ const Hero: React.FC = () => {
             height: 12px;
           }
 
-          /* Bottom ribbon — full width, corners touch */
           .az-bottom-ribbon {
             display: flex;
 
@@ -985,100 +983,50 @@ const Hero: React.FC = () => {
         }
 
         /* =====================================================
-           MOBILE — 600px
+           MOBILE — 768px (Tablet portrait)
         ===================================================== */
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
           .az-hero-container {
             padding:
-              90px
-              20px
-              90px;
-          }
-
-          .az-hero-left {
-            padding-top: 0;
+              110px
+              24px
+              100px;
           }
 
           .az-hero-title {
-            font-size: 38px;
-            line-height: 1;
+            font-size: 46px;
             letter-spacing: -2px;
           }
 
           .az-hero-description {
-            margin-top: 18px;
-            font-size: 15px;
-            line-height: 1.5;
-          }
-
-          .az-desktop-break {
-            display: none;
-          }
-
-          .az-hero-actions {
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 22px;
-          }
-
-          .az-start-btn {
-            width: 100%;
-            max-width: 260px;
-            height: 54px;
-            font-size: 14px;
-          }
-
-          .az-play-circle {
-            width: 52px;
-            height: 52px;
-          }
-
-          .az-watch-btn {
-            font-size: 14px;
+            font-size: 15.5px;
           }
 
           .az-hero-right {
-            height: 260px;
-            margin-top: 5px;
-            justify-content: center;
+            height: 320px;
           }
 
           .az-hero-image {
-            width: 100%;
-            max-width: 400px;
-            height: 255px;
-            object-fit: contain;
-            transform: none;
+            max-width: 380px;
+            height: 300px;
           }
 
-          /* TOP RIBBON — fully visible on mobile */
           .az-top-ribbon {
-            display: flex;
-
-            top: 15px;
-
-            right: -60px;
-
-            width: 460px;
-            height: 52px;
-
-            gap: 16px;
-
+            top: 25px;
+            right: -180px;
+            width: 720px;
+            height: 68px;
+            gap: 24px;
             transform:
-              rotate(35deg)
-              scale(0.75);
+              rotate(42deg)
+              scale(0.78);
 
-            transform-origin: center center;
-
-            animation: none;
-            opacity: 1;
+            transform-origin: right center;
           }
 
           .az-ribbon-item {
-            gap: 16px;
-            opacity: 1;
-            animation: none;
+            gap: 18px;
           }
 
           .az-ribbon-text {
@@ -1090,18 +1038,122 @@ const Hero: React.FC = () => {
             height: 10px;
           }
 
-          /* BOTTOM RIBBON — full width, corners touch */
+          .az-bottom-ribbon {
+            left: -8%;
+            width: 116%;
+            bottom: 10px;
+            height: 56px;
+            transform: rotate(-5deg);
+          }
+
+          .az-services {
+            gap: 26px;
+          }
+
+          .az-service {
+            gap: 14px;
+          }
+
+          .az-service-text {
+            font-size: 11px;
+          }
+
+          .az-service-dot {
+            width: 10px;
+            height: 10px;
+          }
+        }
+
+        /* =====================================================
+           MOBILE — 600px
+           TOP RIBBON HIDDEN, HEADING MOVED TO TOP
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+          /* HIDE TOP RIBBON ON MOBILE */
+          .az-top-ribbon {
+            display: none !important;
+          }
+
+          /* REDUCE TOP PADDING — heading moves up */
+          .az-hero-container {
+            padding:
+              40px
+              18px
+              90px;
+          }
+
+          .az-hero-left {
+            padding-top: 0;
+          }
+
+          .az-hero-title {
+            font-size: 36px;
+            line-height: 1;
+            letter-spacing: -1.5px;
+          }
+
+          .az-hero-description {
+            margin-top: 18px;
+            font-size: 14.5px;
+            line-height: 1.55;
+          }
+
+          .az-desktop-break {
+            display: none;
+          }
+
+          .az-hero-actions {
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 24px;
+            align-items: center;
+          }
+
+          .az-start-btn {
+            width: 100%;
+            max-width: 270px;
+            height: 54px;
+            font-size: 14px;
+          }
+
+          .az-play-circle {
+            width: 52px;
+            height: 52px;
+          }
+
+          .az-watch-btn {
+            font-size: 14px;
+            justify-content: center;
+          }
+
+          .az-hero-right {
+            height: 280px;
+            margin-top: 10px;
+            justify-content: center;
+          }
+
+          .az-hero-image {
+            width: 100%;
+            max-width: 360px;
+            height: 270px;
+            object-fit: contain;
+            transform: none;
+          }
+
+          /* BOTTOM RIBBON — full bleed, corners touch */
           .az-bottom-ribbon {
             display: flex;
 
-            left: -10%;
+            left: -8%;
             right: auto;
 
-            width: 120%;
+            width: 116%;
 
-            bottom: 8px;
+            bottom: 10px;
 
-            height: 50px;
+            height: 52px;
 
             transform: rotate(-5deg);
             transform-origin: center;
@@ -1140,17 +1192,23 @@ const Hero: React.FC = () => {
         ===================================================== */
 
         @media (max-width: 480px) {
+
+          /* TOP RIBBON HIDDEN */
+          .az-top-ribbon {
+            display: none !important;
+          }
+
           .az-hero-container {
             padding:
-              82px
+              35px
               16px
               82px;
           }
 
           .az-hero-title {
-            font-size: 34px;
+            font-size: 32px;
             line-height: 1.02;
-            letter-spacing: -1.8px;
+            letter-spacing: -1.2px;
           }
 
           .az-hero-description {
@@ -1160,12 +1218,12 @@ const Hero: React.FC = () => {
           }
 
           .az-hero-actions {
-            gap: 12px;
-            margin-top: 20px;
+            gap: 14px;
+            margin-top: 22px;
           }
 
           .az-start-btn {
-            max-width: 240px;
+            max-width: 250px;
             height: 52px;
             font-size: 13px;
           }
@@ -1181,50 +1239,22 @@ const Hero: React.FC = () => {
           }
 
           .az-hero-right {
-            height: 230px;
+            height: 250px;
           }
 
           .az-hero-image {
-            max-width: 340px;
-            height: 225px;
+            max-width: 320px;
+            height: 240px;
           }
 
-          /* TOP RIBBON — fully visible on small mobile */
-          .az-top-ribbon {
-            top: 12px;
-            right: -50px;
-            width: 420px;
-            height: 48px;
-            gap: 14px;
-
-            transform:
-              rotate(35deg)
-              scale(0.68);
-
-            transform-origin: center center;
-          }
-
-          .az-ribbon-item {
-            gap: 14px;
-          }
-
-          .az-ribbon-text {
-            font-size: 11px;
-          }
-
-          .az-ribbon-dot {
-            width: 9px;
-            height: 9px;
-          }
-
-          /* BOTTOM RIBBON — full width, corners touch */
+          /* BOTTOM RIBBON */
           .az-bottom-ribbon {
-            left: -10%;
-            width: 120%;
+            left: -8%;
+            width: 116%;
 
-            bottom: 6px;
+            bottom: 8px;
 
-            height: 46px;
+            height: 48px;
 
             transform: rotate(-5deg);
           }
@@ -1252,16 +1282,22 @@ const Hero: React.FC = () => {
         ===================================================== */
 
         @media (max-width: 380px) {
+
+          /* TOP RIBBON HIDDEN */
+          .az-top-ribbon {
+            display: none !important;
+          }
+
           .az-hero-container {
             padding:
-              74px
+              30px
               14px
               76px;
           }
 
           .az-hero-title {
-            font-size: 30px;
-            letter-spacing: -1.5px;
+            font-size: 28px;
+            letter-spacing: -1px;
           }
 
           .az-hero-description {
@@ -1269,56 +1305,28 @@ const Hero: React.FC = () => {
           }
 
           .az-start-btn {
-            max-width: 220px;
+            max-width: 230px;
             height: 50px;
             font-size: 12px;
           }
 
           .az-hero-right {
-            height: 200px;
+            height: 220px;
           }
 
           .az-hero-image {
-            max-width: 300px;
-            height: 195px;
+            max-width: 280px;
+            height: 210px;
           }
 
-          /* TOP RIBBON — fully visible on extra small */
-          .az-top-ribbon {
-            top: 10px;
-            right: -40px;
-            width: 380px;
-            height: 44px;
-            gap: 12px;
-
-            transform:
-              rotate(35deg)
-              scale(0.62);
-
-            transform-origin: center center;
-          }
-
-          .az-ribbon-item {
-            gap: 12px;
-          }
-
-          .az-ribbon-text {
-            font-size: 10px;
-          }
-
-          .az-ribbon-dot {
-            width: 8px;
-            height: 8px;
-          }
-
-          /* BOTTOM RIBBON — full width */
+          /* BOTTOM RIBBON */
           .az-bottom-ribbon {
-            left: -10%;
-            width: 120%;
+            left: -8%;
+            width: 116%;
 
-            bottom: 5px;
+            bottom: 6px;
 
-            height: 42px;
+            height: 44px;
 
             transform: rotate(-5deg);
           }
@@ -1357,7 +1365,7 @@ const Hero: React.FC = () => {
       `}</style>
 
       <section className="az-hero">
-        {/* TOP GREEN RIBBON */}
+        {/* TOP GREEN RIBBON (hidden on mobile via CSS) */}
         <div className="az-top-ribbon">
           {topServices.map((service, index) => (
             <div className="az-ribbon-item" key={service}>

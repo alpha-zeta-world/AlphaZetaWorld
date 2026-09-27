@@ -269,9 +269,7 @@ const Arrow = () => {
 
 const WhyAlphaZeta: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
 
   /* =====================================================
      INTERSECTION OBSERVER — Repeats on scroll up/down
@@ -299,52 +297,6 @@ const WhyAlphaZeta: React.FC = () => {
       observer.disconnect();
     };
   }, []);
-
-  /* =====================================================
-     TRACK ACTIVE SLIDE (based on scroll position)
-  ===================================================== */
-
-  const handleScroll = () => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const scrollLeft = el.scrollLeft;
-    const cardWidth = el.scrollWidth / cards.length;
-    const index = Math.round(scrollLeft / cardWidth);
-
-    if (index !== activeSlide) {
-      setActiveSlide(index);
-    }
-  };
-
-  /* =====================================================
-     SLIDE NAVIGATION
-  ===================================================== */
-
-  const goToSlide = (index: number) => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const cardWidth = el.scrollWidth / cards.length;
-
-    el.scrollTo({
-      left: cardWidth * index,
-      behavior: "smooth",
-    });
-
-    setActiveSlide(index);
-  };
-
-  const nextSlide = () => {
-    const next = (activeSlide + 1) % cards.length;
-    goToSlide(next);
-  };
-
-  const prevSlide = () => {
-    const prev =
-      (activeSlide - 1 + cards.length) % cards.length;
-    goToSlide(prev);
-  };
 
   return (
     <>
@@ -418,7 +370,7 @@ const WhyAlphaZeta: React.FC = () => {
         }
 
         /* =========================
-           GRID (Desktop) / SLIDER (Mobile)
+           GRID
         ========================= */
 
         .alpha-why-grid {
@@ -680,94 +632,6 @@ const WhyAlphaZeta: React.FC = () => {
         }
 
         /* =========================
-           SLIDER CONTROLS (hidden on desktop)
-        ========================= */
-
-        .aw-slider-controls {
-          display: none;
-        }
-
-        .aw-slider-dots {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .aw-dot {
-          width: 8px;
-          height: 8px;
-
-          border-radius: 50%;
-
-          background: #c9d6d3;
-
-          border: none;
-          padding: 0;
-
-          cursor: pointer;
-
-          transition:
-            background 0.3s ease,
-            width 0.3s ease,
-            transform 0.3s ease;
-        }
-
-        .aw-dot.aw-dot-active {
-          width: 22px;
-
-          border-radius: 5px;
-
-          background: #0A4B3F;
-        }
-
-        .aw-slider-buttons {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          gap: 12px;
-
-          margin-top: 14px;
-        }
-
-        .aw-slider-btn {
-          width: 42px;
-          height: 42px;
-
-          border-radius: 50%;
-
-          border: 1.5px solid #0A4B3F;
-
-          background: #ffffff;
-
-          color: #0A4B3F;
-
-          font-size: 18px;
-          line-height: 1;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          cursor: pointer;
-
-          transition:
-            background 0.25s ease,
-            color 0.25s ease,
-            transform 0.25s ease,
-            box-shadow 0.25s ease;
-        }
-
-        .aw-slider-btn:hover {
-          background: #0A4B3F;
-          color: #ffffff;
-          transform: translateY(-2px);
-          box-shadow:
-            0 6px 14px rgba(10, 75, 63, 0.20);
-        }
-
-        /* =========================
            VISIBLE STATE — Animations
         ========================= */
 
@@ -1003,7 +867,7 @@ const WhyAlphaZeta: React.FC = () => {
         }
 
         /* =====================================================
-           MOBILE — Slider layout
+           MOBILE — Stacked layout (no slider)
         ===================================================== */
 
         @media (max-width: 760px) {
@@ -1032,91 +896,18 @@ const WhyAlphaZeta: React.FC = () => {
             display: none;
           }
 
-          /* =========================
-             MOBILE SLIDER
-          ========================= */
-
+          /* Stacked grid */
           .alpha-why-grid {
-            display: flex;
-
-            grid-template-columns: none;
-
-            gap: 16px;
+            grid-template-columns: 1fr;
 
             column-gap: 0;
-            row-gap: 0;
+            row-gap: 34px;
 
-            margin-top: 25px;
-
-            overflow-x: auto;
-            overflow-y: hidden;
-
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-
-            -webkit-overflow-scrolling: touch;
-
-            padding: 8px 16px 24px;
-
-            margin-left: -16px;
-            margin-right: -16px;
-
-            scrollbar-width: none;
-          }
-
-          .alpha-why-grid::-webkit-scrollbar {
-            display: none;
+            margin-top: 30px;
           }
 
           .alpha-why-card {
-            flex: 0 0 82%;
-            max-width: 340px;
-
-            scroll-snap-align: center;
-
             padding: 4px 0 12px;
-
-            opacity: 1;
-            animation: none;
-          }
-
-          /* Re-enable entrance animation inside slider */
-          .alpha-why-section.aw-visible .alpha-why-card {
-            animation:
-              awCardFlipIn
-              0.85s
-              cubic-bezier(0.34, 1.4, 0.64, 1)
-              forwards;
-          }
-
-          .alpha-why-section.aw-visible
-          .alpha-why-card:nth-child(1) {
-            animation-delay: 0.4s;
-          }
-
-          .alpha-why-section.aw-visible
-          .alpha-why-card:nth-child(2) {
-            animation-delay: 0.55s;
-          }
-
-          .alpha-why-section.aw-visible
-          .alpha-why-card:nth-child(3) {
-            animation-delay: 0.7s;
-          }
-
-          .alpha-why-section.aw-visible
-          .alpha-why-card:nth-child(4) {
-            animation-delay: 0.85s;
-          }
-
-          .alpha-why-section.aw-visible
-          .alpha-why-card:nth-child(5) {
-            animation-delay: 1s;
-          }
-
-          .alpha-why-section.aw-visible
-          .alpha-why-card:nth-child(6) {
-            animation-delay: 1.15s;
           }
 
           .alpha-icon-orbit {
@@ -1168,24 +959,6 @@ const WhyAlphaZeta: React.FC = () => {
 
             padding: 10px;
           }
-
-          /* =========================
-             SLIDER CONTROLS
-          ========================= */
-
-          .aw-slider-controls {
-            display: block;
-
-            margin-top: 4px;
-          }
-
-          .aw-slider-dots {
-            margin-top: 6px;
-          }
-
-          .aw-slider-buttons {
-            margin-top: 14px;
-          }
         }
 
         /* =========================
@@ -1207,20 +980,8 @@ const WhyAlphaZeta: React.FC = () => {
           }
 
           .alpha-why-grid {
-            margin-top: 23px;
-
-            padding:
-              8px
-              14px
-              22px;
-
-            margin-left: -14px;
-            margin-right: -14px;
-          }
-
-          .alpha-why-card {
-            flex: 0 0 85%;
-            max-width: 320px;
+            margin-top: 26px;
+            row-gap: 30px;
           }
 
           .alpha-icon-orbit {
@@ -1265,11 +1026,6 @@ const WhyAlphaZeta: React.FC = () => {
 
             padding: 10px;
           }
-
-          .aw-slider-btn {
-            width: 40px;
-            height: 40px;
-          }
         }
 
         /* =========================
@@ -1283,10 +1039,6 @@ const WhyAlphaZeta: React.FC = () => {
             animation: none !important;
             transition: none !important;
             opacity: 1 !important;
-          }
-
-          .alpha-why-grid {
-            scroll-behavior: auto;
           }
         }
 
@@ -1318,11 +1070,7 @@ const WhyAlphaZeta: React.FC = () => {
             roof.
           </p>
 
-          <div
-            ref={sliderRef}
-            className="alpha-why-grid"
-            onScroll={handleScroll}
-          >
+          <div className="alpha-why-grid">
 
             {cards.map((card, index) => (
               <article
@@ -1353,50 +1101,6 @@ const WhyAlphaZeta: React.FC = () => {
 
               </article>
             ))}
-
-          </div>
-
-          {/* ================================================
-              MOBILE SLIDER CONTROLS
-          ================================================ */}
-
-          <div className="aw-slider-controls">
-
-            <div className="aw-slider-dots">
-              {cards.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  aria-label={`Go to slide ${index + 1}`}
-                  className={`aw-dot${
-                    activeSlide === index
-                      ? " aw-dot-active"
-                      : ""
-                  }`}
-                  onClick={() => goToSlide(index)}
-                />
-              ))}
-            </div>
-
-            <div className="aw-slider-buttons">
-              <button
-                type="button"
-                aria-label="Previous"
-                className="aw-slider-btn"
-                onClick={prevSlide}
-              >
-                ←
-              </button>
-
-              <button
-                type="button"
-                aria-label="Next"
-                className="aw-slider-btn"
-                onClick={nextSlide}
-              >
-                →
-              </button>
-            </div>
 
           </div>
 

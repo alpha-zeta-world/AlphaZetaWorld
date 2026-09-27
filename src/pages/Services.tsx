@@ -144,14 +144,14 @@ const animationStyles = `
     to { opacity: 1; transform: scale(1); }
   }
 
-  /* ================= RESPONSIVE / MOBILE STYLES ================= */
+  /* ================= BASE / DESKTOP STYLES ================= */
   .hsw-container {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
   }
 
-  /* Solutions — moved up */
+  /* Solutions */
   .hsw-solutions-wrapper { padding: 3rem 2rem 4rem; }
   .hsw-solutions-grid {
     display: grid;
@@ -160,7 +160,7 @@ const animationStyles = `
     align-items: stretch;
   }
 
-  /* Workflow — moved up */
+  /* Workflow */
   .hsw-workflow-wrapper { padding: 3rem 2rem 4rem; }
   .hsw-workflow-grid {
     display: grid;
@@ -169,7 +169,7 @@ const animationStyles = `
     align-items: stretch;
   }
 
-  /* Growth — moved up */
+  /* Growth */
   .hsw-growth-wrapper { padding: 2.5rem 2rem 3.5rem; }
   .hsw-growth-container {
     max-width: 1200px;
@@ -216,18 +216,57 @@ const animationStyles = `
 
     .hsw-header-description { font-size: 0.9rem !important; }
 
-    .hsw-solutions-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-    .hsw-image-container { height: 180px !important; }
-    .hsw-card-content { padding: 1.25rem !important; }
-    .hsw-solution-title { font-size: 1.1rem !important; }
-    .hsw-solution-desc { font-size: 0.85rem !important; }
+    /* 🎯 SOLUTIONS: ONE BY ONE (1 column) */
+    .hsw-solutions-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+    }
 
-    /* Workflow: 1 column on mobile */
-    .hsw-workflow-grid { grid-template-columns: 1fr; gap: 1rem; }
-    .hsw-workflow-card { padding: 1.5rem 1.25rem !important; }
-    .hsw-step-number { font-size: 1.25rem !important; margin-bottom: 1rem !important; }
-    .hsw-workflow-title-text { font-size: 1.05rem !important; }
-    .hsw-workflow-desc { font-size: 0.85rem !important; }
+    /* 🎯 Image height */
+    .hsw-image-container {
+      height: 180px !important;
+    }
+
+    .hsw-card-content {
+      padding: 1.25rem !important;
+      gap: 0.75rem !important;
+    }
+
+    .hsw-solution-title {
+      font-size: 1.1rem !important;
+      line-height: 1.3 !important;
+    }
+
+    .hsw-solution-desc {
+      font-size: 0.85rem !important;
+      line-height: 1.5 !important;
+    }
+
+    /* 🎯 WORKFLOW: ONE BY ONE (1 column) */
+    .hsw-workflow-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+    }
+
+    .hsw-workflow-card {
+      padding: 1.5rem 1.25rem !important;
+      border-radius: 1rem !important;
+    }
+
+    .hsw-step-number {
+      font-size: 1.25rem !important;
+      margin-bottom: 1rem !important;
+    }
+
+    .hsw-workflow-title-text {
+      font-size: 1.05rem !important;
+      margin-bottom: 0.5rem !important;
+    }
+
+    .hsw-workflow-desc {
+      font-size: 0.85rem !important;
+      line-height: 1.5 !important;
+    }
 
     /* Growth: stack text + stats */
     .hsw-growth-container { grid-template-columns: 1fr; gap: 2rem; }
@@ -248,7 +287,7 @@ const animationStyles = `
     .hsw-workflow-title,
     .hsw-growth-title { font-size: 1.4rem !important; }
 
-    .hsw-image-container { height: 150px !important; }
+    .hsw-image-container { height: 160px !important; }
     .hsw-workflow-card { padding: 1.25rem 1rem !important; }
   }
 `;

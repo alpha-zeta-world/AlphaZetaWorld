@@ -1,7 +1,7 @@
 import Hero from "../components/Home/Hero";
 import Howwework from "../components/Home/Howwework";
 import Whyweare from "../components/Home/whyweare";
-import Banner from "../components/Home/banner";
+
 import Testimonials from "../components/Home/Testimonials";
 import Service from "../components/Home/service";
 import CTA from "../components/Home/CTA";
@@ -13,7 +13,7 @@ export default function Home() {
       <Hero />
       <Howwework />
       <Whyweare />
-      <Banner />
+     
       <Testimonials />
       <Service/>
       <CTA />

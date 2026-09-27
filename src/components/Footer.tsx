@@ -1,14 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
+// 🎯 Footer links — proper React Router paths tho
 const footerLinks = {
-  company: ["Home", "About", "Contact"],
-  services: [
-    "Web & App Development",
-    "AI Video & Content",
-    "Google SEO & AI Search",
-    "Product Lab",
+  company: [
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Contact", path: "/contact" },
   ],
-  products: ["Digital Product Lab", "SaaS Tools", "Consumer Apps"],
+  services: [
+    { label: "Web & App Development", path: "/web-app-development" },
+    { label: "AI Video & Content", path: "/ai-video" },
+    { label: "Google SEO & AI Search", path: "/seo-ai" },
+    { label: "Digital Solution", path: "/services" },
+  ],
+  products: [
+    { label: "Digital Product Lab", path: "/products-lab" },
+    { label: "SaaS Tools", path: "/products-lab" },
+    { label: "Consumer Apps", path: "/products-lab" },
+  ],
 };
 
 // 🔗 Social links — mee actual URLs ikkada pettandi
@@ -120,13 +130,13 @@ const Footer: React.FC = () => {
 
               <ul className="ft-link-list">
                 {footerLinks.company.map((link) => (
-                  <li key={link}>
-                    <a
-                      href={`#${link.toLowerCase()}`}
+                  <li key={link.label}>
+                    <Link
+                      to={link.path}
                       className="ft-link"
                     >
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -140,10 +150,10 @@ const Footer: React.FC = () => {
 
               <ul className="ft-link-list">
                 {footerLinks.services.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="ft-link">
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    <Link to={link.path} className="ft-link">
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -157,10 +167,10 @@ const Footer: React.FC = () => {
 
               <ul className="ft-link-list">
                 {footerLinks.products.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="ft-link">
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    <Link to={link.path} className="ft-link">
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
