@@ -7,6 +7,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import CatalogList from "../pages/CatalogList";
 import CatalogForm from "../pages/CatalogForm";
 import ContactList from "../pages/contact/ContactList";
+import StaffList from "../pages/StaffList";
+import ActivityLog from "../pages/ActivityLog";
 
 const AppRoutes = () => {
     return (
@@ -29,6 +31,8 @@ const AppRoutes = () => {
                     <Route path="/services/new" element={<CatalogForm type="services" />} />
                     <Route path="/services/:id/edit" element={<CatalogForm type="services" />} />
                     <Route path="/contacts" element={<ContactList />} />
+                    <Route path="/staff" element={<StaffList />} />
+                    <Route path="/activity-log" element={<ActivityLog />} />
                 </Route>
             </Route>
 

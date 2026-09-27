@@ -2,7 +2,9 @@ import {
     LayoutDashboard,
     Package,
     Briefcase,
-    MessageSquare
+    MessageSquare,
+    UsersRound,
+    ScrollText
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -34,6 +36,16 @@ const Sidebar = () => {
                 <NavLink to="/contacts" className={({ isActive }) => isActive ? "active" : ""}>
                     <MessageSquare size={20} />
                     Contacts
+                </NavLink>
+
+                <NavLink to="/staff" className={({ isActive }) => isActive ? "active" : ""}>
+                    <UsersRound size={20} />
+                    Staff
+                </NavLink>
+
+                <NavLink to="/activity-log" className={({ isActive }) => isActive ? "active" : ""}>
+                    <ScrollText size={20} />
+                    Activity Log
                 </NavLink>
 
             </nav>

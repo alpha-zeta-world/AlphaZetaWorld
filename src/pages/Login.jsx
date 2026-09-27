@@ -20,22 +20,21 @@ const Login = () => {
 
         try {
             const response = await api.post("/admin/login", {
-                email,
+                email: email.trim().toLowerCase(),
                 password
             });
 
-            if (response.data.success) {
-                login(
-                    response.data.admin,
-                    response.data.token
-                );
-
-                navigate("/dashboard");
+            if (!response.data?.success || !response.data?.token || !response.data?.admin) {
+                throw new Error(response.data?.message || "The server returned an invalid login response.");
             }
-        } catch (error) {
+            login(response.data.admin, response.data.token);
+            navigate("/dashboard");
+        } catch (requestError) {
             setError(
-                error.response?.data?.message ||
-                "Login failed"
+                requestError.response?.data?.message ||
+                (requestError.request
+                    ? "Could not reach the admin server. Check your connection and try again."
+                    : requestError.message || "Login failed. Please try again.")
             );
         } finally {
             setLoading(false);
@@ -48,7 +47,7 @@ const Login = () => {
                 <h1>Admin Login</h1>
 
                 {error && (
-                    <div className="login-error">
+                    <div className="login-error" role="alert">
                         {error}
                     </div>
                 )}
@@ -60,6 +59,7 @@ const Login = () => {
                         <input
                             type="email"
                             placeholder="Enter email"
+                            autoComplete="username"
                             value={email}
                             onChange={(e) =>
                                 setEmail(e.target.value)
@@ -74,6 +74,7 @@ const Login = () => {
                         <input
                             type="password"
                             placeholder="Enter password"
+                            autoComplete="current-password"
                             value={password}
                             onChange={(e) =>
                                 setPassword(e.target.value)
