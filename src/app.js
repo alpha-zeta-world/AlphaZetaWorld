@@ -38,6 +38,38 @@ app.use(cors({
 }));
 
 app.use(express.json({ limit: "32kb" }));
+
+// Keep one response envelope across the API while preserving existing fields
+// (such as `success`, `token`, `admin`, and pagination) used by current clients.
+app.use((req, res, next) => {
+    const sendJson = res.json.bind(res);
+
+    res.json = (body) => {
+        if (!body || typeof body !== "object" || Array.isArray(body)) {
+            return sendJson(body);
+        }
+
+        const status = typeof body.status === "boolean"
+            ? body.status
+            : typeof body.success === "boolean"
+                ? body.success
+                : res.statusCode < 400;
+
+        return sendJson({
+            ...body,
+            status,
+            message: typeof body.message === "string" && body.message.trim()
+                ? body.message
+                : status ? "Request successful" : "Request failed",
+            data: Object.prototype.hasOwnProperty.call(body, "data") ? body.data : null,
+            // `success` remains as a compatibility alias for existing clients.
+            success: typeof body.success === "boolean" ? body.success : status
+        });
+    };
+
+    next();
+});
+
 app.use("/uploads", (req, res, next) => {
     res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
     next();
