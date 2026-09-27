@@ -13,16 +13,25 @@ const app = express();
 
 app.use(helmet());
 
+const normalizeOrigin = (value) => {
+    try {
+        return new URL(value.trim()).origin;
+    } catch {
+        return value.trim().replace(/\/+$/, "");
+    }
+};
+
 const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173,http://127.0.0.1:5173")
     .split(",")
-    .map((origin) => origin.trim())
+    .map(normalizeOrigin)
     .filter(Boolean);
 
 app.use(cors({
     origin: (origin, callback) => {
+        const normalizedOrigin = origin ? normalizeOrigin(origin) : "";
         const localDevelopmentOrigin = process.env.NODE_ENV !== "production" &&
             /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin || "");
-        callback(null, !origin || allowedOrigins.includes(origin) || localDevelopmentOrigin);
+        callback(null, !origin || allowedOrigins.includes(normalizedOrigin) || localDevelopmentOrigin);
     },
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]

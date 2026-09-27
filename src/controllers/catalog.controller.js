@@ -1,3 +1,5 @@
+const { logActivity } = require("../services/activityLog.service");
+
 const createCatalogController = (Model, resourceName = "Data") => {
 
     const list = async (req, res, next) => {
@@ -80,6 +82,8 @@ const createCatalogController = (Model, resourceName = "Data") => {
         try {
             const data = await Model.create(req.body);
 
+            await logActivity(req, { action: "created", resource: resourceName.toLowerCase(), resourceId: data._id, description: `${req.admin.name} created ${resourceName.toLowerCase()} ${data.name}` });
+
             res.status(201).json({
                 success: true,
                 message: `${resourceName} created successfully`,
@@ -109,6 +113,8 @@ const createCatalogController = (Model, resourceName = "Data") => {
                 });
             }
 
+            await logActivity(req, { action: "updated", resource: resourceName.toLowerCase(), resourceId: data._id, description: `${req.admin.name} updated ${resourceName.toLowerCase()} ${data.name}` });
+
             res.json({
                 success: true,
                 message: `${resourceName} updated successfully`,
@@ -130,6 +136,8 @@ const createCatalogController = (Model, resourceName = "Data") => {
                     message: `${resourceName} not found`
                 });
             }
+
+            await logActivity(req, { action: "deleted", resource: resourceName.toLowerCase(), resourceId: data._id, description: `${req.admin.name} deleted ${resourceName.toLowerCase()} ${data.name}` });
 
             res.json({
                 success: true,
