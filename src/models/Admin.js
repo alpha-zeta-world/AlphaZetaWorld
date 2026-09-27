@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ADMIN_PERMISSIONS } = require("../constants/adminPermissions");
 
 const adminSchema = new mongoose.Schema(
     {
@@ -31,6 +32,15 @@ const adminSchema = new mongoose.Schema(
         isActive: {
             type: Boolean,
             default: true
+        },
+
+        permissions: {
+            type: [{ type: String, enum: ADMIN_PERMISSIONS }],
+            default: () => [...ADMIN_PERMISSIONS],
+            validate: {
+                validator: (permissions) => Array.isArray(permissions) && permissions.length > 0,
+                message: "An admin account must have at least one page permission"
+            }
         }
     },
     {

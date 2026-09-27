@@ -4,6 +4,7 @@ const path = require("node:path");
 const express = require("express");
 const multer = require("multer");
 const requireAdmin = require("../middleware/requireAdmin");
+const requirePermission = require("../middleware/requirePermission");
 
 const uploadDirectory = path.join(__dirname, "../../uploads/catalog");
 const extensions = {
@@ -33,7 +34,7 @@ const upload = multer({
 
 const router = express.Router();
 
-router.post("/catalog", requireAdmin, upload.single("image"), (req, res) => {
+router.post("/catalog", requireAdmin, requirePermission("products", "services"), upload.single("image"), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ success: false, message: "Choose an image to upload" });
     }
