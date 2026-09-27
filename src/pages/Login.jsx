@@ -26,11 +26,11 @@ const Login = () => {
                 password
             });
 
-            if (!response.data?.success || !response.data?.token || !response.data?.admin) {
+            if (!response.data?.status || !response.data?.data?.token || !response.data?.data?.admin) {
                 throw new Error(response.data?.message || "The server returned an invalid login response.");
             }
-            login(response.data.admin, response.data.token);
-            navigate(getFirstPermittedPath(response.data.admin), { replace: true });
+            login(response.data.data.admin, response.data.data.token);
+            navigate(getFirstPermittedPath(response.data.data.admin), { replace: true });
         } catch (requestError) {
             setError(
                 requestError.response?.data?.message ||

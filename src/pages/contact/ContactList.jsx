@@ -24,8 +24,8 @@ const ContactList = () => {
             if (status !== "all") params.status = status;
             if (search) params.search = search;
             const { data } = await api.get("/contacts", { params });
-            setContacts(data.data || []);
-            setPagination(data.pagination || { page: 1, total: 0, totalPages: 1 });
+            setContacts(data.data?.items || []);
+            setPagination(data.data?.pagination || { page: 1, total: 0, totalPages: 1 });
         } catch (requestError) {
             setError(requestError.response?.data?.message || "Could not load contact submissions.");
         } finally {
@@ -40,8 +40,8 @@ const ContactList = () => {
         if (search) params.search = search;
         api.get("/contacts", { params }).then(({ data }) => {
             if (!active) return;
-            setContacts(data.data || []);
-            setPagination(data.pagination || { page: 1, total: 0, totalPages: 1 });
+            setContacts(data.data?.items || []);
+            setPagination(data.data?.pagination || { page: 1, total: 0, totalPages: 1 });
         }).catch((requestError) => {
             if (active) setError(requestError.response?.data?.message || "Could not load contact submissions.");
         }).finally(() => {

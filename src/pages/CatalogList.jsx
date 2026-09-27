@@ -33,8 +33,8 @@ const CatalogList = ({ type }) => {
             const params = { status: "all", page, limit: PAGE_SIZE };
             if (search) params.search = search;
             const response = await api.get(`/${type}`, { params });
-            setItems(response.data.data || []);
-            setPagination(response.data.pagination || { page: 1, total: 0, totalPages: 1 });
+            setItems(response.data.data?.items || []);
+            setPagination(response.data.data?.pagination || { page: 1, total: 0, totalPages: 1 });
         } catch (requestError) {
             setError(requestError.response?.data?.message || `Could not load ${itemConfig.plural.toLowerCase()}.`);
         } finally {
@@ -47,8 +47,8 @@ const CatalogList = ({ type }) => {
         const params = { status: "all", page: 1, limit: PAGE_SIZE };
         if (search) params.search = search;
         api.get(`/${type}`, { params }).then((response) => {
-            if (active) setItems(response.data.data || []);
-            if (active) setPagination(response.data.pagination || { page: 1, total: 0, totalPages: 1 });
+            if (active) setItems(response.data.data?.items || []);
+            if (active) setPagination(response.data.data?.pagination || { page: 1, total: 0, totalPages: 1 });
         }).catch((requestError) => {
             if (active) setError(requestError.response?.data?.message || `Could not load ${itemConfig.plural.toLowerCase()}.`);
         }).finally(() => {

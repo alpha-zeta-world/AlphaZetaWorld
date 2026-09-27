@@ -32,8 +32,8 @@ const ActivityLog = () => {
                 api.get("/admin/activity-logs", { params: { page, limit: 20 } }),
                 hasPermission(currentAdmin, "staff") ? api.get("/admin/staff") : Promise.resolve(null),
             ]);
-            setLogs(logsResponse.data.data || []);
-            setPagination(logsResponse.data.pagination || { page: 1, totalPages: 1, total: 0 });
+            setLogs(logsResponse.data.data?.items || []);
+            setPagination(logsResponse.data.data?.pagination || { page: 1, totalPages: 1, total: 0 });
             setStaffById(Object.fromEntries((staffResponse?.data.data || []).map((member) => [String(member.id), member])));
         } catch (requestError) {
             setError(requestError.response?.data?.message || "Could not load the activity log.");
