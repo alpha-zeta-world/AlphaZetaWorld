@@ -39,8 +39,7 @@ app.use(cors({
 
 app.use(express.json({ limit: "32kb" }));
 
-// Keep one response envelope across the API while preserving existing fields
-// (such as `success`, `token`, `admin`, and pagination) used by current clients.
+// Normalize API JSON responses to { status, message, data }.
 app.use((req, res, next) => {
     const sendJson = res.json.bind(res);
 
@@ -55,15 +54,34 @@ app.use((req, res, next) => {
                 ? body.success
                 : res.statusCode < 400;
 
+        const details = { ...body };
+        delete details.status;
+        delete details.success;
+        delete details.message;
+        delete details.data;
+        const result = body.data;
+        let data = null;
+        const hasResult = Object.prototype.hasOwnProperty.call(body, "data");
+        const hasDetails = Object.keys(details).length > 0;
+
+        if (hasResult && hasDetails && Object.prototype.hasOwnProperty.call(details, "pagination")) {
+            data = { items: result, ...details };
+        } else if (hasResult && hasDetails && result && !Array.isArray(result) && typeof result === "object") {
+            data = { ...result, ...details };
+        } else if (hasResult && hasDetails) {
+            data = { result, ...details };
+        } else if (hasResult) {
+            data = result;
+        } else if (hasDetails) {
+            data = details;
+        }
+
         return sendJson({
-            ...body,
             status,
             message: typeof body.message === "string" && body.message.trim()
                 ? body.message
                 : status ? "Request successful" : "Request failed",
-            data: Object.prototype.hasOwnProperty.call(body, "data") ? body.data : null,
-            // `success` remains as a compatibility alias for existing clients.
-            success: typeof body.success === "boolean" ? body.success : status
+            data
         });
     };
 
