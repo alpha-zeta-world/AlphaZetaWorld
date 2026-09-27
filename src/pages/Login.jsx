@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useAuth } from "../context/useAuth";
+import { getFirstPermittedPath } from "../constants/permissions";
+import { ArrowRight, LockKeyhole, ShieldCheck } from "lucide-react";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -28,7 +30,7 @@ const Login = () => {
                 throw new Error(response.data?.message || "The server returned an invalid login response.");
             }
             login(response.data.admin, response.data.token);
-            navigate("/dashboard");
+            navigate(getFirstPermittedPath(response.data.admin), { replace: true });
         } catch (requestError) {
             setError(
                 requestError.response?.data?.message ||
@@ -43,54 +45,30 @@ const Login = () => {
 
     return (
         <div className="login-page">
-            <div className="login-box">
-                <h1>Admin Login</h1>
-
-                {error && (
-                    <div className="login-error" role="alert">
-                        {error}
-                    </div>
-                )}
-
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Email</label>
-
-                        <input
-                            type="email"
-                            placeholder="Enter email"
-                            autoComplete="username"
-                            value={email}
-                            onChange={(e) =>
-                                setEmail(e.target.value)
-                            }
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label>Password</label>
-
-                        <input
-                            type="password"
-                            placeholder="Enter password"
-                            autoComplete="current-password"
-                            value={password}
-                            onChange={(e) =>
-                                setPassword(e.target.value)
-                            }
-                            required
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        disabled={loading}
-                    >
-                        {loading ? "Logging in..." : "Login"}
-                    </button>
-                </form>
-            </div>
+            <section className="login-brand-panel">
+                <a className="login-brand" href="/login"><span className="brand-mark">AZ</span><span><strong>Alpha Zeta World</strong><small>ADMINISTRATION</small></span></a>
+                <div className="login-brand-message">
+                    <span className="login-kicker"><ShieldCheck size={15} /> Secure workspace</span>
+                    <h2>Everything you need to manage your world.</h2>
+                    <p>Manage your catalog, enquiries, staff access, and activity from one place.</p>
+                </div>
+                <div className="login-brand-footer">A clearer view of your business.</div>
+            </section>
+            <section className="login-form-panel">
+                <div className="login-box">
+                    <div className="login-icon"><LockKeyhole size={20} /></div>
+                    <p className="eyebrow">Alpha Zeta World</p>
+                    <h1>Welcome back</h1>
+                    <p className="login-subtitle">Sign in to continue to your admin workspace.</p>
+                    {error && <div className="login-error" role="alert">{error}</div>}
+                    <form onSubmit={handleSubmit}>
+                        <label className="field">Email address<input type="email" placeholder="you@example.com" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
+                        <label className="field">Password<input type="password" placeholder="Enter your password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
+                        <button className="login-submit" type="submit" disabled={loading}>{loading ? "Signing in…" : <>Sign in <ArrowRight size={17} /></>}</button>
+                    </form>
+                    <div className="login-form-footer">© {new Date().getFullYear()} Alpha Zeta World</div>
+                </div>
+            </section>
         </div>
     );
 };

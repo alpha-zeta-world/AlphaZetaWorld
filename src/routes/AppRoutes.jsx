@@ -9,8 +9,11 @@ import CatalogForm from "../pages/CatalogForm";
 import ContactList from "../pages/contact/ContactList";
 import StaffList from "../pages/StaffList";
 import ActivityLog from "../pages/ActivityLog";
+import { getFirstPermittedPath } from "../constants/permissions";
+import { useAuth } from "../context/useAuth";
 
 const AppRoutes = () => {
+    const { admin } = useAuth();
     return (
         <Routes>
 
@@ -20,19 +23,21 @@ const AppRoutes = () => {
             {/* Protected Admin Routes */}
             <Route element={<ProtectedRoute />}>
                 <Route element={<AdminLayout />}>
-                    <Route
-                        path="/dashboard"
-                        element={<Dashboard />}
-                    />
-                    <Route path="/products" element={<CatalogList type="products" />} />
-                    <Route path="/products/new" element={<CatalogForm type="products" />} />
-                    <Route path="/products/:id/edit" element={<CatalogForm type="products" />} />
-                    <Route path="/services" element={<CatalogList type="services" />} />
-                    <Route path="/services/new" element={<CatalogForm type="services" />} />
-                    <Route path="/services/:id/edit" element={<CatalogForm type="services" />} />
-                    <Route path="/contacts" element={<ContactList />} />
-                    <Route path="/staff" element={<StaffList />} />
-                    <Route path="/activity-log" element={<ActivityLog />} />
+                    <Route index element={<Navigate to={getFirstPermittedPath(admin)} replace />} />
+                    <Route element={<ProtectedRoute permission="dashboard" />}><Route path="/dashboard" element={<Dashboard />} /></Route>
+                    <Route element={<ProtectedRoute permission="products" />}>
+                        <Route path="/products" element={<CatalogList type="products" />} />
+                        <Route path="/products/new" element={<CatalogForm type="products" />} />
+                        <Route path="/products/:id/edit" element={<CatalogForm type="products" />} />
+                    </Route>
+                    <Route element={<ProtectedRoute permission="services" />}>
+                        <Route path="/services" element={<CatalogList type="services" />} />
+                        <Route path="/services/new" element={<CatalogForm type="services" />} />
+                        <Route path="/services/:id/edit" element={<CatalogForm type="services" />} />
+                    </Route>
+                    <Route element={<ProtectedRoute permission="contacts" />}><Route path="/contacts" element={<ContactList />} /></Route>
+                    <Route element={<ProtectedRoute permission="staff" />}><Route path="/staff" element={<StaffList />} /></Route>
+                    <Route element={<ProtectedRoute permission="activity-log" />}><Route path="/activity-log" element={<ActivityLog />} /></Route>
                 </Route>
             </Route>
 

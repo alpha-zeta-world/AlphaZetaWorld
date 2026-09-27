@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { RefreshCw, ScrollText } from "lucide-react";
 import api from "../api/axios";
 import { useAuth } from "../context/useAuth";
+import { hasPermission } from "../constants/permissions";
 
 const formatDate = (value) => {
     if (!value) return { date: "—", time: "—", timestamp: "" };
@@ -29,17 +30,17 @@ const ActivityLog = () => {
         try {
             const [logsResponse, staffResponse] = await Promise.all([
                 api.get("/admin/activity-logs", { params: { page, limit: 20 } }),
-                api.get("/admin/staff"),
+                hasPermission(currentAdmin, "staff") ? api.get("/admin/staff") : Promise.resolve(null),
             ]);
             setLogs(logsResponse.data.data || []);
             setPagination(logsResponse.data.pagination || { page: 1, totalPages: 1, total: 0 });
-            setStaffById(Object.fromEntries((staffResponse.data.data || []).map((member) => [String(member.id), member])));
+            setStaffById(Object.fromEntries((staffResponse?.data.data || []).map((member) => [String(member.id), member])));
         } catch (requestError) {
             setError(requestError.response?.data?.message || "Could not load the activity log.");
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [currentAdmin]);
 
     useEffect(() => { void Promise.resolve().then(() => loadLogs()); }, [loadLogs]);
 

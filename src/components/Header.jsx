@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, CircleUserRound, KeyRound, LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import api from "../api/axios";
 import { useAuth } from "../context/useAuth";
 
 const Header = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { admin, logout } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
     const profileRef = useRef(null);
@@ -82,10 +83,19 @@ const Header = () => {
     };
 
     const displayName = admin?.name || admin?.email || "Administrator";
+    const pageSections = [
+        ["/dashboard", "Dashboard"],
+        ["/products", "Products"],
+        ["/services", "Services"],
+        ["/contacts", "Contacts"],
+        ["/staff", "Staff & access"],
+        ["/activity-log", "Activity log"],
+    ];
+    const sectionName = pageSections.find(([path]) => location.pathname.startsWith(path))?.[1] || "Workspace";
 
     return (
         <header className="header">
-            <div className="header-context"><span className="header-context-dot" /> Admin workspace</div>
+            <div className="header-page-title"><span>ALPHA ZETA WORLD</span><strong>{sectionName}</strong></div>
             <div className="profile-area" ref={profileRef}>
                 <button className="profile-trigger" type="button" aria-label="Open profile menu" aria-haspopup="menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
                     <span className="profile-avatar"><CircleUserRound size={20} /></span>
