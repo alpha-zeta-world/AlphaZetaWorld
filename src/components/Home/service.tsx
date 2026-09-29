@@ -62,7 +62,7 @@ export default function ServicesOverview() {
     <>
       <style>{`
         .sow-container {
-          background-color: #F8FAFC;
+          background-color: #FFFFFF; /* 👈 Motham White Background */
           font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           display: flex;
           align-items: center;
@@ -75,18 +75,6 @@ export default function ServicesOverview() {
         }
         .sow-container *, .sow-container *::before, .sow-container *::after {
           box-sizing: border-box;
-        }
-
-        /* Background Blobs */
-        .sow-bg-blob-1 {
-          position: absolute; top: 0; right: 0; width: 600px; height: 600px;
-          background-color: #ecfdf5; border-radius: 50%; filter: blur(80px);
-          opacity: 0.6; transform: translate(30%, -50%); pointer-events: none; z-index: 0;
-        }
-        .sow-bg-blob-2 {
-          position: absolute; bottom: 0; left: 0; width: 500px; height: 500px;
-          background-color: #f0fdfa; border-radius: 50%; filter: blur(80px);
-          opacity: 0.6; transform: translate(-30%, 30%); pointer-events: none; z-index: 0;
         }
 
         /* ============================
@@ -257,9 +245,6 @@ export default function ServicesOverview() {
       `}</style>
 
       <div className="sow-container">
-        <div className="sow-bg-blob-1"></div>
-        <div className="sow-bg-blob-2"></div>
-
         <div className="sow-grid">
 
           {/* Left Section: Content */}

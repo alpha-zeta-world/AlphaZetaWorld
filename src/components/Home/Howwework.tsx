@@ -1,1696 +1,391 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from 'react';
 
-const services = [
-  {
-    icon: "code",
-    title: (
-      <>
-        Web & Mobile
-        <br />
-        App Dev
-      </>
-    ),
-    description: (
-      <>
-        Custom web and mobile applications
-        <br />
-        built for performance, scalability,
-        <br />
-        and real business value.
-      </>
-    ),
-    image: "/Images/homeweb.png",
-  },
-  {
-    icon: "ai",
-    title: (
-      <>
-        AI Videos Ads &
-        <br />
-        Content
-      </>
-    ),
-    description: (
-      <>
-        AI-powered video marketing, reels,
-        <br />
-        ads, and creative content to grow
-        <br />
-        your brand faster.
-      </>
-    ),
-    image: "/Images/homemo.png",
-  },
-  {
-    icon: "seo",
-    title: (
-      <>
-        Google SEO &
-        <br />
-        AI Search
-      </>
-    ),
-    description: (
-      <>
-        Rank higher on Google and get
-        <br />
-        discovered in AI search results with
-        <br />
-        proven SEO strategies.
-      </>
-    ),
-    image: "/Images/homeseo.png",
-  },
-  {
-    icon: "product",
-    title: (
-      <>
-        Digital Product
-        <br />
-        Lab
-      </>
-    ),
-    description: (
-      <>
-        Innovative digital tools, SaaS ideas,
-        <br />
-        and custom solutions to solve real
-        <br />
-        problems and create new opportunities.
-      </>
-    ),
-    image: "/Images/homedigi.png",
-  },
-];
-
-/* =========================================================
-   ICONS
-========================================================= */
-
-const Icon = ({ type }: { type: string }) => {
-  if (type === "code") {
-    return (
-      <svg viewBox="0 0 24 24" className="wwb-icon-svg">
-        <path
-          d="M8.5 7L3 12l5.5 5M15.5 7l5.5 5-5.5 5M13.5 4l-3 16"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    );
+// ==========================================
+// 1. CSS STYLES
+// ==========================================
+const styles = `
+  .process-section {
+    width: 100%;
+    background-color: #FAFAF9;
+    padding: 80px 20px;
+    font-family: system-ui, -apple-system, sans-serif;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
   }
 
-  if (type === "ai") {
-    return (
-      <svg viewBox="0 0 24 24" className="wwb-icon-svg">
-        <rect
-          x="6"
-          y="6"
-          width="12"
-          height="12"
-          rx="2"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <path
-          d="M9 2v4M15 2v4M9 18v4M15 18v4"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M2 9h4M2 15h4M18 9h4M18 15h4"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M10 10h4v4h-4z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-      </svg>
-    );
+  /* Background decorative curves */
+  .process-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #E5E7EB;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    pointer-events: none;
+  }
+  .process-section::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: -100px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #E5E7EB;
+    border-radius: 50%;
+    pointer-events: none;
   }
 
-  if (type === "seo") {
-    return (
-      <svg viewBox="0 0 24 24" className="wwb-icon-svg">
-        <circle
-          cx="12"
-          cy="12"
-          r="9"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        />
-        <path
-          d="M8 14l3-3 2 2 4-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M17 8h-3"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    );
+  .process-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
   }
 
-  return (
-    <svg viewBox="0 0 24 24" className="wwb-icon-svg">
-      <path
-        d="M5 8h14l1 13H4L5 8Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 8V6a3 3 0 0 1 6 0v2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-};
+  /* Header Section */
+  .process-header {
+    text-align: center;
+    margin-bottom: 64px;
+    position: relative;
+  }
 
-/* =========================================================
-   ARROW
-========================================================= */
+  .process-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
 
-const Arrow = () => (
-  <svg viewBox="0 0 24 24" className="wwb-arrow">
-    <path
-      d="M5 12h13"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-    <path
-      d="M13 6l6 6-6 6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  .process-label span {
+    color: #0F3D2E;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .label-line {
+    height: 1px;
+    width: 40px;
+    background-color: #9CA3AF;
+  }
+
+  .process-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .process-title { font-size: 46px; }
+  }
+
+  .highlight-green {
+    color: #0F3D2E;
+  }
+
+  .process-subtitle {
+    color: #6B7280;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Handwritten Note */
+  .handwritten-note {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    display: none;
+    transform: rotate(5deg);
+  }
+
+  @media (min-width: 1024px) {
+    .handwritten-note { display: block; }
+  }
+
+  .handwritten-note .text {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 24px;
+    color: #1F2937;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .handwritten-note svg {
+    margin-left: 40px;
+    margin-top: -5px;
+  }
+
+  /* Steps Grid */
+  .steps-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .steps-wrapper {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0;
+    }
+  }
+
+  .step-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    max-width: 220px;
+  }
+
+  /* Image Wrapper */
+  .step-image-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 24px;
+  }
+
+  .step-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Perfect Circle */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15); /* Subtle shadow to lift it */
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Step Number Badge */
+  .step-number {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background-color: #0F3D2E;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    z-index: 3;
+    border: 3px solid #FAFAF9;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: #4B5563;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Connecting Arrow (Desktop Only) */
+  .connector {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 70px;
+      right: -40px;
+      width: 80px;
+      z-index: 5;
+    }
+    
+    .step-item:last-child .connector {
+      display: none;
+    }
+  }
+
+  .connector-line {
+    width: 100%;
+    height: 1px;
+    border-top: 2px dashed #9CA3AF;
+    position: relative;
+  }
+
+  .connector-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  /* For mobile connecting lines */
+  @media (max-width: 1023px) {
+    .step-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 30px;
+      border-left: 2px dashed #9CA3AF;
+    }
+  }
+`;
+
+// ==========================================
+// 2. SVG ICONS
+// ==========================================
+const ArrowRightSmall = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
   </svg>
 );
 
-/* =========================================================
-   COMPONENT
-========================================================= */
+const HandDrawnArrow = () => (
+  <svg width="60" height="50" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 5 C 55 15, 40 25, 30 30 C 20 35, 15 40, 10 45" stroke="#1F2937" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+    <path d="M10 45 L 18 42 M10 45 L 15 38" stroke="#1F2937" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+  </svg>
+);
 
-const WhatWeBuild: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+// ==========================================
+// 3. DATA FOR STEPS
+// ==========================================
+const stepsData = [
+  {
+    id: '01',
+    title: 'Discover & Understand',
+    desc: 'We learn about your business, goals and target audience to understand your needs.',
+    img: '/Images/pro1.png'
+  },
+  {
+    id: '02',
+    title: 'Plan & Strategize',
+    desc: 'We create a tailored strategy and roadmap with the right technologies and approach.',
+    img: '/Images/pro2.png'
+  },
+  {
+    id: '03',
+    title: 'Design & Develop',
+    desc: 'Our team designs and builds high-quality, scalable and performance-driven solutions.',
+    img: '/Images/pro3.png'
+  },
+  {
+    id: '04',
+    title: 'Test & Optimize',
+    desc: 'We rigorously test for performance, security and usability to ensure the best results.',
+    img: '/Images/pro4.png'
+  },
+  {
+    id: '05',
+    title: 'Launch & Support',
+    desc: 'We deploy your solution and provide ongoing support to help you grow continuously.',
+    img: '/Images/pro5.png'
+  }
+];
 
-  /* =====================================================
-     INTERSECTION OBSERVER
-     Triggers animation when section enters viewport
-  ===================================================== */
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            // Once visible, stop observing — animation runs only once
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.15,
-        rootMargin: "0px 0px -80px 0px",
-      }
-    );
-
-    observer.observe(node);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
+// ==========================================
+// 4. MAIN COMPONENT
+// ==========================================
+const ProcessSection = () => {
   return (
     <>
-      <style>{`
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        .wwb-section,
-        .wwb-section * {
-          box-sizing: border-box;
-        }
-
-        /* =====================================================
-           MAIN SECTION
-        ===================================================== */
-
-        .wwb-section {
-          width: 100%;
-          padding: 10px 3.2% 20px;
-          background: #ffffff;
-          font-family: Arial, Helvetica, sans-serif;
-          color: #111827;
-        }
-
-        .wwb-wrapper {
-          width: 100%;
-          max-width: 1450px;
-          margin: 0 auto;
-        }
-
-        /* =====================================================
-           WHAT WE BUILD
-        ===================================================== */
-
-        .wwb-intro {
-          position: relative;
-
-          min-height: 145px;
-
-          padding: 20px 38px;
-
-          border: 1.5px solid #0A4B3F;
-
-          border-radius: 30px;
-
-          overflow: hidden;
-
-          background:
-            linear-gradient(
-              100deg,
-              #ffffff 0%,
-              #ffffff 55%,
-              #f8fbfa 100%
-            );
-
-          opacity: 0;
-        }
-
-        .wwb-intro::before {
-          content: "";
-
-          position: absolute;
-
-          right: 40px;
-          top: -90px;
-
-          width: 480px;
-          height: 280px;
-
-          border-radius: 50%;
-
-          background:
-            radial-gradient(
-              circle,
-              rgba(10, 75, 63, 0.10) 0%,
-              rgba(10, 75, 63, 0.04) 45%,
-              transparent 72%
-            );
-
-          pointer-events: none;
-
-          animation:
-            wwbGlowFloat
-            8s
-            ease-in-out
-            infinite;
-        }
-
-        .wwb-intro-content {
-          position: relative;
-          z-index: 5;
-          max-width: 720px;
-        }
-
-        /* =====================================================
-           HEADING
-        ===================================================== */
-
-        .wwb-heading {
-          margin: 0;
-
-          font-size: clamp(
-            40px,
-            4vw,
-            46px
-          );
-
-          line-height: 0.95;
-
-          letter-spacing: -2px;
-
-          font-weight: 800;
-
-          opacity: 0;
-        }
-
-        .wwb-heading-green {
-          color: #0A4B3F;
-        }
-
-        .wwb-heading-dark {
-          color: #111827;
-        }
-
-        /* =====================================================
-           DESCRIPTION
-        ===================================================== */
-
-        .wwb-description {
-          margin: 7px 0 0;
-
-          color: #445066;
-
-          font-size: 16px;
-
-          line-height: 1.2;
-
-          opacity: 0;
-        }
-
-        /* =====================================================
-           EXPLORE SERVICES
-        ===================================================== */
-
-        .wwb-intro-button {
-          position: absolute;
-
-          z-index: 10;
-
-          right: 38px;
-          top: 52px;
-
-          min-width: 225px;
-
-          height: 46px;
-
-          padding: 0 22px;
-
-          display: flex;
-
-          align-items: center;
-          justify-content: center;
-
-          gap: 16px;
-
-          border: 1.5px solid #8eaeb6;
-
-          border-radius: 30px;
-
-          background: rgba(
-            255,
-            255,
-            255,
-            0.88
-          );
-
-          color: #111827;
-
-          font-size: 13px;
-
-          font-weight: 700;
-
-          cursor: pointer;
-
-          transition: 0.3s ease;
-
-          opacity: 0;
-        }
-
-        .wwb-intro-button:hover {
-          border-color: #0A4B3F;
-          transform: translateY(-2px);
-          background: #ffffff;
-        }
-
-        .wwb-intro-button .wwb-arrow {
-          transition: transform 0.3s ease;
-        }
-
-        .wwb-intro-button:hover .wwb-arrow {
-          transform: translateX(5px);
-        }
-
-        /* =====================================================
-           HOW WE WORK
-        ===================================================== */
-
-        .wwb-process {
-          position: relative;
-
-          margin-top: 12px;
-
-          padding:
-            18px
-            26px
-            20px;
-
-          border:
-            1.5px solid
-            #0A4B3F;
-
-          border-radius: 30px;
-
-          overflow: hidden;
-
-          background: #ffffff;
-
-          opacity: 0;
-        }
-
-        .wwb-process::before {
-          content: "";
-
-          position: absolute;
-
-          top: 0;
-          right: 350px;
-
-          width: 400px;
-          height: 240px;
-
-          border-radius: 50%;
-
-          background:
-            radial-gradient(
-              circle,
-              rgba(10, 75, 63, 0.06) 0%,
-              rgba(10, 75, 63, 0.02) 45%,
-              transparent 72%
-            );
-
-          pointer-events: none;
-
-          animation:
-            wwbGlowFloat
-            10s
-            ease-in-out
-            infinite;
-        }
-
-        /* =====================================================
-           PROCESS HEADER
-        ===================================================== */
-
-        .wwb-process-header {
-          position: relative;
-
-          z-index: 10;
-
-          display: flex;
-
-          justify-content: space-between;
-
-          align-items: flex-start;
-
-          margin-bottom: 8px;
-        }
-
-        .wwb-process-title {
-          margin: 0;
-
-          font-size: clamp(
-            40px,
-            4vw,
-            45px
-          );
-
-          line-height: 0.9;
-
-          letter-spacing: -2px;
-
-          font-weight: 800;
-
-          opacity: 0;
-        }
-
-        .wwb-process-description {
-          margin: 4px 0 0;
-
-          color: #445066;
-
-          font-size: 16px;
-
-          line-height: 1.15;
-
-          opacity: 0;
-        }
-
-        /* =====================================================
-           OUR PROCESS BUTTON
-        ===================================================== */
-
-        .wwb-process-button {
-          margin-top: 3px;
-
-          min-width: 180px;
-
-          height: 45px;
-
-          padding: 0 20px;
-
-          display: flex;
-
-          align-items: center;
-
-          justify-content: center;
-
-          gap: 14px;
-
-          border:
-            1.5px solid
-            #8eaeb6;
-
-          border-radius: 28px;
-
-          background: #ffffff;
-
-          color: #111827;
-
-          font-size: 12px;
-
-          font-weight: 700;
-
-          cursor: pointer;
-
-          transition: 0.3s ease;
-
-          opacity: 0;
-        }
-
-        .wwb-process-button:hover {
-          border-color: #0A4B3F;
-          transform: translateY(-2px);
-        }
-
-        .wwb-process-button .wwb-arrow {
-          transition: transform 0.3s ease;
-        }
-
-        .wwb-process-button:hover .wwb-arrow {
-          transform: translateX(5px);
-        }
-
-        /* =====================================================
-           SERVICE GRID
-        ===================================================== */
-
-        .wwb-grid {
-          position: relative;
-
-          z-index: 10;
-
-          display: grid;
-
-          grid-template-columns:
-            repeat(
-              2,
-              minmax(
-                0,
-                1fr
-              )
-            );
-
-          gap: 10px;
-        }
-
-        /* =====================================================
-           SERVICE CARD
-        ===================================================== */
-
-        .wwb-card {
-          position: relative;
-
-          width: 100%;
-
-          height: 205px;
-
-          border:
-            1px solid
-            #dce7e9;
-
-          border-radius: 15px;
-
-          overflow: hidden;
-
-          background: #ffffff;
-
-          box-shadow: none;
-
-          transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-
-          opacity: 0;
-        }
-
-        .wwb-card:hover {
-          transform: translateY(-3px);
-
-          box-shadow:
-            0 8px 22px
-            rgba(
-              10,
-              75,
-              63,
-              0.10
-            );
-        }
-
-        /* =====================================================
-           CARD CONTENT
-        ===================================================== */
-
-        .wwb-card-content {
-          position: relative;
-
-          z-index: 20;
-
-          width: 56%;
-
-          height: 100%;
-
-          padding:
-            9px
-            16px
-            10px
-            23px;
-
-          display: flex;
-
-          flex-direction: column;
-        }
-
-        /* =====================================================
-           ICON
-        ===================================================== */
-
-        .wwb-icon {
-          width: 45px;
-          height: 45px;
-
-          flex-shrink: 0;
-
-          display: flex;
-
-          align-items: center;
-          justify-content: center;
-
-          margin-bottom: 6px;
-
-          border:
-            2px solid
-            #0A4B3F;
-
-          border-radius: 50%;
-
-          color: #0A4B3F;
-
-          background: #ffffff;
-
-          transition:
-            transform 0.4s ease,
-            background 0.4s ease,
-            color 0.4s ease;
-        }
-
-        .wwb-card:hover .wwb-icon {
-          transform: scale(1.08) rotate(-4deg);
-
-          background: #0A4B3F;
-
-          color: #ffffff;
-        }
-
-        .wwb-icon-svg {
-          width: 24px;
-          height: 24px;
-        }
-
-        /* =====================================================
-           CARD TITLE
-        ===================================================== */
-
-        .wwb-card-title {
-          margin: 0;
-
-          color: #11182c;
-
-          font-size: 21px;
-
-          line-height: 0.98;
-
-          letter-spacing: -0.5px;
-
-          font-weight: 800;
-        }
-
-        /* =====================================================
-           CARD DESCRIPTION
-        ===================================================== */
-
-        .wwb-card-description {
-          margin: 6px 0 0;
-
-          color: #4a5569;
-
-          font-size: 13px;
-
-          line-height: 1.15;
-
-          font-weight: 400;
-        }
-
-        /* =====================================================
-           LEARN MORE
-        ===================================================== */
-
-        .wwb-learn {
-          margin-top: auto;
-
-          display: inline-flex;
-
-          align-items: center;
-
-          gap: 8px;
-
-          width: fit-content;
-
-          color: #0A4B3F;
-
-          font-size: 12px;
-
-          font-weight: 700;
-
-          text-decoration: none;
-
-          transition:
-            gap 0.25s ease;
-        }
-
-        .wwb-learn:hover {
-          gap: 13px;
-        }
-
-        .wwb-arrow {
-          width: 17px;
-          height: 17px;
-        }
-
-        /* =====================================================
-           IMAGE AREA
-        ===================================================== */
-
-        .wwb-card-image-wrap {
-          position: absolute;
-
-          z-index: 2;
-
-          top: 0;
-          right: 0;
-
-          width: 53%;
-          height: 100%;
-
-          display: flex;
-
-          align-items: center;
-          justify-content: center;
-
-          overflow: hidden;
-
-          background: transparent;
-
-          border: none;
-        }
-
-        /* =====================================================
-           IMAGE GLOW
-        ===================================================== */
-
-        .wwb-card-image-wrap::before {
-          content: "";
-
-          position: absolute;
-
-          width: 220px;
-          height: 180px;
-
-          border-radius: 50%;
-
-          background:
-            radial-gradient(
-              circle,
-              rgba(
-                10,
-                75,
-                63,
-                0.15
-              ) 0%,
-              rgba(
-                10,
-                75,
-                63,
-                0.05
-              ) 42%,
-              transparent 72%
-            );
-
-          animation:
-            wwbGlowPulse
-            4s
-            ease-in-out
-            infinite;
-        }
-
-        /* =====================================================
-           IMAGE
-        ===================================================== */
-
-        .wwb-card-image {
-          position: relative;
-
-          z-index: 3;
-
-          width: 100%;
-          height: 100%;
-
-          object-fit: contain;
-
-          object-position: center;
-
-          mix-blend-mode: multiply;
-
-          border: none;
-
-          outline: none;
-
-          filter:
-            drop-shadow(
-              0 8px 14px
-              rgba(
-                10,
-                75,
-                63,
-                0.08
-              )
-            );
-
-          transition:
-            transform 0.4s ease;
-        }
-
-        .wwb-card:hover
-        .wwb-card-image {
-          transform:
-            scale(1.04);
-        }
-
-        /* =====================================================
-           SOFT DECORATION
-        ===================================================== */
-
-        .wwb-card:nth-child(1)::after,
-        .wwb-card:nth-child(2)::after,
-        .wwb-card:nth-child(3)::after,
-        .wwb-card:nth-child(4)::after {
-          content: "";
-
-          position: absolute;
-
-          border-radius: 50%;
-
-          pointer-events: none;
-
-          background:
-            rgba(
-              10,
-              75,
-              63,
-              0.06
-            );
-
-          animation:
-            wwbDotFloat
-            6s
-            ease-in-out
-            infinite;
-        }
-
-        .wwb-card:nth-child(1)::after {
-          width: 90px;
-          height: 90px;
-
-          right: 140px;
-          top: 30px;
-        }
-
-        .wwb-card:nth-child(2)::after {
-          width: 75px;
-          height: 75px;
-
-          right: 155px;
-          top: 28px;
-
-          animation-delay: 1s;
-        }
-
-        .wwb-card:nth-child(3)::after {
-          width: 65px;
-          height: 65px;
-
-          right: 165px;
-          top: 35px;
-
-          animation-delay: 2s;
-        }
-
-        .wwb-card:nth-child(4)::after {
-          width: 90px;
-          height: 90px;
-
-          right: 125px;
-          top: 20px;
-
-          animation-delay: 3s;
-        }
-
-        /* =====================================================
-           EXACT DESKTOP LINE BREAKS
-        ===================================================== */
-
-        .desktop-break {
-          display: block;
-        }
-
-        /* =====================================================
-           VISIBLE STATE
-           These animations only run when .wwb-visible
-           class is added by the IntersectionObserver
-        ===================================================== */
-
-        .wwb-section.wwb-visible .wwb-intro {
-          animation:
-            wwbSlideUp
-            0.8s
-            ease
-            0s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-heading {
-          animation:
-            wwbSlideLeft
-            0.8s
-            ease
-            0.25s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-description {
-          animation:
-            wwbFadeUp
-            0.8s
-            ease
-            0.45s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-intro-button {
-          animation:
-            wwbFadeUp
-            0.8s
-            ease
-            0.6s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-process {
-          animation:
-            wwbSlideUp
-            0.8s
-            ease
-            0.75s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-process-title {
-          animation:
-            wwbSlideLeft
-            0.7s
-            ease
-            1s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-process-description {
-          animation:
-            wwbFadeUp
-            0.7s
-            ease
-            1.15s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-process-button {
-          animation:
-            wwbFadeUp
-            0.7s
-            ease
-            1.3s
-            forwards;
-        }
-
-        .wwb-section.wwb-visible .wwb-card {
-          animation:
-            wwbCardIn
-            0.7s
-            ease
-            forwards;
-        }
-
-        /* Card stagger — one by one */
-        .wwb-section.wwb-visible .wwb-card:nth-child(1) {
-          animation-delay: 1.5s;
-        }
-
-        .wwb-section.wwb-visible .wwb-card:nth-child(2) {
-          animation-delay: 1.65s;
-        }
-
-        .wwb-section.wwb-visible .wwb-card:nth-child(3) {
-          animation-delay: 1.8s;
-        }
-
-        .wwb-section.wwb-visible .wwb-card:nth-child(4) {
-          animation-delay: 1.95s;
-        }
-
-        /* =====================================================
-           KEYFRAMES
-        ===================================================== */
-
-        @keyframes wwbSlideUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes wwbSlideLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-25px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes wwbFadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(18px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes wwbCardIn {
-          from {
-            opacity: 0;
-            transform: translateY(35px) scale(0.97);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        @keyframes wwbGlowFloat {
-          0%,
-          100% {
-            transform: translate(0, 0);
-          }
-
-          50% {
-            transform: translate(-15px, 15px);
-          }
-        }
-
-        @keyframes wwbGlowPulse {
-          0%,
-          100% {
-            transform: scale(1);
-            opacity: 0.8;
-          }
-
-          50% {
-            transform: scale(1.15);
-            opacity: 1;
-          }
-        }
-
-        @keyframes wwbDotFloat {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-
-          50% {
-            transform: translateY(-8px);
-          }
-        }
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 1100px) {
-
-          .wwb-section {
-            padding:
-              8px
-              3%
-              18px;
-          }
-
-          .wwb-intro {
-            min-height: 135px;
-
-            padding:
-              18px
-              30px;
-          }
-
-          .wwb-heading {
-            font-size: 40px;
-          }
-
-          .wwb-description,
-          .wwb-process-description {
-            font-size: 15px;
-          }
-
-          .wwb-process {
-            padding:
-              15px
-              22px
-              17px;
-          }
-
-          .wwb-card {
-            height: 195px;
-          }
-
-          .wwb-card-content {
-            padding-left: 20px;
-          }
-
-          .wwb-card-title {
-            font-size: 20px;
-          }
-
-          .wwb-card-description {
-            font-size: 12px;
-          }
-
-          .wwb-icon {
-            width: 42px;
-            height: 42px;
-          }
-
-          .wwb-icon-svg {
-            width: 22px;
-            height: 22px;
-          }
-        }
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 768px) {
-
-          .wwb-section {
-            padding:
-              10px
-              14px
-              20px;
-          }
-
-          .wwb-intro {
-            min-height: auto;
-
-            padding:
-              22px
-              20px
-              72px;
-
-            border-radius:
-              25px;
-          }
-
-          .wwb-heading {
-            font-size: 32px;
-
-            letter-spacing:
-              -1.4px;
-          }
-
-          .wwb-description {
-            font-size: 14px;
-
-            line-height: 1.3;
-          }
-
-          .wwb-intro-button {
-            top: auto;
-
-            right: 20px;
-            bottom: 17px;
-
-            min-width: 195px;
-
-            height: 43px;
-
-            font-size: 11px;
-          }
-
-          .wwb-process {
-            margin-top:
-              10px;
-
-            padding:
-              18px
-              13px
-              17px;
-
-            border-radius:
-              25px;
-          }
-
-          .wwb-process-header {
-            flex-direction:
-              column;
-
-            margin-bottom:
-              7px;
-          }
-
-          .wwb-process-title {
-            font-size:
-              32px;
-          }
-
-          .wwb-process-description {
-            font-size:
-              14px;
-          }
-
-          .wwb-process-button {
-            margin-top:
-              12px;
-
-            width:
-              175px;
-
-            min-width:
-              175px;
-
-            height:
-              43px;
-          }
-
-          .wwb-grid {
-            grid-template-columns:
-              1fr;
-
-            gap:
-              9px;
-          }
-
-          .wwb-card {
-            height:
-              260px;
-
-            border-radius:
-              14px;
-          }
-
-          .wwb-card-content {
-            width:
-              62%;
-
-            padding:
-              15px
-              12px
-              14px
-              18px;
-          }
-
-          .wwb-icon {
-            width:
-              44px;
-
-            height:
-              44px;
-
-            margin-bottom:
-              7px;
-          }
-
-          .wwb-card-title {
-            font-size:
-              20px;
-          }
-
-          .wwb-card-description {
-            font-size:
-              12.5px;
-
-            line-height:
-              1.2;
-          }
-
-          .wwb-card-image-wrap {
-            width:
-              48%;
-          }
-
-          .desktop-break {
-            display:
-              none;
-          }
-        }
-
-        /* =====================================================
-           SMALL MOBILE
-        ===================================================== */
-
-        @media (max-width: 480px) {
-
-          .wwb-heading {
-            font-size:
-              28px;
-          }
-
-          .wwb-description {
-            font-size:
-              13px;
-          }
-
-          .wwb-intro-button {
-            left:
-              20px;
-
-            right:
-              20px;
-
-            width:
-              auto;
-
-            min-width:
-              0;
-          }
-
-          .wwb-process-title {
-            font-size:
-              28px;
-          }
-
-          .wwb-card {
-            height:
-              275px;
-          }
-
-          .wwb-card-content {
-            width:
-              64%;
-          }
-
-          .wwb-card-image-wrap {
-            width:
-              48%;
-          }
-
-          .wwb-card-title {
-            font-size:
-              19px;
-          }
-
-          .wwb-card-description {
-            font-size:
-              12px;
-          }
-
-          .wwb-learn {
-            font-size:
-              11px;
-          }
-        }
-
-        /* =====================================================
-           REDUCED MOTION
-        ===================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-          .wwb-section *,
-          .wwb-section *::before,
-          .wwb-section *::after {
-            animation: none !important;
-            transition: none !important;
-            opacity: 1 !important;
-          }
-        }
-
-      `}</style>
-
-      <section
-        ref={sectionRef}
-        className={`wwb-section${
-          isVisible ? " wwb-visible" : ""
-        }`}
-      >
-
-        <div className="wwb-wrapper">
-
-          {/* =================================================
-              WHAT WE BUILD
-          ================================================= */}
-
-          <div className="wwb-intro">
-
-            <div className="wwb-intro-content">
-
-              <h2 className="wwb-heading">
-
-                <span className="wwb-heading-green">
-                  What We Build
-                </span>{" "}
-
-                <span className="wwb-heading-dark">
-                  &amp; Deliver
-                </span>
-
-              </h2>
-
-              <p className="wwb-description">
-
-                From ideas to impact — we build digital products.
-
-                <br className="desktop-break" />
-
-                tech solutions, and growth strategies that help
-
-                <br className="desktop-break" />
-
-                businesses scale in the real world.
-
-              </p>
-
+      <style>{styles}</style>
+      
+      <section className="process-section">
+        <div className="process-container">
+          
+          {/* Header */}
+          <div className="process-header">
+            <div className="process-label">
+              <div className="label-line"></div>
+              <span>How We Work</span>
+              <div className="label-line"></div>
             </div>
+            
+            <h2 className="process-title">
+              A Simple Process. <span className="highlight-green">Real Results.</span>
+            </h2>
+            
+            <p className="process-subtitle">
+              We follow a clear and collaborative process to turn your ideas into impactful digital solutions.
+            </p>
 
-            <button
-              type="button"
-              className="wwb-intro-button"
-            >
-              <span>
-                EXPLORE SERVICES
-              </span>
-
-              <Arrow />
-            </button>
-
+            {/* Handwritten Note */}
+            <div className="handwritten-note">
+              <div className="text">From<br/>Idea to Impact</div>
+              <HandDrawnArrow />
+            </div>
           </div>
 
+          {/* Steps */}
+          <div className="steps-wrapper">
+            {stepsData.map((step, index) => (
+              <div className="step-item" key={index}>
+                
+                {/* Image and Number */}
+                <div className="step-image-wrapper">
+                  <img src={step.img} alt={step.title} className="step-img" />
+                  <div className="step-number">{step.id}</div>
+                </div>
 
-          {/* =================================================
-              HOW WE WORK
-          ================================================= */}
+                {/* Text Content */}
+                <h3 className="step-title">{step.title}</h3>
+                <p className="step-desc">{step.desc}</p>
 
-          <div className="wwb-process">
-
-            <div className="wwb-process-header">
-
-              <div>
-
-                <h2 className="wwb-process-title">
-
-                  <span className="wwb-heading-green">
-                    How We
-                  </span>{" "}
-
-                  <span className="wwb-heading-dark">
-                    Work
-                  </span>
-
-                </h2>
-
-                <p className="wwb-process-description">
-
-                  From concept to launch, we keep it simple —
-
-                  <br className="desktop-break" />
-
-                  transparent, focused, and result-driven.
-
-                </p>
-
-              </div>
-
-              <button
-                type="button"
-                className="wwb-process-button"
-              >
-                <span>
-                  OUR PROCESS
-                </span>
-
-                <Arrow />
-              </button>
-
-            </div>
-
-
-            {/* =================================================
-                SERVICE CARDS
-            ================================================= */}
-
-            <div className="wwb-grid">
-
-              {services.map(
-                (service, index) => (
-
-                  <article
-                    className="wwb-card"
-                    key={index}
-                  >
-
-                    {/* IMAGE */}
-
-                    <div className="wwb-card-image-wrap">
-
-                      <img
-                        src={service.image}
-                        alt=""
-                        className="wwb-card-image"
-                      />
-
-                    </div>
-
-
-                    {/* CARD CONTENT */}
-
-                    <div className="wwb-card-content">
-
-                      <div className="wwb-icon">
-
-                        <Icon
-                          type={service.icon}
-                        />
-
+                {/* Connector Arrow (Not on last item) */}
+                {index !== stepsData.length - 1 && (
+                  <div className="connector">
+                    <div className="connector-line">
+                      <div className="connector-arrow">
+                        <ArrowRightSmall />
                       </div>
-
-                      <h3 className="wwb-card-title">
-
-                        {service.title}
-
-                      </h3>
-
-                      <p className="wwb-card-description">
-
-                        {service.description}
-
-                      </p>
-
-                      <a
-                        href="#"
-                        className="wwb-learn"
-                      >
-
-                        <span>
-                          LEARN MORE
-                        </span>
-
-                        <Arrow />
-
-                      </a>
-
                     </div>
-
-                  </article>
-
-                )
-              )}
-
-            </div>
-
+                  </div>
+                )}
+                
+              </div>
+            ))}
           </div>
 
         </div>
-
       </section>
     </>
   );
 };
 
-export default WhatWeBuild;
+export default ProcessSection;

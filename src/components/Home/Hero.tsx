@@ -1,786 +1,612 @@
 import React from "react";
 
-const topServices = [
-  "STRATEGY",
-  "DEVELOPMENT",
-  "MARKETING",
-];
-
-const bottomServices = [
-  "CUSTOM SOFTWARE",
-  "WEB APPS",
-  "AI SOLUTIONS",
-  "INFOTECH",
-  "CLOUD SERVICES",
-  "DIGITAL GROWTH",
-  "CUSTOM SOFTWARE",
-];
-
 const Hero: React.FC = () => {
   return (
     <>
+      {/* =====================================================
+          HERO SECTION
+      ===================================================== */}
+      <section className="hero-section">
+
+        {/* Background Image */}
+        <div className="hero-image"></div>
+
+        {/* White Gradient */}
+        <div className="hero-overlay"></div>
+
+        {/* Hero Container */}
+        <div className="hero-container">
+
+          <div className="hero-content">
+
+            {/* Eyebrow */}
+            <div className="hero-eyebrow">
+              <span>
+                DIGITAL SOLUTIONS FOR A BRIGHTER TOMORROW
+              </span>
+
+              <i></i>
+            </div>
+
+            {/* Main Heading */}
+            <h1>
+              Ideas Today.
+              <br />
+
+              <span>Greater Possibilities</span>
+
+              <br />
+
+              Tomorrow.
+            </h1>
+
+            {/* Description */}
+            <p className="hero-description">
+              At AlphaZetaWorld, we help businesses grow with
+              innovative digital solutions in SEO, AI Videos,
+              Web Development and Digital Solutions.
+            </p>
+
+            {/* Buttons */}
+            <div className="hero-buttons">
+
+              <a
+                href="/contact"
+                className="primary-button"
+              >
+                <span>Get Started</span>
+
+                <span className="button-arrow">
+                  →
+                </span>
+              </a>
+
+              <a
+                href="/services"
+                className="secondary-button"
+              >
+                Explore Services
+              </a>
+
+            </div>
+
+            {/* Stats */}
+            <div className="hero-stats">
+
+              <div className="stat">
+                <h3>150+</h3>
+                <p>Projects Delivered</p>
+              </div>
+
+              <div className="stat-divider"></div>
+
+              <div className="stat">
+                <h3>100+</h3>
+                <p>Happy Clients</p>
+              </div>
+
+              <div className="stat-divider"></div>
+
+              <div className="stat">
+                <h3>5+</h3>
+                <p>Years of Experience</p>
+              </div>
+
+              <div className="stat-divider"></div>
+
+              <div className="stat">
+                <h3>98%</h3>
+                <p>Client Satisfaction</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+
+      {/* =====================================================
+          TRUSTED BY SECTION
+      ===================================================== */}
+      <section className="trusted-section">
+
+        <div className="trusted-container">
+
+          {/* Trusted Heading */}
+          <div className="trusted-heading">
+
+            <h2>
+              Trusted by
+              <br />
+              <strong>Leading Brands</strong>
+            </h2>
+
+          </div>
+
+
+          {/* Divider */}
+          <div className="trusted-main-divider"></div>
+
+
+          {/* Brand Slider */}
+          <div className="brand-slider">
+
+            <div className="brand-list">
+
+              {/* Google */}
+              <div className="brand">
+                <span className="google-logo">Google</span>
+              </div>
+
+              {/* Meta */}
+              <div className="brand">
+                <span className="meta-logo"><b>∞</b>Meta</span>
+              </div>
+
+              {/* AWS */}
+              <div className="brand">
+                <span className="aws-logo">aws</span>
+              </div>
+
+              {/* Microsoft */}
+              <div className="brand">
+                <span className="microsoft-logo">
+                  <b className="microsoft-icon">
+                    <i></i><i></i><i></i><i></i>
+                  </b>
+                  Microsoft
+                </span>
+              </div>
+
+              {/* HubSpot */}
+              <div className="brand">
+                <span className="hubspot-logo">HubSpot</span>
+              </div>
+
+              {/* Canva */}
+              <div className="brand">
+                <span className="canva-logo">Canva</span>
+              </div>
+
+              {/* Notion */}
+              <div className="brand">
+                <span className="notion-logo"><b>N</b>Notion</span>
+              </div>
+
+              {/* ===== Duplicate set for seamless slider (desktop + mobile) ===== */}
+              <div className="brand brand-duplicate"><span className="google-logo">Google</span></div>
+              <div className="brand brand-duplicate"><span className="meta-logo"><b>∞</b>Meta</span></div>
+              <div className="brand brand-duplicate"><span className="aws-logo">aws</span></div>
+              <div className="brand brand-duplicate">
+                <span className="microsoft-logo">
+                  <b className="microsoft-icon"><i></i><i></i><i></i><i></i></b>
+                  Microsoft
+                </span>
+              </div>
+              <div className="brand brand-duplicate"><span className="hubspot-logo">HubSpot</span></div>
+              <div className="brand brand-duplicate"><span className="canva-logo">Canva</span></div>
+              <div className="brand brand-duplicate"><span className="notion-logo"><b>N</b>Notion</span></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* =====================================================
+          CSS
+      ===================================================== */}
+
       <style>{`
+
         /* =====================================================
            RESET
         ===================================================== */
 
-        .az-hero,
-        .az-hero * {
+        .hero-section,
+        .hero-section *,
+        .trusted-section,
+        .trusted-section * {
           box-sizing: border-box;
         }
+
 
         /* =====================================================
            HERO
         ===================================================== */
 
-        .az-hero {
+        .hero-section {
           position: relative;
           width: 100%;
-          height: 600px;
-          min-height: 600px;
-
+          min-height: 615px;
           overflow: hidden;
-
-          background: #ffffff;
-          color: #111820;
-
-          font-family:
-            Arial,
-            Helvetica,
-            sans-serif;
-        }
-
-        /* =====================================================
-           MAIN CONTAINER
-        ===================================================== */
-
-        .az-hero-container {
-          position: relative;
-          z-index: 5;
-
-          width: 100%;
-          height: 580px;
-
-          display: grid;
-          grid-template-columns: 58% 42%;
-
-          align-items: center;
-
-          padding:
-            35px
-            5%
-            65px
-            8%;
-        }
-
-        /* =====================================================
-           LEFT CONTENT
-        ===================================================== */
-
-        .az-hero-left {
-          position: relative;
-          z-index: 10;
-
-          padding-top: 10px;
-        }
-
-        .az-hero-title {
+          background: #f5f7f6;
           margin: 0;
-
-          font-size:
-            clamp(
-              52px,
-              5.2vw,
-              82px
-            );
-
-          line-height: 0.94;
-
-          letter-spacing: -3px;
-
-          font-weight: 800;
-
-          opacity: 0;
-
-          animation:
-            azHeroLeft
-            0.8s
-            ease
-            0s
-            forwards;
+          padding: 0;
         }
 
-        .az-black {
-          color: #101419;
+
+        /* =====================================================
+           BACKGROUND IMAGE
+        ===================================================== */
+
+        .hero-image {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+          background-image: url("/Images/hero.png");
+          background-size: cover;
+          background-position: center right;
+          background-repeat: no-repeat;
         }
 
-        .az-green {
+
+        /* =====================================================
+           HERO OVERLAY
+        ===================================================== */
+
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
           background:
             linear-gradient(
-              100deg,
-              #073B32 0%,
-              #0A4B3F 30%,
-              #0F5C4A 50%,
-              #0A4B3F 70%,
-              #073B32 100%
+              90deg,
+              rgba(255, 255, 255, 1) 0%,
+              rgba(255, 255, 255, 0.99) 20%,
+              rgba(255, 255, 255, 0.96) 31%,
+              rgba(255, 255, 255, 0.82) 43%,
+              rgba(255, 255, 255, 0.48) 55%,
+              rgba(255, 255, 255, 0.10) 72%,
+              rgba(255, 255, 255, 0) 100%
             );
-
-          -webkit-background-clip: text;
-          background-clip: text;
-
-          color: transparent;
-
-          background-size: 200% 200%;
-
-          animation:
-            azGreenShift
-            5s
-            ease
-            infinite;
         }
+
+
+        /* =====================================================
+           HERO CONTAINER
+        ===================================================== */
+
+        .hero-container {
+          position: relative;
+          z-index: 2;
+          width: min(1280px, calc(100% - 64px));
+          min-height: 600px;
+          margin: 0 auto;
+          padding: 0;
+          display: flex;
+          align-items: flex-start;
+        }
+
+
+        /* =====================================================
+           HERO CONTENT
+        ===================================================== */
+
+        .hero-content {
+          width: 650px;
+          padding-top: 48px;
+        }
+
+
+        /* =====================================================
+           EYEBROW
+        ===================================================== */
+
+        .hero-eyebrow {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin: 0 0 18px 0;
+          color: #4e5963;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 2.5px;
+          line-height: 1.4;
+          white-space: nowrap;
+        }
+
+
+        .hero-eyebrow i {
+          display: block;
+          width: 42px;
+          height: 2px;
+          flex-shrink: 0;
+          background: #6c7975;
+        }
+
+
+        /* =====================================================
+           HEADING
+        ===================================================== */
+
+        .hero-content h1 {
+          margin: 0;
+          padding: 0;
+          color: #0c131a;
+          font-size: clamp(50px, 4.4vw, 68px);
+          line-height: 1.04;
+          font-weight: 700;
+          letter-spacing: -2.8px;
+        }
+
+
+        .hero-content h1 span {
+          color: #075b43;
+        }
+
 
         /* =====================================================
            DESCRIPTION
         ===================================================== */
 
-        .az-hero-description {
-          margin-top: 22px;
-
-          color: #3e4959;
-
-          font-size: 18px;
-
-          line-height: 1.5;
-
-          font-weight: 400;
-
-          opacity: 0;
-
-          animation:
-            azFadeUp
-            0.9s
-            ease
-            0.35s
-            forwards;
-        }
-
-        /* =====================================================
-           ACTIONS
-        ===================================================== */
-
-        .az-hero-actions {
-          display: flex;
-          align-items: center;
-
-          gap: 25px;
-
-          margin-top: 26px;
-
-          opacity: 0;
-
-          animation:
-            azFadeUp
-            0.9s
-            ease
-            0.7s
-            forwards;
-        }
-
-        /* =====================================================
-           START BUTTON
-        ===================================================== */
-
-        .az-start-btn {
-          position: relative;
-
-          width: 210px;
-          height: 56px;
-
-          border: none;
-          border-radius: 40px;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          gap: 18px;
-
-          cursor: pointer;
-
-          overflow: hidden;
-
-          color: #ffffff;
-
-          font-size: 14px;
-          font-weight: 700;
-
-          background:
-            linear-gradient(
-              135deg,
-              #0A4B3F,
-              #0F5C4A
-            );
-
-          box-shadow:
-            0 10px 25px
-            rgba(
-              10,
-              75,
-              63,
-              0.22
-            );
-
-          transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-
-          animation:
-            azBtnPulse
-            3s
-            ease
-            1.6s
-            infinite;
-        }
-
-        .az-start-btn::before {
-          content: "";
-
-          position: absolute;
-
-          top: 0;
-          left: -120%;
-
-          width: 80%;
-          height: 100%;
-
-          background:
-            linear-gradient(
-              120deg,
-              transparent,
-              rgba(255, 255, 255, 0.35),
-              transparent
-            );
-
-          transform: skewX(-20deg);
-
-          animation:
-            azShine
-            3.5s
-            ease-in-out
-            2s
-            infinite;
-        }
-
-        .az-start-btn:hover {
-          transform: translateY(-3px);
-
-          box-shadow:
-            0 15px 30px
-            rgba(
-              10,
-              75,
-              63,
-              0.32
-            );
-        }
-
-        .az-arrow {
-          font-size: 25px;
-          line-height: 1;
-          font-weight: 400;
-
-          transition:
-            transform 0.3s ease;
-        }
-
-        .az-start-btn:hover .az-arrow {
-          transform:
-            translateX(6px);
-        }
-
-        /* =====================================================
-           WATCH VIDEO
-        ===================================================== */
-
-        .az-watch-btn {
-          border: none;
-
-          background: transparent;
-
-          display: flex;
-          align-items: center;
-
-          gap: 12px;
-
-          cursor: pointer;
-
-          color: #202731;
-
-          font-size: 15px;
-          font-weight: 500;
-        }
-
-        .az-play-circle {
-          position: relative;
-
-          width: 56px;
-          height: 56px;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          border-radius: 50%;
-
-          border:
-            2px solid
-            #d3d7dc;
-
-          background: #ffffff;
-
-          transition:
-            transform 0.3s ease,
-            border-color 0.3s ease;
-        }
-
-        .az-play-circle::after {
-          content: "";
-
-          position: absolute;
-          inset: -6px;
-
-          border-radius: 50%;
-
-          border:
-            2px solid
-            rgba(
-              10,
-              75,
-              63,
-              0.45
-            );
-
-          opacity: 0;
-
-          animation:
-            azPulseRing
-            2.4s
-            ease-out
-            1.8s
-            infinite;
-        }
-
-        .az-watch-btn:hover .az-play-circle {
-          transform: scale(1.05);
-
-          border-color: #0A4B3F;
-        }
-
-        .az-play-icon {
-          color: #0A4B3F;
-
-          font-size: 17px;
-
-          margin-left: 3px;
-
-          transition:
-            transform 0.3s ease;
-        }
-
-        .az-watch-btn:hover .az-play-icon {
-          transform: scale(1.15);
-        }
-
-        /* =====================================================
-           RIGHT IMAGE
-        ===================================================== */
-
-        .az-hero-right {
-          position: relative;
-
+        .hero-description {
           width: 100%;
-          height: 200px;
+          max-width: 580px;
+          margin: 20px 0 0 0;
+          padding: 0;
+          color: #59636e;
+          font-size: 17px;
+          line-height: 1.55;
+          font-weight: 400;
+        }
 
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .hero-buttons {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          margin-top: 23px;
+        }
+
+
+        .primary-button,
+        .secondary-button {
+          height: 50px;
+          padding: 0 27px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 7px;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 1;
+          transition:
+            transform 0.25s ease,
+            background 0.25s ease,
+            color 0.25s ease;
+        }
+
+
+        /* =====================================================
+           PRIMARY BUTTON
+        ===================================================== */
+
+        .primary-button {
+          gap: 15px;
+          background: #075b43;
+          color: #ffffff;
+        }
+
+
+        .button-arrow {
+          font-size: 20px;
+          line-height: 1;
+        }
+
+
+        .primary-button:hover {
+          background: #043f2f;
+          transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           SECONDARY BUTTON
+        ===================================================== */
+
+        .secondary-button {
+          border: 1px solid #075b43;
+          background: rgba(255, 255, 255, 0.78);
+          color: #075b43;
+        }
+
+
+        .secondary-button:hover {
+          background: #075b43;
+          color: #ffffff;
+          transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .hero-stats {
+          width: 640px;
+          display: flex;
+          align-items: center;
+          margin-top: 28px;
+        }
+
+
+        .stat {
+          min-width: 125px;
+          display: flex;
+          flex-direction: column;
+        }
+
+
+        .stat h3 {
+          margin: 0;
+          padding: 0;
+          color: #111820;
+          font-size: 27px;
+          line-height: 1.1;
+          font-weight: 700;
+        }
+
+
+        .stat p {
+          margin: 5px 0 0 0;
+          padding: 0;
+          color: #59636e;
+          font-size: 13px;
+          line-height: 1.3;
+        }
+
+
+        .stat-divider {
+          width: 1px;
+          height: 45px;
+          margin: 0 22px;
+          flex-shrink: 0;
+          background: #cbd1d0;
+        }
+
+
+        /* =====================================================
+           TRUSTED SECTION
+        ===================================================== */
+
+        .trusted-section {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          background: #ffffff;
+          border-top: 1px solid #eeeeee;
+          border-bottom: 1px solid #eeeeee;
+          overflow: hidden;
+        }
+
+
+        .trusted-container {
+          width: min(1280px, calc(100% - 64px));
+          min-height: 130px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+        }
+
+
+        /* =====================================================
+           TRUSTED HEADING
+        ===================================================== */
+
+        .trusted-heading {
+          width: 235px;
+          flex-shrink: 0;
+        }
+
+
+        .trusted-label {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          margin-bottom: 7px;
+        }
+
+
+        .trusted-label span {
+          width: 32px;
+          height: 2px;
+          flex-shrink: 0;
+          background: #075b43;
+        }
+
+
+        .trusted-label p {
+          margin: 0;
+          color: #59636e;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 1.7px;
+        }
+
+
+        .trusted-heading h2 {
+          margin: 0;
+          color: #111820;
+          font-size: 24px;
+          line-height: 1.15;
+          font-weight: 700;
+          letter-spacing: -0.6px;
+        }
+
+
+        .trusted-heading h2 strong {
+          color: #075b43;
+          font-weight: 700;
+        }
+
+
+        /* =====================================================
+           TRUSTED DIVIDER
+        ===================================================== */
+
+        .trusted-main-divider {
+          width: 1px;
+          height: 65px;
+          margin-right: 20px;
+          flex-shrink: 0;
+          background: #d8dddb;
+        }
+
+
+        /* =====================================================
+           BRAND SLIDER  (DESKTOP)
+        ===================================================== */
+
+        .brand-slider {
+          flex: 1;
+          min-width: 0;
+          overflow: hidden;
+          position: relative;
+        }
+
+
+        /* =====================================================
+           BRAND LIST  (DESKTOP SLIDER TRACK)
+        ===================================================== */
+
+        .brand-list {
           display: flex;
           align-items: center;
           justify-content: flex-start;
+          flex-wrap: nowrap;
 
-          opacity: 0;
+          width: max-content;
+          min-width: max-content;
+          height: 54px;
 
-          animation:
-            azHeroRight
-            1s
-            ease
-            0.4s
-            forwards;
+          margin: 0;
+          padding: 0;
+
+          animation: trustedPartnersSlide 28s linear infinite;
+
+          will-change: transform;
         }
 
-        .az-hero-image {
-          display: block;
 
-          width: 100%;
-          max-width: 480px;
-
-          height: 440px;
-
-          object-fit: contain;
-          object-position: center;
-
-          transform: translateX(20px);
+        .brand-slider:hover .brand-list {
+          animation-play-state: paused;
         }
 
-        /* =====================================================
-           GREEN DIAGONAL RIBBON (TOP)
-        ===================================================== */
 
-        .az-top-ribbon {
-          position: absolute;
-
-          top: 50px;
-          right: -210px;
-
-          z-index: 45;
-
-          width: 950px;
-          height: 65px;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          gap: 45px;
-
-          background:
-            linear-gradient(
-              100deg,
-              #0A4B3F 0%,
-              #0F5C4A 50%,
-              #073B32 100%
-            );
-
-          transform: rotate(38deg);
-
-          transform-origin: center;
-
-          box-shadow:
-            0 8px 25px
-            rgba(
-              10,
-              75,
-              63,
-              0.08
-            );
-
-          overflow: hidden;
-
-          opacity: 0;
-
-          animation:
-            azRibbonEnter
-            0.9s
-            ease
-            1s
-            forwards;
-        }
-
-        .az-top-ribbon::before {
-          content: "";
-
-          position: absolute;
-          inset: 0;
-
-          background:
-            linear-gradient(
-              100deg,
-              transparent 0%,
-              rgba(255, 255, 255, 0.18) 50%,
-              transparent 100%
-            );
-
-          animation:
-            azRibbonSweep
-            4s
-            ease-in-out
-            1.8s
-            infinite;
-        }
-
-        .az-ribbon-item {
-          display: flex;
-          align-items: center;
-
-          gap: 32px;
-
-          white-space: nowrap;
-
-          opacity: 0;
-
-          animation:
-            azFadeUp
-            0.5s
-            ease
-            forwards;
-        }
-
-        .az-ribbon-item:nth-child(1) {
-          animation-delay: 1.3s;
-        }
-
-        .az-ribbon-item:nth-child(2) {
-          animation-delay: 1.5s;
-        }
-
-        .az-ribbon-item:nth-child(3) {
-          animation-delay: 1.7s;
-        }
-
-        .az-ribbon-text {
-          color: #ffffff;
-
-          font-size: 16px;
-
-          font-weight: 700;
-
-          letter-spacing: -0.3px;
-        }
-
-        .az-ribbon-dot {
-          width: 15px;
-          height: 15px;
-
-          flex-shrink: 0;
-
-          border-radius: 50%;
-
-          background: #ffffff;
-
-          animation:
-            azDotBlink
-            2s
-            ease-in-out
-            2s
-            infinite;
-        }
-
-        /* =====================================================
-           BOTTOM DIAGONAL RIBBON
-        ===================================================== */
-
-        .az-bottom-ribbon {
-          position: absolute;
-
-          z-index: 35;
-
-          left: -80px;
-          bottom: 30px;
-
-          width:
-            calc(
-              100% + 160px
-            );
-
-          height: 78px;
-
-          background: #f1f3f5;
-
-          transform: rotate(-10deg);
-
-          display: flex;
-
-          align-items: center;
-
-          overflow: hidden;
-
-          box-shadow:
-            0 -2px 20px
-            rgba(
-              20,
-              30,
-              40,
-              0.04
-            );
-
-          opacity: 0;
-
-          animation:
-            azBottomRibbonEnter
-            0.9s
-            ease
-            1.2s
-            forwards;
-        }
-
-        .az-services {
-          width: 100%;
-
-          display: flex;
-
-          align-items: center;
-          justify-content: center;
-
-          gap: 45px;
-
-          transform: rotate(0deg);
-
-          animation:
-            azMarquee
-            22s
-            linear
-            2s
-            infinite;
-        }
-
-        .az-service {
-          display: flex;
-
-          align-items: center;
-
-          gap: 21px;
-
-          white-space: nowrap;
-        }
-
-        .az-service-text {
-          color: #11171c;
-
-          font-size: 13px;
-
-          font-weight: 600;
-        }
-
-        .az-service-dot {
-          width: 13px;
-          height: 13px;
-
-          border-radius: 50%;
-
-          background: #0A4B3F;
-
-          animation:
-            azDotBlink
-            2.4s
-            ease-in-out
-            2.4s
-            infinite;
-        }
-
-        /* =====================================================
-           ANIMATIONS
-        ===================================================== */
-
-        @keyframes azHeroLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-35px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes azHeroRight {
-          from {
-            opacity: 0;
-            transform: translateX(35px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes azFadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(25px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes azGreenShift {
-          0%,
-          100% {
-            background-position: 0% 50%;
-          }
-
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-
-        @keyframes azBtnPulse {
-          0%,
-          100% {
-            box-shadow:
-              0 10px 25px
-              rgba(10, 75, 63, 0.22);
-          }
-
-          50% {
-            box-shadow:
-              0 12px 32px
-              rgba(10, 75, 63, 0.38);
-          }
-        }
-
-        @keyframes azShine {
-          0% {
-            left: -120%;
-          }
-
-          60% {
-            left: 130%;
-          }
-
-          100% {
-            left: 130%;
-          }
-        }
-
-        @keyframes azPulseRing {
-          0% {
-            transform: scale(1);
-            opacity: 0.7;
-          }
-
-          100% {
-            transform: scale(1.4);
-            opacity: 0;
-          }
-        }
-
-        @keyframes azRibbonSweep {
-          0% {
-            transform: translateX(-100%);
-          }
-
-          50%,
-          100% {
-            transform: translateX(100%);
-          }
-        }
-
-        @keyframes azDotBlink {
-          0%,
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-
-          50% {
-            opacity: 0.5;
-            transform: scale(0.85);
-          }
-        }
-
-        @keyframes azMarquee {
+        @keyframes trustedPartnersSlide {
           0% {
             transform: translateX(0);
           }
@@ -790,653 +616,726 @@ const Hero: React.FC = () => {
           }
         }
 
-        @keyframes azRibbonEnter {
-          from {
-            opacity: 0;
-            transform: rotate(38deg) translateY(-30px);
-          }
-
-          to {
-            opacity: 1;
-            transform: rotate(38deg) translateY(0);
-          }
-        }
-
-        @keyframes azBottomRibbonEnter {
-          from {
-            opacity: 0;
-            transform: rotate(-10deg) translateY(30px);
-          }
-
-          to {
-            opacity: 1;
-            transform: rotate(-10deg) translateY(0);
-          }
-        }
 
         /* =====================================================
-           TABLET — 1100px
+           BRAND
         ===================================================== */
 
-        @media (max-width: 1100px) {
-          .az-hero {
-            height: 560px;
-            min-height: 560px;
+        .brand {
+          width: 160px;
+          min-width: 160px;
+          height: 54px;
+          padding: 0 14px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          flex: 0 0 160px;
+
+          border-right: 1px solid #e4e7e6;
+        }
+
+
+        .brand:last-child {
+          border-right: none;
+        }
+
+
+        .brand-duplicate {
+          display: flex;
+        }
+
+
+        /* =====================================================
+           GOOGLE
+        ===================================================== */
+
+        .google-logo {
+          color: #555d66;
+          font-size: 24px;
+          font-weight: 500;
+          letter-spacing: -1px;
+        }
+
+
+        /* =====================================================
+           META
+        ===================================================== */
+
+        .meta-logo {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: #555d66;
+          font-size: 23px;
+          font-weight: 500;
+        }
+
+
+        .meta-logo b {
+          font-size: 30px;
+          font-weight: 400;
+          line-height: 1;
+        }
+
+
+        /* =====================================================
+           AWS
+        ===================================================== */
+
+        .aws-logo {
+          color: #555d66;
+          font-size: 27px;
+          font-weight: 700;
+        }
+
+
+        /* =====================================================
+           MICROSOFT
+        ===================================================== */
+
+        .microsoft-logo {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          color: #555d66;
+          font-size: 17px;
+          font-weight: 600;
+        }
+
+
+        .microsoft-icon {
+          width: 24px;
+          height: 24px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          gap: 2px;
+        }
+
+
+        .microsoft-icon i {
+          display: block;
+          background: #555d66;
+        }
+
+
+        /* =====================================================
+           HUBSPOT
+        ===================================================== */
+
+        .hubspot-logo {
+          color: #555d66;
+          font-size: 18px;
+          font-weight: 600;
+        }
+
+
+        /* =====================================================
+           CANVA
+        ===================================================== */
+
+        .canva-logo {
+          color: #555d66;
+          font-size: 26px;
+          font-family: cursive;
+          font-style: italic;
+          font-weight: 600;
+        }
+
+
+        /* =====================================================
+           NOTION
+        ===================================================== */
+
+        .notion-logo {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: #555d66;
+          font-size: 17px;
+          font-weight: 600;
+        }
+
+
+        .notion-logo b {
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #555d66;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+          .hero-section {
+            min-height: 570px;
           }
 
-          .az-hero-container {
-            height: 560px;
-            padding:
-              30px
-              5%
-              60px
-              7%;
+
+          .hero-container {
+            width: calc(100% - 48px);
+            min-height: 570px;
           }
 
-          .az-hero-title {
-            font-size: 62px;
+
+          .hero-content {
+            width: 570px;
+            padding-top: 42px;
           }
 
-          .az-hero-description {
+
+          .hero-content h1 {
+            font-size: 54px;
+            letter-spacing: -2.3px;
+          }
+
+
+          .hero-description {
             font-size: 16px;
           }
 
-          .az-hero-right {
-            height: 340px;
+
+          .hero-stats {
+            width: 570px;
           }
 
-          .az-hero-image {
-            max-width: 420px;
-            height: 340px;
+
+          .stat {
+            min-width: 110px;
           }
 
-          .az-top-ribbon {
-            top: 90px;
-            right: -240px;
-            width: 950px;
-            height: 88px;
-          }
-        }
 
-        /* =====================================================
-           TABLET — 900px
-        ===================================================== */
-
-        @media (max-width: 900px) {
-          .az-hero {
-            height: auto;
-            min-height: auto;
+          .stat-divider {
+            margin: 0 13px;
           }
 
-          .az-hero-container {
-            height: auto;
-            min-height: auto;
-            grid-template-columns: 1fr;
 
-            padding:
-              130px
-              6%
-              100px;
+          /* Trusted */
+
+          .trusted-container {
+            width: calc(100% - 48px);
           }
 
-          .az-hero-left {
-            text-align: center;
-            padding-top: 20px;
+
+          .trusted-heading {
+            width: 190px;
           }
 
-          .az-hero-title {
-            font-size:
-              clamp(
-                44px,
-                7.5vw,
-                64px
-              );
+
+          .trusted-heading h2 {
+            font-size: 21px;
           }
 
-          .az-hero-description {
-            font-size: 16px;
+
+          .trusted-main-divider {
+            margin-right: 10px;
           }
 
-          .az-hero-actions {
-            justify-content: center;
+
+          .brand {
+            width: 120px;
+            min-width: 120px;
+            flex: 0 0 120px;
+            padding: 0 7px;
           }
 
-          .az-hero-right {
-            height: 360px;
-            margin-top: 10px;
-            justify-content: center;
+
+          .google-logo,
+          .meta-logo {
+            font-size: 18px;
           }
 
-          .az-hero-image {
-            width: 100%;
-            max-width: 440px;
-            height: 340px;
-            transform: none;
+
+          .aws-logo {
+            font-size: 21px;
           }
 
-          .az-top-ribbon {
-            top: 40px;
-            right: -210px;
-            width: 850px;
-            height: 78px;
-            gap: 28px;
-            transform:
-              rotate(45deg)
-              scale(0.82);
 
-            transform-origin: right center;
-
-            animation: none;
-            opacity: 1;
-          }
-
-          .az-ribbon-item {
-            gap: 22px;
-            opacity: 1;
-            animation: none;
-          }
-
-          .az-ribbon-text {
+          .microsoft-logo {
             font-size: 13px;
           }
 
-          .az-ribbon-dot {
-            width: 12px;
-            height: 12px;
+
+          .hubspot-logo {
+            font-size: 14px;
           }
 
-          .az-bottom-ribbon {
+
+          .canva-logo {
+            font-size: 20px;
+          }
+
+
+          .notion-logo {
+            font-size: 13px;
+          }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 760px) {
+
+          /* =====================================================
+             MOBILE HERO
+          ===================================================== */
+
+          .hero-section {
+            min-height: 0;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #ffffff;
+          }
+
+
+          .hero-container {
+            width: calc(100% - 28px);
+            min-height: 0;
+            height: auto;
+            margin: 0 auto;
+            padding: 0 0 26px;
             display: flex;
-
-            left: -10%;
-            right: auto;
-
-            width: 120%;
-
-            bottom: 12px;
-
-            height: 62px;
-
-            transform: rotate(-5deg);
-            transform-origin: center;
-
-            animation: none;
-            opacity: 1;
+            flex-direction: column;
           }
 
-          .az-services {
-            gap: 32px;
+
+          .hero-content {
+            order: 1;
+            width: 100%;
+            padding-top: 26px;
+            position: relative;
+            z-index: 3;
           }
 
-          .az-service {
-            gap: 16px;
+
+          /* Mobile-specific image */
+          .hero-image {
+            position: relative;
+            inset: auto;
+            order: 2;
+            display: block;
+            width: 100%;
+            height: 250px;
+            margin: 8px 0 0;
+            background-image: url("/Images/hero.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 0;
+            z-index: 1;
           }
 
-          .az-service-text {
-            font-size: 12px;
-          }
 
-          .az-service-dot {
-            width: 11px;
-            height: 11px;
-          }
-        }
-
-        /* =====================================================
-           MOBILE — 768px (Tablet portrait)
-        ===================================================== */
-
-        @media (max-width: 768px) {
-          .az-hero-container {
-            padding:
-              110px
-              24px
-              100px;
-          }
-
-          .az-hero-title {
-            font-size: 46px;
-            letter-spacing: -2px;
-          }
-
-          .az-hero-description {
-            font-size: 15.5px;
-          }
-
-          .az-hero-right {
-            height: 320px;
-          }
-
-          .az-hero-image {
-            max-width: 380px;
-            height: 300px;
-          }
-
-          .az-top-ribbon {
-            top: 25px;
-            right: -180px;
-            width: 720px;
-            height: 68px;
-            gap: 24px;
-            transform:
-              rotate(42deg)
-              scale(0.78);
-
-            transform-origin: right center;
-          }
-
-          .az-ribbon-item {
-            gap: 18px;
-          }
-
-          .az-ribbon-text {
-            font-size: 12px;
-          }
-
-          .az-ribbon-dot {
-            width: 10px;
-            height: 10px;
-          }
-
-          .az-bottom-ribbon {
-            left: -8%;
-            width: 116%;
-            bottom: 10px;
-            height: 56px;
-            transform: rotate(-5deg);
-          }
-
-          .az-services {
-            gap: 26px;
-          }
-
-          .az-service {
-            gap: 14px;
-          }
-
-          .az-service-text {
-            font-size: 11px;
-          }
-
-          .az-service-dot {
-            width: 10px;
-            height: 10px;
-          }
-        }
-
-        /* =====================================================
-           MOBILE — 600px
-           TOP RIBBON HIDDEN, HEADING MOVED TO TOP
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-          /* HIDE TOP RIBBON ON MOBILE */
-          .az-top-ribbon {
-            display: none !important;
-          }
-
-          /* REDUCE TOP PADDING — heading moves up */
-          .az-hero-container {
-            padding:
-              40px
-              18px
-              90px;
-          }
-
-          .az-hero-left {
-            padding-top: 0;
-          }
-
-          .az-hero-title {
-            font-size: 36px;
-            line-height: 1;
-            letter-spacing: -1.5px;
-          }
-
-          .az-hero-description {
-            margin-top: 18px;
-            font-size: 14.5px;
-            line-height: 1.55;
-          }
-
-          .az-desktop-break {
+          .hero-overlay {
             display: none;
           }
 
-          .az-hero-actions {
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 24px;
-            align-items: center;
-          }
 
-          .az-start-btn {
+          .hero-eyebrow {
             width: 100%;
-            max-width: 270px;
-            height: 54px;
-            font-size: 14px;
-          }
-
-          .az-play-circle {
-            width: 52px;
-            height: 52px;
-          }
-
-          .az-watch-btn {
-            font-size: 14px;
-            justify-content: center;
-          }
-
-          .az-hero-right {
-            height: 280px;
-            margin-top: 10px;
-            justify-content: center;
-          }
-
-          .az-hero-image {
-            width: 100%;
-            max-width: 360px;
-            height: 270px;
-            object-fit: contain;
-            transform: none;
-          }
-
-          /* BOTTOM RIBBON — full bleed, corners touch */
-          .az-bottom-ribbon {
             display: flex;
-
-            left: -8%;
-            right: auto;
-
-            width: 116%;
-
-            bottom: 10px;
-
-            height: 52px;
-
-            transform: rotate(-5deg);
-            transform-origin: center;
-
-            animation: none;
-            opacity: 1;
+            align-items: center;
+            gap: 7px;
+            margin: 0 0 13px 0;
+            font-size: 7.5px;
+            line-height: 1.4;
+            letter-spacing: 1.25px;
+            white-space: normal;
           }
 
-          .az-services {
-            gap: 22px;
 
-            animation:
-              azMarquee
-              18s
-              linear
-              0.5s
-              infinite;
+          .hero-eyebrow span {
+            max-width: calc(100% - 30px);
           }
 
-          .az-service {
-            gap: 12px;
+
+          .hero-eyebrow i {
+            width: 22px;
+            height: 1.5px;
+            flex-shrink: 0;
           }
 
-          .az-service-text {
-            font-size: 10.5px;
+
+          .hero-content h1 {
+            max-width: 100%;
+            margin: 0;
+            font-size: clamp(32px, 9.5vw, 39px);
+            line-height: 1.04;
+            letter-spacing: -1.4px;
           }
 
-          .az-service-dot {
-            width: 9px;
-            height: 9px;
-          }
-        }
 
-        /* =====================================================
-           SMALL MOBILE — 480px
-        ===================================================== */
-
-        @media (max-width: 480px) {
-
-          /* TOP RIBBON HIDDEN */
-          .az-top-ribbon {
-            display: none !important;
+          .hero-description {
+            width: 100%;
+            max-width: 100%;
+            margin: 15px 0 0 0;
+            font-size: 13.5px;
+            line-height: 1.52;
           }
 
-          .az-hero-container {
-            padding:
-              35px
-              16px
-              82px;
+
+          .hero-buttons {
+            width: 100%;
+            display: flex;
+            align-items: stretch;
+            gap: 8px;
+            margin-top: 19px;
           }
 
-          .az-hero-title {
-            font-size: 32px;
-            line-height: 1.02;
-            letter-spacing: -1.2px;
-          }
 
-          .az-hero-description {
-            margin-top: 16px;
-            font-size: 14px;
-            line-height: 1.5;
-          }
-
-          .az-hero-actions {
-            gap: 14px;
-            margin-top: 22px;
-          }
-
-          .az-start-btn {
-            max-width: 250px;
-            height: 52px;
-            font-size: 13px;
-          }
-
-          .az-play-circle {
-            width: 48px;
-            height: 48px;
-          }
-
-          .az-watch-btn {
-            font-size: 13px;
-            gap: 10px;
-          }
-
-          .az-hero-right {
-            height: 250px;
-          }
-
-          .az-hero-image {
-            max-width: 320px;
-            height: 240px;
-          }
-
-          /* BOTTOM RIBBON */
-          .az-bottom-ribbon {
-            left: -8%;
-            width: 116%;
-
-            bottom: 8px;
-
-            height: 48px;
-
-            transform: rotate(-5deg);
-          }
-
-          .az-services {
-            gap: 18px;
-          }
-
-          .az-service {
-            gap: 10px;
-          }
-
-          .az-service-text {
-            font-size: 9.5px;
-          }
-
-          .az-service-dot {
-            width: 8px;
-            height: 8px;
-          }
-        }
-
-        /* =====================================================
-           EXTRA SMALL — 380px
-        ===================================================== */
-
-        @media (max-width: 380px) {
-
-          /* TOP RIBBON HIDDEN */
-          .az-top-ribbon {
-            display: none !important;
-          }
-
-          .az-hero-container {
-            padding:
-              30px
-              14px
-              76px;
-          }
-
-          .az-hero-title {
-            font-size: 28px;
-            letter-spacing: -1px;
-          }
-
-          .az-hero-description {
-            font-size: 13px;
-          }
-
-          .az-start-btn {
-            max-width: 230px;
-            height: 50px;
-            font-size: 12px;
-          }
-
-          .az-hero-right {
-            height: 220px;
-          }
-
-          .az-hero-image {
-            max-width: 280px;
-            height: 210px;
-          }
-
-          /* BOTTOM RIBBON */
-          .az-bottom-ribbon {
-            left: -8%;
-            width: 116%;
-
-            bottom: 6px;
-
+          .primary-button,
+          .secondary-button {
+            min-width: 0;
             height: 44px;
-
-            transform: rotate(-5deg);
+            padding: 0 13px;
+            border-radius: 7px;
+            font-size: 11px;
+            white-space: nowrap;
           }
 
-          .az-services {
-            gap: 14px;
-          }
 
-          .az-service {
+          .primary-button {
+            flex: 1;
             gap: 8px;
           }
 
-          .az-service-text {
+
+          .secondary-button {
+            flex: 1;
+          }
+
+
+          .button-arrow {
+            font-size: 16px;
+          }
+
+
+          .hero-stats {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px 18px;
+            margin-top: 25px;
+          }
+
+
+          .stat {
+            min-width: 0;
+          }
+
+
+          .stat h3 {
+            margin: 0;
+            font-size: 22px;
+            line-height: 1.1;
+          }
+
+
+          .stat p {
+            margin: 4px 0 0 0;
+            font-size: 10.5px;
+            line-height: 1.3;
+          }
+
+
+          .stat-divider {
+            display: none;
+          }
+
+
+          /* =====================================================
+             TRUSTED PARTNERS - MOBILE
+          ===================================================== */
+
+          .trusted-section {
+            width: 100%;
+            margin-top: 22px;
+            padding: 0 0 20px;
+            overflow: hidden;
+          }
+
+
+          .trusted-container {
+            width: calc(100% - 28px);
+            min-height: auto;
+            margin: 0 auto;
+            padding: 34px 0 8px;
+            display: block;
+          }
+
+
+          .trusted-heading {
+            width: 100%;
+            margin: 0 0 20px;
+            text-align: center;
+          }
+
+
+          .trusted-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 7px;
+          }
+
+
+          /* Remove line before OUR PARTNERS */
+          .trusted-label span {
+            display: none;
+          }
+
+
+          .trusted-label p {
+            margin: 0;
             font-size: 9px;
+            line-height: 1.2;
+            letter-spacing: 1.5px;
+            text-align: center;
           }
 
-          .az-service-dot {
-            width: 7px;
-            height: 7px;
+
+          .trusted-heading h2 {
+            margin: 0;
+            text-align: center;
+            font-size: 23px;
+            line-height: 1.05;
           }
+
+
+          .trusted-main-divider {
+            display: none;
+          }
+
+
+          /* Slider viewport */
+          .brand-slider {
+            display: block;
+            width: 100%;
+            height: 72px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            visibility: visible;
+            opacity: 1;
+          }
+
+
+          /* Moving track */
+          .brand-list {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+
+            width: max-content;
+            min-width: max-content;
+            height: 72px;
+
+            margin: 0;
+            padding: 0;
+
+            animation: trustedPartnersSlide 32s linear infinite;
+
+            will-change: transform;
+          }
+
+
+          /* Every logo is always visible */
+          .brand {
+            width: 150px;
+            min-width: 150px;
+            height: 72px;
+
+            padding: 8px 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex: 0 0 150px;
+
+            border-right: 1px solid #e4e7e6;
+            border-bottom: none;
+
+            background: #ffffff;
+          }
+
+
+          .brand-duplicate {
+            display: flex;
+          }
+
+
+          .brand-slider:hover .brand-list {
+            animation-play-state: paused;
+          }
+
+
+          .google-logo {
+            font-size: 18px;
+          }
+
+
+          .meta-logo {
+            font-size: 18px;
+          }
+
+
+          .meta-logo b {
+            font-size: 25px;
+          }
+
+
+          .aws-logo {
+            font-size: 21px;
+          }
+
+
+          .microsoft-logo {
+            font-size: 13px;
+          }
+
+
+          .microsoft-icon {
+            width: 21px;
+            height: 21px;
+          }
+
+
+          .hubspot-logo {
+            font-size: 14px;
+          }
+
+
+          .canva-logo {
+            font-size: 21px;
+          }
+
+
+          .notion-logo {
+            font-size: 13px;
+          }
+
+
+          .notion-logo b {
+            width: 21px;
+            height: 21px;
+            font-size: 12px;
+          }
+
         }
 
-        /* =====================================================
-           REDUCED MOTION
-        ===================================================== */
 
-        @media (prefers-reduced-motion: reduce) {
-          .az-hero *,
-          .az-hero *::before,
-          .az-hero *::after {
-            animation: none !important;
-            transition: none !important;
-            opacity: 1 !important;
+        @media (max-width: 420px) {
+
+          /* HERO ONLY */
+
+          .hero-container {
+            width: calc(100% - 26px);
+            min-height: 0;
+            height: auto;
+            padding-bottom: 30px;
           }
+
+
+          .hero-content {
+            padding-top: 24px;
+          }
+
+
+          .hero-content h1 {
+            font-size: 34px;
+            line-height: 1.05;
+            letter-spacing: -1.2px;
+          }
+
+
+          .hero-description {
+            font-size: 13px;
+            line-height: 1.5;
+          }
+
+
+          .hero-buttons {
+            gap: 7px;
+            margin-top: 18px;
+          }
+
+
+          .primary-button,
+          .secondary-button {
+            height: 43px;
+            padding: 0 10px;
+            font-size: 10.5px;
+          }
+
+
+          .hero-stats {
+            gap: 15px 8px;
+            margin-top: 23px;
+          }
+
+
+          .stat h3 {
+            font-size: 21px;
+          }
+
+
+          .stat p {
+            font-size: 10px;
+          }
+
+
+          /* TRUSTED PARTNERS */
+
+          .trusted-section {
+            margin-top: 24px;
+          }
+
+
+          .trusted-container {
+            width: calc(100% - 26px);
+            padding-top: 32px;
+          }
+
+
+          .trusted-heading h2 {
+            font-size: 22px;
+          }
+
+
+          .brand {
+            width: 140px;
+            min-width: 140px;
+            flex-basis: 140px;
+          }
+
+
+          .hero-image {
+            height: 220px;
+            margin-top: 8px;
+            background-position: center;
+          }
+
         }
+
       `}</style>
-
-      <section className="az-hero">
-        {/* TOP GREEN RIBBON (hidden on mobile via CSS) */}
-        <div className="az-top-ribbon">
-          {topServices.map((service, index) => (
-            <div className="az-ribbon-item" key={service}>
-              <span className="az-ribbon-text">{service}</span>
-              {index !== topServices.length - 1 && (
-                <span className="az-ribbon-dot" />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* MAIN CONTENT */}
-        <div className="az-hero-container">
-          {/* LEFT */}
-          <div className="az-hero-left">
-            <h1 className="az-hero-title">
-              <span className="az-black">Build Your</span>
-              <br />
-              <span className="az-black">Tech.</span>{" "}
-              <span className="az-green">Flood It</span>
-              <br />
-              <span className="az-green">With Customers.</span>
-            </h1>
-
-            <p className="az-hero-description">
-              Strategy, development, and marketing solutions
-              <br className="az-desktop-break" />
-              that help businesses build, grow, and scale in
-              <br className="az-desktop-break" />
-              the digital world.
-            </p>
-
-            <div className="az-hero-actions">
-              <button type="button" className="az-start-btn">
-                <span>GET STARTED</span>
-                <span className="az-arrow">→</span>
-              </button>
-
-              <button type="button" className="az-watch-btn">
-                <span className="az-play-circle">
-                  <span className="az-play-icon">▶</span>
-                </span>
-                <span>Watch Video</span>
-              </button>
-            </div>
-          </div>
-
-          {/* RIGHT IMAGE */}
-          <div className="az-hero-right">
-            <img
-              src="/Images/heroimage.png"
-              alt="Technology"
-              className="az-hero-image"
-            />
-          </div>
-        </div>
-
-        {/* BOTTOM GREY RIBBON */}
-        <div className="az-bottom-ribbon">
-          <div className="az-services">
-            {[...bottomServices, ...bottomServices].map(
-              (service, index) => (
-                <div className="az-service" key={index}>
-                  <span className="az-service-text">{service}</span>
-                  <span className="az-service-dot" />
-                </div>
-              )
-            )}
-          </div>
-        </div>
-      </section>
     </>
   );
 };

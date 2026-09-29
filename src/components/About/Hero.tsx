@@ -1,599 +1,274 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from 'react';
 
-const AboutSection: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
 
-  /* =====================================================
-     INTERSECTION OBSERVER — Repeats on scroll up/down
-  ===================================================== */
+const styles = `
+  .people-section {
+    width: 100%;
+    background-color: #FAFAF9;
+    font-family: system-ui, -apple-system, sans-serif;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+  }
 
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
+  .people-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+    z-index: 10;
+  }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -60px 0px",
-      }
-    );
+  @media (min-width: 1024px) {
+    .people-container {
+      grid-template-columns: 1fr 1.2fr;
+      min-height: 550px;
+    }
+  }
 
-    observer.observe(node);
+  
+  .people-left {
+    padding: 60px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+    text-align: left;       
+    z-index: 20;
+  }
 
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  @media (min-width: 1024px) {
+    .people-left {
+      padding: 80px 0 80px 80px;
+    }
+  }
 
+ 
+  .section-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .section-label span {
+    color: #0F3D2E;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .label-line {
+    height: 1px;
+    width: 40px;
+    background-color: #9CA3AF;
+  }
+
+ 
+  .main-heading {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 48px;           
+    font-weight: 700;          
+    color: #1A1A1A;            
+    line-height: 1.1;
+    margin: 0 0 24px 0;
+    letter-spacing: -1px;
+    text-align: left;          
+    display: flex;            
+    flex-direction: column;    
+    align-items: flex-start;   
+  }
+
+  
+  .main-heading span {
+    display: block;          
+    text-align: left;        
+    width: 100%;               
+  }
+
+  .highlight-green {
+    color: #0F3D2E;
+  }
+
+  .description {
+    color: #4B5563;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 450px;
+    text-align: left;         
+    margin-left: 0;            
+    margin-right: 0;
+  }
+
+  .cta-button {
+    background-color: #0F3D2E;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: fit-content;
+    margin: 0;              
+  }
+
+  .cta-button:hover {
+    background-color: #1a5c46;
+    transform: translateY(-2px);
+  }
+
+  /* Dotted Pattern */
+  .dots-pattern {
+    position: absolute;
+    bottom: 60px;
+    right: 40px;
+    width: 100px;
+    height: 60px;
+    background-image: radial-gradient(#0F3D2E 2px, transparent 2px);
+    background-size: 12px 12px;
+    opacity: 0.3;
+    z-index: 5;
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .dots-pattern { display: block; }
+  }
+
+  
+  .people-right {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    z-index: 10;
+    margin-top: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    .people-right {
+      height: auto;
+      min-height: 550px;
+      border-top-left-radius: 150px;
+      border-bottom-left-radius: 150px;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+      margin-top: 0;
+    }
+  }
+
+  .people-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* =========================================
+     TABLET / MOBILE  (≤1024px)
+     Height తగ్గించబడింది: 350px → 260px
+  ========================================= */
+  @media (max-width: 1024px) {
+    .people-left { padding: 40px 20px; }
+    .main-heading { font-size: 34px; }
+    .description { font-size: 15px; }
+    .people-right { height: 260px; }
+  }
+
+  /* =========================================
+     SMALL PHONES  (≤480px)
+     ఇంకా తగ్గించబడింది: 260px → 200px
+  ========================================= */
+  @media (max-width: 480px) {
+    .people-left { padding: 32px 18px; }
+    .main-heading { font-size: 28px; }
+    .description { font-size: 14px; }
+    .people-right { height: 200px; }
+  }
+`;
+
+// ==========================================
+// 2. SVG ICONS
+// ==========================================
+const ArrowRightIcon: React.FC = () => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="18" 
+    height="18" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+);
+
+// ==========================================
+// 3. MAIN COMPONENT
+// ==========================================
+const PeopleBehindSection: React.FC = () => {
   return (
-    <section
-      ref={sectionRef}
-      className={`about-section${
-        isVisible ? " about-visible" : ""
-      }`}
-    >
-      <div className="about-container">
+    <>
+      <style>{styles}</style>
+      
+      <section className="people-section">
+        <div className="people-container">
+          
+          {/* Left Section */}
+          <div className="people-left">
+            
+            <div className="section-label">
+              <span>About Us</span>
+              <div className="label-line"></div>
+            </div>
 
-        {/* TOP CONTENT */}
-        <div className="about-top">
+          
+            <h1 className="main-heading">
+              <span>PEOPLE BEHIND</span>
+              <span className="highlight-green">DIGITAL</span>
+              <span className="highlight-green">POSSIBILITIES</span>
+            </h1>
 
-          <p className="about-eyebrow">
-            THE COMPANY BEHIND THE CODE
-          </p>
-
-          <h1 className="about-heading">
-            Alpha Zeta <span>World</span>
-          </h1>
-
-          <p className="about-intro">
-            A modern technology venture operating through a hybrid dual-vertical
-            <br />
-            business model. We engineer platforms to drive businesses from inception
-            <br />
-            to maturity.
-          </p>
-
-        </div>
-
-        {/* DIVIDER */}
-        <div className="about-divider"></div>
-
-        {/* BOTTOM CONTENT */}
-        <div className="principle-grid">
-
-          {/* LEFT CONTENT */}
-          <div className="principle-content">
-
-            <p className="principle-eyebrow">
-              OUR GUIDING PRINCIPLE
+            <p className="description">
+              We are a team of passionate creators, developers and strategists building digital solutions that help businesses grow, innovate and make a real impact.
             </p>
 
-            <h2 className="principle-heading">
-              From Inception to{" "}
-              <span>Market Leadership.</span>
-            </h2>
+            <button className="cta-button">
+              Get to Know Us
+              <ArrowRightIcon />
+            </button>
 
-            <p className="principle-text">
-              Our mission is to help companies cross the threshold from inception
-              (Alpha) to scale and market maturity (Zeta). We sit squarely at the
-              intersection of production-grade engineering and user growth, acting
-              as your technical engine and distribution catalyst.
-            </p>
-
+            <div className="dots-pattern"></div>
           </div>
 
-          {/* RIGHT IMAGE */}
-          <div className="principle-image">
-            <img
-              src="/Images/about.png"
-              alt="Guiding Principle"
+          {/* Right Section */}
+          <div className="people-right">
+            <img 
+              src="/Images/abouthero.png" 
+              alt="Office Workspace" 
             />
           </div>
 
         </div>
-
-      </div>
-
-      <style>{`
-        * {
-          box-sizing: border-box;
-        }
-
-        /* =========================
-           SECTION
-        ========================= */
-
-        .about-section {
-          width: 100%;
-          background: #ffffff;
-          padding: 45px 5.5% 40px;
-          overflow: hidden;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .about-container {
-          width: 100%;
-          max-width: 1450px;
-          margin: 0 auto;
-        }
-
-        /* =========================
-           TOP CONTENT
-        ========================= */
-
-        .about-eyebrow {
-          margin: 0 0 20px;
-          color: #0A4B3F;
-          font-size: 16px;
-          line-height: 1.2;
-          font-weight: 500;
-          letter-spacing: 0.3px;
-
-          opacity: 0;
-        }
-
-        .about-heading {
-          margin: 0;
-          color: #142235;
-          font-size: 54px;
-          line-height: 1;
-          font-weight: 700;
-          letter-spacing: -2.5px;
-
-          opacity: 0;
-        }
-
-        .about-heading span {
-          color: #0A4B3F;
-
-          background:
-            linear-gradient(
-              90deg,
-              #0A4B3F 0%,
-              #0F5C4A 50%,
-              #0A4B3F 100%
-            );
-
-          background-size: 200% 100%;
-
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-
-          animation:
-            azGradientShift
-            5s
-            ease
-            infinite;
-        }
-
-        .about-intro {
-          margin: 21px 0 0;
-          color: #5b626a;
-          font-size: 18px;
-          line-height: 1.5;
-          font-weight: 400;
-
-          opacity: 0;
-        }
-
-        /* =========================
-           DIVIDER
-        ========================= */
-
-        .about-divider {
-          width: 100%;
-          height: 1px;
-          margin: 32px 0 34px;
-          background: #bcd8d3;
-
-          transform-origin: left center;
-
-          transform: scaleX(0);
-          opacity: 0;
-        }
-
-        /* =========================
-           PRINCIPLE GRID
-        ========================= */
-
-        .principle-grid {
-          display: grid;
-          grid-template-columns: 1.55fr 1fr;
-          align-items: center;
-          gap: 50px;
-        }
-
-        .principle-content {
-          min-width: 0;
-
-          opacity: 0;
-        }
-
-        .principle-eyebrow {
-          margin: 0 0 20px;
-          color: #0A4B3F;
-          font-size: 16px;
-          line-height: 1.2;
-          font-weight: 600;
-          letter-spacing: 0.3px;
-        }
-
-        .principle-heading {
-          margin: 0;
-          color: #142235;
-          font-size: 39px;
-          line-height: 1.12;
-          font-weight: 700;
-          letter-spacing: -1.5px;
-        }
-
-        .principle-heading span {
-          color: #0A4B3F;
-        }
-
-        .principle-text {
-          max-width: 850px;
-          margin: 20px 0 0;
-          color: #626870;
-          font-size: 18px;
-          line-height: 1.55;
-          font-weight: 400;
-        }
-
-        /* =========================
-           IMAGE
-        ========================= */
-
-        .principle-image {
-          width: 100%;
-
-          opacity: 0;
-        }
-
-        .principle-image img {
-          display: block;
-          width: 100%;
-          height: 280px;
-          object-fit: cover;
-          border-radius: 27px;
-
-          box-shadow:
-            0 8px 24px rgba(10, 75, 63, 0.08);
-
-          transition:
-            transform 0.5s ease,
-            box-shadow 0.5s ease;
-        }
-
-        .principle-image img:hover {
-          transform: translateY(-6px) scale(1.02);
-
-          box-shadow:
-            0 16px 36px rgba(10, 75, 63, 0.18);
-        }
-
-        /* =========================
-           VISIBLE STATE — Animations
-        ========================= */
-
-        .about-section.about-visible .about-eyebrow {
-          animation:
-            aboutSlideDown
-            0.7s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0s
-            forwards;
-        }
-
-        .about-section.about-visible .about-heading {
-          animation:
-            aboutHeadingIn
-            1s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0.15s
-            forwards;
-        }
-
-        .about-section.about-visible .about-intro {
-          animation:
-            aboutBlurIn
-            0.9s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0.35s
-            forwards;
-        }
-
-        .about-section.about-visible .about-divider {
-          animation:
-            aboutDividerIn
-            1s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0.55s
-            forwards;
-        }
-
-        .about-section.about-visible .principle-content {
-          animation:
-            aboutSlideLeft
-            0.9s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0.75s
-            forwards;
-        }
-
-        .about-section.about-visible .principle-image {
-          animation:
-            aboutSlideRight
-            0.9s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0.9s
-            forwards;
-        }
-
-        /* =========================
-           KEYFRAMES
-        ========================= */
-
-        @keyframes aboutSlideDown {
-          from {
-            opacity: 0;
-            transform: translateY(-14px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes aboutHeadingIn {
-          from {
-            opacity: 0;
-            transform: translateY(35px) scale(0.97);
-            letter-spacing: 3px;
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            letter-spacing: -2.5px;
-          }
-        }
-
-        @keyframes aboutBlurIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-            filter: blur(5px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-          }
-        }
-
-        @keyframes aboutDividerIn {
-          from {
-            transform: scaleX(0);
-            opacity: 0;
-          }
-
-          to {
-            transform: scaleX(1);
-            opacity: 1;
-          }
-        }
-
-        @keyframes aboutSlideLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-40px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes aboutSlideRight {
-          from {
-            opacity: 0;
-            transform: translateX(40px) scale(0.95);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateX(0) scale(1);
-          }
-        }
-
-        @keyframes azGradientShift {
-          0% {
-            background-position: 0% 50%;
-          }
-
-          100% {
-            background-position: 200% 50%;
-          }
-        }
-
-        /* =========================
-           TABLET
-        ========================= */
-
-        @media (max-width: 1000px) {
-
-          .about-section {
-            padding: 40px 5% 38px;
-          }
-
-          .about-heading {
-            font-size: 46px;
-          }
-
-          .about-intro {
-            font-size: 17px;
-          }
-
-          .about-divider {
-            margin: 28px 0 32px;
-          }
-
-          .principle-grid {
-            grid-template-columns: 1.15fr 1fr;
-            gap: 30px;
-          }
-
-          .principle-heading {
-            font-size: 32px;
-          }
-
-          .principle-text {
-            font-size: 16px;
-          }
-
-          .principle-image img {
-            height: 250px;
-          }
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 700px) {
-
-          .about-section {
-            padding: 38px 20px 42px;
-          }
-
-          .about-eyebrow {
-            margin-bottom: 16px;
-            font-size: 13px;
-          }
-
-          .about-heading {
-            font-size: 37px;
-            letter-spacing: -1.5px;
-          }
-
-          .about-intro {
-            margin-top: 17px;
-            font-size: 15px;
-            line-height: 1.5;
-          }
-
-          .about-intro br {
-            display: none;
-          }
-
-          .about-divider {
-            margin: 28px 0 32px;
-          }
-
-          .principle-grid {
-            grid-template-columns: 1fr;
-            gap: 25px;
-          }
-
-          .principle-eyebrow {
-            margin-bottom: 15px;
-            font-size: 13px;
-          }
-
-          .principle-heading {
-            font-size: 29px;
-            line-height: 1.15;
-            letter-spacing: -1px;
-          }
-
-          .principle-text {
-            margin-top: 17px;
-            font-size: 15px;
-            line-height: 1.5;
-          }
-
-          .principle-image img {
-            width: 100%;
-            height: 235px;
-            border-radius: 21px;
-          }
-
-          /* Mobile order: image below content (default) */
-          /* If you want image above, swap using order */
-          .principle-content {
-            order: 1;
-          }
-
-          .principle-image {
-            order: 2;
-          }
-        }
-
-        /* =========================
-           SMALL MOBILE
-        ========================= */
-
-        @media (max-width: 480px) {
-
-          .about-section {
-            padding: 34px 17px 38px;
-          }
-
-          .about-heading {
-            font-size: 33px;
-          }
-
-          .about-intro {
-            font-size: 14px;
-          }
-
-          .about-divider {
-            margin: 25px 0 30px;
-          }
-
-          .principle-heading {
-            font-size: 26px;
-          }
-
-          .principle-text {
-            font-size: 14px;
-          }
-
-          .principle-image img {
-            height: 205px;
-            border-radius: 18px;
-          }
-        }
-
-        /* =========================
-           REDUCED MOTION
-        ========================= */
-
-        @media (prefers-reduced-motion: reduce) {
-          .about-section *,
-          .about-section *::before,
-          .about-section *::after {
-            animation: none !important;
-            transition: none !important;
-            opacity: 1 !important;
-            transform: none !important;
-            filter: none !important;
-          }
-        }
-      `}</style>
-    </section>
+      </section>
+    </>
   );
 };
 
-export default AboutSection;
+export default PeopleBehindSection;

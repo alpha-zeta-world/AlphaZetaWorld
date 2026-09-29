@@ -67,8 +67,6 @@ const testimonials: Testimonial[] = [
 const Testimonials: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   const maxIndex = Math.max(0, testimonials.length - visibleCards);
 
@@ -102,55 +100,11 @@ const Testimonials: React.FC = () => {
     setActiveIndex(0);
   }, [visibleCards]);
 
-  /* =====================================================
-     AUTO SLIDE
-  ===================================================== */
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [maxIndex]);
-
-  /* =====================================================
-     INTERSECTION OBSERVER
-  ===================================================== */
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -60px 0px",
-      }
-    );
-
-    observer.observe(node);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   /* Translate percentage per visible card */
   const translatePercent = activeIndex * (100 / visibleCards);
 
   return (
-    <section
-      ref={sectionRef}
-      className={`testimonials-section${
-        isVisible ? " ts-visible" : ""
-      }`}
-    >
+    <section className="testimonials-section">
       <div className="testimonials-container">
 
         {/* Heading */}
@@ -177,8 +131,6 @@ const Testimonials: React.FC = () => {
               <div className="testimonial-slide" key={index}>
 
                 <div className="testimonial-card">
-                  <div className="testimonial-shine"></div>
-
                   <p className="testimonial-text">
                     "{testimonial.text}"
                   </p>
@@ -268,8 +220,6 @@ const Testimonials: React.FC = () => {
           font-weight: 700;
           color: #111111;
           letter-spacing: -0.7px;
-
-          opacity: 0;
         }
 
         .testimonials-header h2 span {
@@ -282,8 +232,6 @@ const Testimonials: React.FC = () => {
           font-size: 14px;
           line-height: 1.6;
           color: #666666;
-
-          opacity: 0;
         }
 
         /* =========================
@@ -308,8 +256,6 @@ const Testimonials: React.FC = () => {
           flex: 0 0 calc((100% - 32px) / 3);
           min-width: 0;
           padding-bottom: 82px;
-
-          opacity: 0;
         }
 
         /* =========================
@@ -346,35 +292,6 @@ const Testimonials: React.FC = () => {
           box-shadow:
             0 14px 30px rgba(10, 75, 63, 0.14),
             0 4px 8px rgba(10, 75, 63, 0.06);
-        }
-
-        /* =========================
-           SHINE EFFECT
-        ========================= */
-
-        .testimonial-shine {
-          position: absolute;
-          top: 0;
-          left: -120%;
-
-          width: 70%;
-          height: 100%;
-
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.65),
-            transparent
-          );
-
-          transform: skewX(-20deg);
-
-          pointer-events: none;
-          transition: left 0.7s ease;
-        }
-
-        .testimonial-card:hover .testimonial-shine {
-          left: 140%;
         }
 
         /* =========================
@@ -438,8 +355,6 @@ const Testimonials: React.FC = () => {
 
           margin-top: 16px;
           padding-left: 22px;
-
-          opacity: 0;
         }
 
         /* =========================
@@ -529,8 +444,6 @@ const Testimonials: React.FC = () => {
 
           gap: 10px;
           margin-top: 2px;
-
-          opacity: 0;
         }
 
         .testimonial-arrow {
@@ -564,135 +477,6 @@ const Testimonials: React.FC = () => {
           color: #ffffff;
           transform: translateY(-2px);
           box-shadow: 0 6px 14px rgba(10, 75, 63, 0.20);
-        }
-
-        /* =========================
-           VISIBLE STATE — Animations
-        ========================= */
-
-        .testimonials-section.ts-visible .testimonials-header h2 {
-          animation:
-            tsHeadingIn
-            1s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0s
-            forwards;
-        }
-
-        .testimonials-section.ts-visible .testimonials-header p {
-          animation:
-            tsFadeUp
-            0.9s
-            cubic-bezier(0.22, 1, 0.36, 1)
-            0.25s
-            forwards;
-        }
-
-        .testimonials-section.ts-visible .testimonial-slide {
-          animation:
-            tsCardIn
-            0.85s
-            cubic-bezier(0.34, 1.4, 0.64, 1)
-            forwards;
-        }
-
-        /* Stagger */
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(1) { animation-delay: 0.45s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(2) { animation-delay: 0.6s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(3) { animation-delay: 0.75s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(4) { animation-delay: 0.9s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(5) { animation-delay: 1.05s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(6) { animation-delay: 1.2s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(7) { animation-delay: 1.35s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(8) { animation-delay: 1.5s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(9) { animation-delay: 1.65s; }
-
-        .testimonials-section.ts-visible .testimonial-user {
-          animation:
-            tsFadeUp
-            0.7s
-            ease
-            forwards;
-        }
-
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(1) .testimonial-user { animation-delay: 0.7s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(2) .testimonial-user { animation-delay: 0.85s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(3) .testimonial-user { animation-delay: 1s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(4) .testimonial-user { animation-delay: 1.15s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(5) .testimonial-user { animation-delay: 1.3s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(6) .testimonial-user { animation-delay: 1.45s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(7) .testimonial-user { animation-delay: 1.6s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(8) .testimonial-user { animation-delay: 1.75s; }
-        .testimonials-section.ts-visible
-        .testimonial-slide:nth-child(9) .testimonial-user { animation-delay: 1.9s; }
-
-        .testimonials-section.ts-visible .testimonial-controls {
-          animation:
-            tsFadeUp
-            0.8s
-            ease
-            1.4s
-            forwards;
-        }
-
-        /* =========================
-           KEYFRAMES
-        ========================= */
-
-        @keyframes tsHeadingIn {
-          from {
-            opacity: 0;
-            transform: translateY(35px) scale(0.96);
-            letter-spacing: 3px;
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            letter-spacing: -0.7px;
-          }
-        }
-
-        @keyframes tsFadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes tsCardIn {
-          0% {
-            opacity: 0;
-            transform: perspective(900px) rotateX(-22deg) translateY(40px);
-          }
-          60% {
-            opacity: 1;
-            transform: perspective(900px) rotateX(5deg) translateY(-6px);
-          }
-          100% {
-            opacity: 1;
-            transform: perspective(900px) rotateX(0) translateY(0);
-          }
         }
 
         /* =========================
@@ -797,21 +581,6 @@ const Testimonials: React.FC = () => {
             height: 35px;
             font-size: 16px;
           }
-
-          /* Faster stagger on mobile — only 1 visible so keep it quick */
-          .testimonials-section.ts-visible
-          .testimonial-slide:nth-child(n) {
-            animation-delay: 0.3s;
-          }
-
-          .testimonials-section.ts-visible
-          .testimonial-slide:nth-child(n) .testimonial-user {
-            animation-delay: 0.5s;
-          }
-
-          .testimonials-section.ts-visible .testimonial-controls {
-            animation-delay: 0.7s;
-          }
         }
 
         /* =========================
@@ -861,9 +630,7 @@ const Testimonials: React.FC = () => {
           .testimonials-section *,
           .testimonials-section *::before,
           .testimonials-section *::after {
-            animation: none !important;
             transition: none !important;
-            opacity: 1 !important;
           }
         }
       `}</style>

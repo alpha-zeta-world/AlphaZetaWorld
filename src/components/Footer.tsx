@@ -186,7 +186,7 @@ const Footer: React.FC = () => {
         <div className="ft-bottom-section">
 
           <p className="ft-copyright">
-            @2025 Alpha Zeta World. All Rights Reserved.
+            @2026 Alpha Zeta World. All Rights Reserved.
           </p>
 
           {/* 🎯 SOCIAL ICONS — RIGHT SIDE */}

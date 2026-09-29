@@ -1,598 +1,980 @@
 import { NavLink } from "react-router-dom";
 import { useState, type MouseEvent, type KeyboardEvent } from "react";
 
-type NavItem = [label: string, path: string];
-
-// 🎯 Nav links (Services teesesi — adi dropdown ga separate ga untundi)
-const links: NavItem[] = [
-  ["Home", "/"],
-  ["About", "/about"],
-  ["Products", "/products-lab"],
-  ["Contact Us", "/contact"],
-];
-
-// 🎯 Services dropdown items
 type ServiceItem = {
   label: string;
   path: string;
 };
 
 const serviceDropdown: ServiceItem[] = [
-  { label: "Digital Solution", path: "/services" },
-  { label: "Web App Development", path: "/web-app-development" },
-  { label: "AI Video Content", path: "/ai-video" },
-  { label: "SEO AI Search", path: "/seo-ai" },
+  {
+    label: "Digital Solution",
+    path: "/services",
+  },
+  {
+    label: "Web App Development",
+    path: "/web-app-development",
+  },
+  {
+    label: "AI Video Content",
+    path: "/ai-video",
+  },
+  {
+    label: "SEO AI Search",
+    path: "/seo-ai",
+  },
 ];
 
 export default function Header() {
-  const [open, setOpen] = useState<boolean>(false);
-  const [servicesOpen, setServicesOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+
+  const closeMenu = () => {
+    setOpen(false);
+    setServicesOpen(false);
+  };
 
   const toggleServices = (
     e: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>
-  ): void => {
+  ) => {
     e.preventDefault();
     setServicesOpen((prev) => !prev);
   };
 
+  // =====================================================
+  // Detect touch device — disables hover handlers on mobile
+  // =====================================================
+  const isTouchDevice = () => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(hover: none)").matches;
+  };
+
+  const handleMouseEnter = () => {
+    if (isTouchDevice()) return; // mobile లో hover ignore
+    setServicesOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (isTouchDevice()) return; // mobile లో hover ignore
+    setServicesOpen(false);
+  };
+
   return (
     <>
-      <header className="site-header">
-        <div className="container nav-wrap">
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
 
-          {/* Logo */}
-          <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
+      <header className="site-header">
+
+        <div className="header-container">
+
+          {/* =================================================
+              LOGO
+          ================================================= */}
+
+          <NavLink
+            to="/"
+            className="header-brand"
+            onClick={closeMenu}
+          >
             <img
               src="/Images/header.png"
               alt="Alpha Zeta World"
-              className="brand-logo"
+              className="header-logo"
             />
           </NavLink>
 
-          {/* Mobile Menu Button */}
+
+          {/* =================================================
+              MOBILE MENU BUTTON
+          ================================================= */}
+
           <button
-            className="menu-btn"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
+            type="button"
+            className="header-menu-btn"
+            onClick={() => {
+              setOpen((prev) => !prev);
+              setServicesOpen(false);
+            }}
+            aria-label="Toggle navigation"
+            aria-expanded={open}
           >
-            ☰
+            {open ? "✕" : "☰"}
           </button>
 
-          {/* Nav */}
-          <nav className={open ? "nav open" : "nav"}>
 
-            {/* 1️⃣ Home */}
+          {/* =================================================
+              NAVIGATION
+          ================================================= */}
+
+          <nav
+            className={
+              open
+                ? "header-nav header-nav-open"
+                : "header-nav"
+            }
+          >
+
+            {/* HOME */}
+
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                isActive
+                  ? "header-link header-link-active"
+                  : "header-link"
               }
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
             >
               Home
             </NavLink>
 
-            {/* 2️⃣ About */}
+
+            {/* ABOUT */}
+
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                isActive
+                  ? "header-link header-link-active"
+                  : "header-link"
               }
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
             >
               About
             </NavLink>
 
-            {/* 3️⃣ Services — dropdown */}
+
+            {/* =================================================
+                SERVICES DROPDOWN
+            ================================================= */}
+
             <div
-              className="nav-dropdown"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              className="header-dropdown"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
+
               <span
                 role="button"
                 tabIndex={0}
-                className={`nav-link nav-link-has-arrow ${
-                  servicesOpen ? "active" : ""
-                }`}
+                className={
+                  servicesOpen
+                    ? "header-link header-services-link header-link-active"
+                    : "header-link header-services-link"
+                }
                 onClick={toggleServices}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
+                  if (
+                    e.key === "Enter" ||
+                    e.key === " "
+                  ) {
                     e.preventDefault();
                     toggleServices(e);
                   }
                 }}
               >
-                Services
-                <span className="nav-arrow">▾</span>
+
+                <span>Services</span>
+
+                <span
+                  className={
+                    servicesOpen
+                      ? "header-arrow header-arrow-open"
+                      : "header-arrow"
+                  }
+                >
+                  ▾
+                </span>
+
               </span>
+
+
+              {/* DROPDOWN */}
 
               <div
                 className={
-                  servicesOpen ? "dropdown-menu open" : "dropdown-menu"
+                  servicesOpen
+                    ? "header-dropdown-menu header-dropdown-open"
+                    : "header-dropdown-menu"
                 }
               >
+
                 {serviceDropdown.map((item) => (
                   <NavLink
                     key={item.path}
                     to={item.path}
                     className={({ isActive }) =>
-                      isActive ? "dropdown-item active" : "dropdown-item"
+                      isActive
+                        ? "header-dropdown-item header-dropdown-item-active"
+                        : "header-dropdown-item"
                     }
-                    onClick={() => {
-                      setOpen(false);
-                      setServicesOpen(false);
-                    }}
+                    onClick={closeMenu}
                   >
                     {item.label}
                   </NavLink>
                 ))}
+
               </div>
+
             </div>
 
-            {/* 4️⃣ Products */}
+
+            {/* PRODUCTS */}
+
             <NavLink
               to="/products-lab"
               className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                isActive
+                  ? "header-link header-link-active"
+                  : "header-link"
               }
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
             >
               Products
             </NavLink>
 
-            {/* 5️⃣ Contact Us */}
+
+            {/* CONTACT */}
+
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                isActive
+                  ? "header-link header-link-active"
+                  : "header-link"
               }
-              onClick={() => setOpen(false)}
+              onClick={closeMenu}
             >
               Contact Us
             </NavLink>
 
-            {/* CTA */}
+
+            {/* GET STARTED */}
+
             <NavLink
               to="/contact"
-              className="nav-cta"
-              onClick={() => setOpen(false)}
+              className="header-cta"
+              onClick={closeMenu}
             >
               Get Started
             </NavLink>
+
           </nav>
 
         </div>
+
       </header>
 
-      <style>{`
-        * { box-sizing: border-box; }
 
-        /* =========================
-           HEADER
-        ========================= */
+      {/* =====================================================
+          CSS
+      ===================================================== */}
+
+      <style>{`
+
+        /* =====================================================
+           HEADER RESET
+        ===================================================== */
+
+        .site-header,
+        .site-header *,
+        .site-header *::before,
+        .site-header *::after {
+          box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           MAIN HEADER
+        ===================================================== */
+
         .site-header {
           position: sticky;
           top: 0;
-          z-index: 100;
-          width: 100%;
-          background: #ffffff;
-          border-bottom: 1px solid #e5ece9;
-          font-family: system-ui, -apple-system, Arial, Helvetica, sans-serif;
-        }
-
-        .container {
-          width: 100%;
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 0 3rem;
-        }
-
-        .nav-wrap {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          height: 90px;
-          gap: 2rem;
-        }
-
-        /* BRAND */
-        .brand {
-          display: inline-flex;
-          align-items: center;
-          text-decoration: none;
-          flex-shrink: 0;
-          margin-left: 1rem;
-        }
-
-        .brand-logo {
-          height: 92px;
-          width: auto;
-          max-width: 460px;
-          max-height: 92px;
-          object-fit: contain;
-          display: block;
-          transition: transform 0.3s ease;
-        }
-
-        .brand-logo:hover { transform: scale(1.05); }
-
-        /* NAV (desktop) */
-        .nav {
-          display: flex;
-          align-items: center;
-          gap: 2rem;
-        }
-
-        .nav-link {
-          position: relative;
-          font-size: 0.95rem;
-          font-weight: 500;
-          color: #1f2a3d;
-          text-decoration: none;
-          padding: 0.5rem 0;
-          transition: color 0.25s ease;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.25rem;
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-family: inherit;
-          user-select: none;
-        }
-
-        .nav-link::after {
-          content: "";
-          position: absolute;
           left: 0;
-          bottom: 0;
-          width: 0;
-          height: 2px;
-          background: #0A4B3F;
-          transition: width 0.3s ease;
+          z-index: 1000;
+          width: 100%;
+          height: 64px;
+          min-height: 64px;
+          max-height: 64px;
+          margin: 0;
+          padding: 0;
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: none;
+          outline: none;
+          box-shadow: none;
+          font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Arial,
+            Helvetica,
+            sans-serif;
         }
 
-        .nav-link:hover { color: #0A4B3F; }
-        .nav-link:hover::after { width: 100%; }
 
-        .nav-link.active {
-          color: #0A4B3F;
-          font-weight: 700;
-        }
+        /* =====================================================
+           HEADER CONTAINER
+        ===================================================== */
 
-        .nav-link.active::after { width: 100%; }
-
-        .nav-link-has-arrow .nav-arrow {
-          font-size: 0.7rem;
-          margin-left: 0.15rem;
-          transition: transform 0.3s ease;
-          display: inline-block;
-        }
-
-        .nav-dropdown:hover .nav-arrow,
-        .nav-link-has-arrow.active .nav-arrow {
-          transform: rotate(180deg);
-        }
-
-        /* DROPDOWN (Desktop) */
-        .nav-dropdown {
+        .header-container {
+          width: 100%;
+          max-width: 1280px;
+          height: 64px;
+          min-height: 64px;
+          max-height: 64px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
           position: relative;
-          display: inline-block;
-          padding: 0.5rem 0;
+          border: none;
+          outline: none;
+          box-shadow: none;
         }
 
-        .dropdown-menu {
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translateX(-50%) translateY(10px);
-          min-width: 240px;
-          background: #ffffff;
-          border: 1px solid #e5ece9;
-          border-radius: 14px;
-          padding: 0.5rem;
-          box-shadow:
-            0 20px 40px -10px rgba(10, 75, 63, 0.15),
-            0 8px 16px -6px rgba(10, 75, 63, 0.08);
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.25s ease, transform 0.25s ease;
-          z-index: 50;
-        }
 
-        .dropdown-menu.open {
-          opacity: 1;
-          pointer-events: auto;
-          transform: translateX(-50%) translateY(6px);
-        }
+        /* =====================================================
+           LOGO
+        ===================================================== */
 
-        .dropdown-menu::before {
-          content: "";
-          position: absolute;
-          top: -6px;
-          left: 50%;
-          transform: translateX(-50%) rotate(45deg);
-          width: 12px;
-          height: 12px;
-          background: #ffffff;
-          border-top: 1px solid #e5ece9;
-          border-left: 1px solid #e5ece9;
-          border-top-left-radius: 2px;
-        }
-
-        .dropdown-item {
-          display: block;
-          padding: 0.7rem 1rem;
-          font-size: 0.9rem;
-          font-weight: 500;
-          color: #1f2a3d;
+        .site-header .header-brand {
+          width: auto;
+          height: 64px;
+          min-width: 190px;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-shrink: 0;
           text-decoration: none;
-          border-radius: 10px;
-          transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+          border: none;
+          outline: none;
+          box-shadow: none;
         }
 
-        .dropdown-item:hover {
-          background: #f2f7f5;
-          color: #0A4B3F;
-          transform: translateX(3px);
+
+        .site-header .header-logo {
+          display: block;
+          width: auto;
+          height: 46px;
+          max-width: 190px;
+          margin: 0;
+          padding: 0;
+          object-fit: contain;
+          object-position: left center;
+          border: none;
+          outline: none;
+          transition: transform 0.2s ease;
         }
 
-        .dropdown-item.active {
-          background: #ecfdf5;
-          color: #0A4B3F;
-          font-weight: 700;
+
+        .site-header .header-logo:hover {
+          transform: scale(1.02);
         }
 
-        /* CTA */
-        .nav-cta {
+
+        /* =====================================================
+           DESKTOP NAVIGATION
+           ✅ GAP INCREASED: 1.25rem → 2rem
+        ===================================================== */
+
+        .site-header .header-nav {
+          height: 64px;
+          min-height: 64px;
+          margin-left: auto;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 2rem;
+          border: none;
+          outline: none;
+          box-shadow: none;
+        }
+
+
+        /* =====================================================
+           NAV LINKS
+        ===================================================== */
+
+        .site-header .header-link {
+          position: relative;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 0 1.35rem;
-          height: 44px;
-          border-radius: 24px;
-          background: linear-gradient(135deg, #0A4B3F, #0F5C4A);
-          color: #ffffff;
+          height: 64px;
+          margin: 0;
+          padding: 0;
+          color: #1f2a3d;
+          background: transparent;
+          border: none;
+          outline: none;
+          font-family: inherit;
           font-size: 0.9rem;
-          font-weight: 600;
-          text-decoration: none;
-          box-shadow: 0 6px 16px rgba(10, 75, 63, 0.20);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .nav-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 22px rgba(10, 75, 63, 0.28);
-        }
-
-        /* MENU BUTTON */
-        .menu-btn {
-          display: none;
-          width: 44px;
-          height: 44px;
-          border: 1px solid #dce8e3;
-          border-radius: 10px;
-          background: #ffffff;
-          font-size: 1.25rem;
+          font-weight: 500;
           line-height: 1;
-          color: #0A4B3F;
+          text-decoration: none;
+          white-space: nowrap;
           cursor: pointer;
-          transition: background 0.25s ease, border-color 0.25s ease;
+          user-select: none;
+          transition: color 0.25s ease;
         }
 
-        .menu-btn:hover {
-          background: #f2f7f5;
-          border-color: #0A4B3F;
+
+        /* =====================================================
+           ACTIVE UNDERLINE
+        ===================================================== */
+
+        .site-header .header-link::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 8px;
+          width: 0;
+          height: 2px;
+          background: #0a4b3f;
+          transition: width 0.25s ease;
         }
 
-        /* TABLET */
-        @media (max-width: 900px) {
-          .container { padding: 0 2rem; }
-          .nav-wrap { height: 80px; }
-          .nav { gap: 1.25rem; }
-          .nav-link { font-size: 0.9rem; }
-          .brand { margin-left: 0.5rem; }
-          .brand-logo { height: 60px; max-width: 220px; }
+
+        .site-header .header-link:hover {
+          color: #0a4b3f;
         }
 
-        /* MOBILE */
-        @media (max-width: 760px) {
-          .container { padding: 0 1.25rem; }
-          .nav-wrap { height: 72px; }
-          .brand { margin-left: 0.5rem; }
-          .brand-logo { height: 50px; max-width: 180px; }
 
-          .menu-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .site-header .header-link:hover::after {
+          width: 100%;
+        }
+
+
+        .site-header .header-link-active {
+          color: #0a4b3f;
+          font-weight: 600;
+        }
+
+
+        .site-header .header-link-active::after {
+          width: 100%;
+        }
+
+
+        /* =====================================================
+           SERVICES
+        ===================================================== */
+
+        .site-header .header-dropdown {
+          position: relative;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          padding: 0;
+          border: none;
+        }
+
+
+        .site-header .header-services-link {
+          gap: 5px;
+        }
+
+
+        /* =====================================================
+           ARROW
+        ===================================================== */
+
+        .site-header .header-arrow {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 1px;
+          font-size: 9px;
+          line-height: 1;
+          transition: transform 0.25s ease;
+        }
+
+
+        .site-header .header-arrow-open {
+          transform: rotate(180deg);
+        }
+
+
+        /* =====================================================
+           DROPDOWN MENU
+        ===================================================== */
+
+        .site-header .header-dropdown-menu {
+          position: absolute;
+          top: calc(100% + 2px);
+          left: 50%;
+          min-width: 225px;
+          margin: 0;
+          padding: 6px;
+          background: rgba(255, 255, 255, 0.98);
+          border: 1px solid #e5ece9;
+          border-radius: 12px;
+          box-shadow:
+            0 18px 35px rgba(10, 75, 63, 0.10),
+            0 5px 15px rgba(0, 0, 0, 0.05);
+          transform: translateX(-50%) translateY(8px);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition:
+            opacity 0.2s ease,
+            transform 0.2s ease,
+            visibility 0.2s ease;
+          z-index: 100;
+        }
+
+
+        .site-header .header-dropdown-open {
+          transform: translateX(-50%) translateY(3px);
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
+
+
+        /* =====================================================
+           DROPDOWN ARROW
+        ===================================================== */
+
+        .site-header .header-dropdown-menu::before {
+          content: "";
+          position: absolute;
+          top: -5px;
+          left: 50%;
+          width: 10px;
+          height: 10px;
+          transform: translateX(-50%) rotate(45deg);
+          background: #ffffff;
+          border-top: 1px solid #e5ece9;
+          border-left: 1px solid #e5ece9;
+        }
+
+
+        /* =====================================================
+           DROPDOWN ITEMS
+        ===================================================== */
+
+        .site-header .header-dropdown-item {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          min-height: 38px;
+          padding: 0.65rem 0.85rem;
+          margin: 0;
+          color: #1f2a3d;
+          background: transparent;
+          border: none;
+          border-radius: 8px;
+          font-family: inherit;
+          font-size: 0.86rem;
+          font-weight: 500;
+          line-height: 1.2;
+          text-decoration: none;
+          transition:
+            background 0.2s ease,
+            color 0.2s ease;
+        }
+
+
+        .site-header .header-dropdown-item:hover {
+          color: #0a4b3f;
+          background: #f3f7f5;
+        }
+
+
+        .site-header .header-dropdown-item-active {
+          color: #0a4b3f;
+          background: #ecfdf5;
+          font-weight: 600;
+        }
+
+
+        /* =====================================================
+           GET STARTED BUTTON
+        ===================================================== */
+
+        .site-header .header-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          height: 36px;
+          padding: 0 1.1rem;
+          margin: 0;
+          color: #ffffff;
+          background: #0a4b3f;
+          border: none;
+          outline: none;
+          border-radius: 20px;
+          font-family: inherit;
+          font-size: 0.83rem;
+          font-weight: 600;
+          line-height: 1;
+          text-decoration: none;
+          white-space: nowrap;
+          box-shadow: 0 5px 14px rgba(10, 75, 63, 0.15);
+          transition:
+            transform 0.25s ease,
+            background 0.25s ease,
+            box-shadow 0.25s ease;
+        }
+
+
+        .site-header .header-cta:hover {
+          transform: translateY(-1px);
+          background: #0f5c4a;
+          box-shadow: 0 8px 18px rgba(10, 75, 63, 0.20);
+        }
+
+
+        /* =====================================================
+           MOBILE BUTTON
+        ===================================================== */
+
+        .site-header .header-menu-btn {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          min-width: 36px;
+          min-height: 36px;
+          margin: 0 0 0 auto;
+          padding: 0;
+          color: #0a4b3f;
+          background: #ffffff;
+          border: 1px solid #dce8e3;
+          outline: none;
+          border-radius: 8px;
+          font-family: inherit;
+          font-size: 16px;
+          line-height: 1;
+          cursor: pointer;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+          .site-header {
+            height: 60px;
+            min-height: 60px;
+            max-height: 60px;
           }
 
-          .nav {
+
+          .header-container {
+            height: 60px;
+            min-height: 60px;
+            max-height: 60px;
+            padding: 0 1.5rem;
+          }
+
+
+          .site-header .header-brand {
+            height: 60px;
+            min-width: 180px;
+          }
+
+
+          .site-header .header-logo {
+            height: 44px;
+            max-width: 180px;
+          }
+
+
+          /* Tablet gap slightly reduced */
+          .site-header .header-nav {
+            height: 60px;
+            min-height: 60px;
+            gap: 1.5rem;
+          }
+
+
+          .site-header .header-link {
+            height: 60px;
+            font-size: 0.86rem;
+          }
+
+
+          .site-header .header-dropdown {
+            height: 60px;
+          }
+
+
+          .site-header .header-cta {
+            height: 34px;
+            padding: 0 0.95rem;
+            font-size: 0.8rem;
+          }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 760px) {
+
+          .site-header {
+            height: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            overflow: visible;
+          }
+
+
+          .header-container {
+            height: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            padding: 0 1rem;
+          }
+
+
+          .site-header .header-brand {
+            height: 56px;
+            min-height: 56px;
+            max-height: 56px;
+            min-width: 0;
+          }
+
+
+          .site-header .header-logo {
+            height: 38px;
+            max-width: 140px;
+          }
+
+
+          .site-header .header-menu-btn {
+            display: flex;
+          }
+
+
+          /* MOBILE NAV */
+
+          .site-header .header-nav {
             position: absolute;
-            top: 72px;
+            top: 56px;
             left: 0;
             right: 0;
-            background: #ffffff;
+            width: 100%;
+            height: auto;
+            max-height: calc(100vh - 56px);
+            overflow-y: auto;
+            margin: 0;
+            padding: 0.35rem 1rem 0.8rem;
+            display: flex;
             flex-direction: column;
             align-items: stretch;
+            justify-content: flex-start;
             gap: 0;
-            padding: 1rem 1.25rem 1.5rem;
-            border-bottom: 1px solid #e5ece9;
-            box-shadow: 0 12px 24px rgba(10, 75, 63, 0.08);
-            transform: translateY(-20px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: none;
+            outline: none;
+            box-shadow: 0 10px 20px rgba(10, 75, 63, 0.07);
+            transform: translateY(-8px);
             opacity: 0;
+            visibility: hidden;
             pointer-events: none;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
+            transition:
+              transform 0.2s ease,
+              opacity 0.2s ease,
+              visibility 0.2s ease;
+            z-index: 999;
           }
 
-          .nav.open {
+
+          .site-header .header-nav-open {
             transform: translateY(0);
             opacity: 1;
+            visibility: visible;
             pointer-events: auto;
           }
 
-          .nav > .nav-link {
-            padding: 0.9rem 0;
-            font-size: 1rem;
-            color: #1f2a3d !important;
-            border-bottom: 1px solid #eef3f1;
+
+          /* MOBILE LINKS */
+
+          .site-header .header-nav > .header-link {
             width: 100%;
+            height: 42px;
+            min-height: 42px;
+            max-height: 42px;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-          }
-
-          .nav-link::after { display: none; }
-
-          /* Services parent — FULL WIDTH */
-          .nav-dropdown {
-            display: block !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            width: 100% !important;
-            position: static !important;
             border-bottom: 1px solid #eef3f1;
           }
 
-          .nav-dropdown .nav-link {
-            padding: 0.9rem 0 !important;
-            font-size: 1rem;
-            color: #1f2a3d !important;
-            width: 100% !important;
+
+          .site-header .header-nav > .header-link::after {
+            display: none;
+          }
+
+
+          /* MOBILE SERVICES */
+
+          .site-header .header-dropdown {
+            position: static;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid #eef3f1;
+          }
+
+
+          .site-header .header-services-link {
+            width: 100%;
+            height: 42px;
+            min-height: 42px;
+            max-height: 42px;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
           }
 
-          /* Sub-items wrapper — no left shift */
-          .nav .dropdown-menu,
-          .nav-dropdown .dropdown-menu,
-          .dropdown-menu {
-            position: static !important;
-            top: auto !important;
-            left: auto !important;
-            right: auto !important;
 
-            transform: none !important;
+          .site-header .header-services-link::after {
+            display: none;
+          }
 
-            margin: 0 !important;
-            padding: 0 !important;
 
-            width: 100% !important;
-            min-width: 0 !important;
-            max-width: 100% !important;
+          /* MOBILE DROPDOWN */
 
-            background: #f7faf9 !important;
-            box-shadow: none !important;
-            border: none !important;
-            border-radius: 0 !important;
-            border-left: 3px solid #0A4B3F !important;
-
-            opacity: 1 !important;
-            pointer-events: auto !important;
-
+          .site-header .header-dropdown-menu {
+            position: static;
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
             max-height: 0;
             overflow: hidden;
-
-            transition: max-height 0.35s ease, padding 0.3s ease;
-
-            display: block !important;
-            visibility: visible !important;
+            margin: 0;
+            padding: 0;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            background: #f7faf9;
+            border: none;
+            border-left: 2px solid #0a4b3f;
+            border-radius: 0;
+            box-shadow: none;
+            transition:
+              max-height 0.25s ease,
+              padding 0.2s ease;
           }
 
-          .nav .dropdown-menu.open,
-          .nav-dropdown .dropdown-menu.open,
-          .dropdown-menu.open {
-            max-height: 500px !important;
-            padding: 0.25rem 0 !important;
+
+          .site-header .header-dropdown-open {
+            max-height: 400px;
+            padding: 0.15rem 0;
           }
 
-          .dropdown-menu::before { display: none !important; }
 
-          /* Sub-items — text VISIBLE */
-          .nav .dropdown-item,
-          .nav-dropdown .dropdown-item,
-          .dropdown-menu .dropdown-item,
-          .dropdown-item {
-            display: block !important;
-
-            width: 100% !important;
-            max-width: 100% !important;
-
-            margin: 0 !important;
-            padding: 0.8rem 1rem 0.8rem 1.25rem !important;
-
-            font-size: 0.92rem !important;
-            font-weight: 500 !important;
-            line-height: 1.4 !important;
-
-            color: #1f2a3d !important;
-            -webkit-text-fill-color: #1f2a3d !important;
-
-            background: transparent !important;
-
-            text-decoration: none !important;
-            text-align: left !important;
-
-            border-bottom: 1px solid #e8efec !important;
-            border-radius: 0 !important;
-
-            transform: none !important;
-
-            transition: background 0.2s ease, color 0.2s ease;
-
-            box-sizing: border-box !important;
-
-            opacity: 1 !important;
-            visibility: visible !important;
-            position: static !important;
+          .site-header .header-dropdown-menu::before {
+            display: none;
           }
 
-          .nav .dropdown-item:last-child,
-          .dropdown-menu .dropdown-item:last-child {
-            border-bottom: none !important;
-          }
 
-          .nav .dropdown-item:hover,
-          .nav .dropdown-item:focus,
-          .dropdown-menu .dropdown-item:hover,
-          .dropdown-menu .dropdown-item:focus {
-            background: #eaf3f0 !important;
-            color: #0A4B3F !important;
-            -webkit-text-fill-color: #0A4B3F !important;
-            transform: none !important;
-          }
-
-          .nav .dropdown-item.active,
-          .dropdown-menu .dropdown-item.active {
-            background: #ecfdf5 !important;
-            color: #0A4B3F !important;
-            -webkit-text-fill-color: #0A4B3F !important;
-            font-weight: 700 !important;
-          }
-
-          .nav-cta {
-            margin-top: 1rem;
+          .site-header .header-dropdown-item {
             width: 100%;
-            height: 46px;
-            font-size: 0.95rem;
+            height: 38px;
+            min-height: 38px;
+            padding: 0 0.9rem;
+            border: none;
+            border-radius: 0;
+            font-size: 0.84rem;
+          }
+
+
+          .site-header .header-dropdown-item:hover {
+            background: #eaf3f0;
+          }
+
+
+          /* MOBILE CTA */
+
+          .site-header .header-cta {
+            width: 100%;
+            height: 38px;
+            min-height: 38px;
+            margin-top: 0.6rem;
+            padding: 0 1rem;
+            border-radius: 20px;
+            font-size: 0.86rem;
           }
         }
 
-        /* SMALL MOBILE */
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
         @media (max-width: 420px) {
-          .container { padding: 0 1rem; }
-          .nav-wrap { height: 66px; }
-          .brand { margin-left: 0.25rem; }
-          .brand-logo { height: 44px; max-width: 150px; }
-          .menu-btn { width: 40px; height: 40px; font-size: 1.1rem; }
 
-          .nav .dropdown-item,
-          .dropdown-menu .dropdown-item {
-            font-size: 0.88rem !important;
-            padding: 0.7rem 0.85rem 0.7rem 1rem !important;
+          .site-header {
+            height: 54px;
+            min-height: 54px;
+            max-height: 54px;
           }
+
+
+          .header-container {
+            height: 54px;
+            min-height: 54px;
+            max-height: 54px;
+            padding: 0 0.8rem;
+          }
+
+
+          .site-header .header-brand {
+            height: 54px;
+            min-height: 54px;
+            max-height: 54px;
+          }
+
+
+          .site-header .header-logo {
+            height: 36px;
+            max-width: 132px;
+          }
+
+
+          .site-header .header-menu-btn {
+            width: 33px;
+            height: 33px;
+            min-width: 33px;
+            min-height: 33px;
+            max-width: 33px;
+            max-height: 33px;
+          }
+
+
+          .site-header .header-nav {
+            top: 54px;
+            max-height: calc(100vh - 54px);
+          }
+
         }
+
       `}</style>
     </>
   );
