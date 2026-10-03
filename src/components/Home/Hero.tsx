@@ -241,7 +241,7 @@ const Hero: React.FC = () => {
           width: 100%;
           height: 100%;
           z-index: 0;
-          background-image: url("/Images/hero.png");
+          background-image: url("/Images/hero.webp");
           background-size: cover;
           background-position: center right;
           background-repeat: no-repeat;
@@ -578,9 +578,7 @@ const Hero: React.FC = () => {
         }
 
 
-        /* =====================================================
-           BRAND LIST  (DESKTOP SLIDER TRACK)
-        ===================================================== */
+       
 
         .brand-list {
           display: flex;
@@ -932,7 +930,7 @@ const Hero: React.FC = () => {
             width: 100%;
             height: 250px;
             margin: 8px 0 0;
-            background-image: url("/Images/hero.png");
+            background-image: url("/Images/hero.webp");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -1058,9 +1056,7 @@ const Hero: React.FC = () => {
           }
 
 
-          /* =====================================================
-             TRUSTED PARTNERS - MOBILE
-          ===================================================== */
+          
 
           .trusted-section {
             width: 100%;

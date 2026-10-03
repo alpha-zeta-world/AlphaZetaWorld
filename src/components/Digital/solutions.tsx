@@ -50,7 +50,7 @@ const ServicesWeOffer: React.FC = () => {
         .swo-section {
           width: 100%;
           background-color: #FAFAFA;
-          /* Gap తగ్గించడానికి padding-top తగ్గించాను */
+   
           padding: 10px 24px 60px;
           font-family: 'Inter', system-ui, -apple-system, sans-serif;
           box-sizing: border-box;

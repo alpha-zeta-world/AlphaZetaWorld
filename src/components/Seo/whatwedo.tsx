@@ -163,7 +163,7 @@ const WhatWeDo: React.FC = () => {
           }
 
           .wwd-description-wrap {
-            padding-top: 48px; /* కుడి వైపు పేరాగ్రాఫ్ కొద్దిగా కిందకి */
+            padding-top: 48px; 
           }
 
           .wwd-description {

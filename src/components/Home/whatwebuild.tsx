@@ -292,7 +292,7 @@ const servicesData = [
     icon: <VideoIcon />,
     desc: 'Create high-quality, engaging videos using AI for marketing, branding and storytelling.',
     features: ['AI Video Creation', 'Product & Service Videos', 'Social Media Content', 'Script & Voice Generation'],
-    img: '/Images/homemo.png'
+    img: '/Images/homemo.webp'
   },
   {
     title: 'Web Development',
@@ -306,7 +306,7 @@ const servicesData = [
     icon: <ChartIcon />,
     desc: 'End-to-end digital strategies to help your business grow faster and smarter.',
     features: ['Digital Marketing Strategy', 'Social Media Management', 'Branding & Design Support', 'Lead Generation & Analytics'],
-    img: '/Images/homedigi.png'
+    img: '/Images/homedigi.webp'
   }
 ];
 

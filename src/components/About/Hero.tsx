@@ -176,10 +176,7 @@ const styles = `
     display: block;
   }
 
-  /* =========================================
-     TABLET / MOBILE  (≤1024px)
-     Height తగ్గించబడింది: 350px → 260px
-  ========================================= */
+  
   @media (max-width: 1024px) {
     .people-left { padding: 40px 20px; }
     .main-heading { font-size: 34px; }
@@ -187,10 +184,7 @@ const styles = `
     .people-right { height: 260px; }
   }
 
-  /* =========================================
-     SMALL PHONES  (≤480px)
-     ఇంకా తగ్గించబడింది: 260px → 200px
-  ========================================= */
+
   @media (max-width: 480px) {
     .people-left { padding: 32px 18px; }
     .main-heading { font-size: 28px; }
@@ -260,7 +254,7 @@ const PeopleBehindSection: React.FC = () => {
           {/* Right Section */}
           <div className="people-right">
             <img 
-              src="/Images/abouthero.png" 
+              src="/Images/abouthero.webp" 
               alt="Office Workspace" 
             />
           </div>

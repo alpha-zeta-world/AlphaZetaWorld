@@ -36,7 +36,7 @@ const HowWeWork: React.FC = () => {
         .hww-section {
           width: 100%;
           background-color: #FAFAFA;
-          /* మొబైల్ లో padding తగ్గించాను */
+          
           padding: 50px 16px;
           font-family: 'Inter', system-ui, -apple-system, sans-serif;
           box-sizing: border-box;
@@ -93,7 +93,7 @@ const HowWeWork: React.FC = () => {
           margin: 0;
         }
 
-        /* --- RIGHT COLUMN (Process Steps) --- */
+       
         .hww-process {
           display: flex;
           flex-direction: column;
@@ -152,7 +152,7 @@ const HowWeWork: React.FC = () => {
           display: flex;
           flex-direction: column;
           padding-top: 4px;
-          padding-right: 30px; /* Number కి space ఇవ్వడానికి */
+          padding-right: 30px; 
         }
 
         .hww-step-title {

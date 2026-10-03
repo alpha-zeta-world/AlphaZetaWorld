@@ -36,14 +36,14 @@ const styles = `
     }
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'values-header-left' అని మార్చాను */
+
   .values-header-left {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'values-label' అని మార్చాను */
+
   .values-label {
     display: flex;
     align-items: center;
@@ -58,14 +58,14 @@ const styles = `
     font-size: 13px;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'values-line' అని మార్చాను */
+
   .values-line {
     height: 1px;
     width: 40px;
     background-color: #9CA3AF;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'values-heading' అని మార్చాను */
+
   .values-heading {
     font-size: 40px;
     font-weight: 800;
@@ -79,13 +79,12 @@ const styles = `
     .values-heading { font-size: 52px; }
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'values-header-right' అని మార్చాను */
+  
   .values-header-right {
     display: flex;
     align-items: flex-end;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'values-description' అని మార్చాను */
   .values-description {
     color: #4B5563;
     font-size: 16px;
@@ -207,9 +206,7 @@ const HeartHandshakeIcon = () => (
   </svg>
 );
 
-// ==========================================
-// 3. DATA FOR VALUES
-// ==========================================
+
 const valuesData = [
   {
     icon: <LightbulbIcon />,
@@ -246,22 +243,22 @@ const OurValuesSection = () => {
           
           {/* Header */}
           <div className="values-header">
-            {/* 👈 ఇక్కడ క్లాస్ పేరు 'values-header-left' అని మార్చాను */}
+            
             <div className="values-header-left">
-              {/* 👈 ఇక్కడ క్లాస్ పేరు 'values-label' అని మార్చాను */}
+         
               <div className="values-label">
                 <span>Our Values</span>
                 <div className="values-line"></div>
               </div>
-              {/* 👈 ఇక్కడ క్లాస్ పేరు 'values-heading' అని మార్చాను */}
+       
               <h2 className="values-heading">
                 What We Stand For
               </h2>
             </div>
 
-            {/* 👈 ఇక్కడ క్లాస్ పేరు 'values-header-right' అని మార్చాను */}
+           
             <div className="values-header-right">
-              {/* 👈 ఇక్కడ క్లాస్ పేరు 'values-description' అని మార్చాను */}
+            
               <p className="values-description">
                 Our values guide everything we do — from how we work with clients to how we build products. They keep us focused on creating long-term impact.
               </p>

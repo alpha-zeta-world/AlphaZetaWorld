@@ -1,8 +1,6 @@
 import React from 'react';
 
-// ==========================================
-// 1. CSS STYLES (Single File lo kalipi unnai)
-// ==========================================
+
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;800&display=swap');
 
@@ -204,7 +202,7 @@ const OurStory: React.FC = () => {
             {/* Top Large Image */}
             <div className="story-img-large">
               <img 
-                src="/Images/story1.png" 
+                src="/Images/story1.webp" 
                 alt="Team collaborating around a laptop" 
               />
             </div>
@@ -214,14 +212,14 @@ const OurStory: React.FC = () => {
               
               <div className="story-img-small">
                 <img 
-                  src="/Images/story2.png" 
+                  src="/Images/story2.webp" 
                   alt="Hand stacking wooden blocks" 
                 />
               </div>
 
               <div className="story-img-small">
                 <img 
-                  src="/Images/story3.png" 
+                  src="/Images/story3.webp" 
                   alt="Our Journey diagram on glass" 
                 />
               </div>

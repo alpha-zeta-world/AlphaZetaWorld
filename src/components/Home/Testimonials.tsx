@@ -78,9 +78,7 @@ const Testimonials: React.FC = () => {
     setActiveIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
-  /* =====================================================
-     RESPONSIVE visibleCards (3 desktop / 2 tablet / 1 mobile)
-  ===================================================== */
+ 
 
   useEffect(() => {
     const updateVisibleCards = () => {

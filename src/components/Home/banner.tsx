@@ -70,7 +70,7 @@ const AboutSection: React.FC = () => {
 
           <div className="about-main-image">
             <img
-              src="/Images/about.png"
+              src="/Images/about.webp"
               alt="AlphaZetaWorld Team"
             />
           </div>

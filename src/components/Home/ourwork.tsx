@@ -178,22 +178,22 @@ const projectsData = [
   {
     title: 'E-commerce Website',
     category: 'Web Development',
-    img: '/Images/eco.png'
+    img: '/Images/eco.webp'
   },
   {
     title: 'Hospital Website',
     category: 'Web Development',
-    img: '/Images/hospital.png'
+    img: '/Images/hospital.webp'
   },
   {
     title: 'CRM Dashboard',
     category: 'Web Application',
-    img: 'Images/dash.png'
+    img: 'Images/dash.webp'
   },
   {
     title: 'Digital Marketing Campaign',
     category: 'SEO & Digital Solutions',
-    img: 'Images/digi.png'
+    img: 'Images/digi.webp'
   }
 ];
 

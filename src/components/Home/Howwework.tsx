@@ -290,31 +290,31 @@ const stepsData = [
     id: '01',
     title: 'Discover & Understand',
     desc: 'We learn about your business, goals and target audience to understand your needs.',
-    img: '/Images/pro1.png'
+    img: '/Images/pro1.webp'
   },
   {
     id: '02',
     title: 'Plan & Strategize',
     desc: 'We create a tailored strategy and roadmap with the right technologies and approach.',
-    img: '/Images/pro2.png'
+    img: '/Images/pro2.webp'
   },
   {
     id: '03',
     title: 'Design & Develop',
     desc: 'Our team designs and builds high-quality, scalable and performance-driven solutions.',
-    img: '/Images/pro3.png'
+    img: '/Images/pro3.webp'
   },
   {
     id: '04',
     title: 'Test & Optimize',
     desc: 'We rigorously test for performance, security and usability to ensure the best results.',
-    img: '/Images/pro4.png'
+    img: '/Images/pro4.webp'
   },
   {
     id: '05',
     title: 'Launch & Support',
     desc: 'We deploy your solution and provide ongoing support to help you grow continuously.',
-    img: '/Images/pro5.png'
+    img: '/Images/pro5.webp'
   }
 ];
 

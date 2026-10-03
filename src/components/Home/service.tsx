@@ -28,7 +28,7 @@ function FeatureItem({ icon, title }: { icon: React.ReactNode; title: string }) 
 // 3. MAIN COMPONENT
 // ==========================================
 export default function ServicesOverview() {
-  const IMAGE_URL = "/Images/servicecard.png";
+  const IMAGE_URL = "/Images/servicecard.webp";
   const DOWNLOAD_FILENAME = "AlphaZetaWorld-Services-Overview.png";
 
   const handleDownload = async () => {
@@ -62,7 +62,7 @@ export default function ServicesOverview() {
     <>
       <style>{`
         .sow-container {
-          background-color: #FFFFFF; /* 👈 Motham White Background */
+          background-color: #FFFFFF; 
           font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           display: flex;
           align-items: center;
@@ -77,37 +77,33 @@ export default function ServicesOverview() {
           box-sizing: border-box;
         }
 
-        /* ============================
-           MAIN GRID — Left smaller, Right bigger
-           ============================ */
+      
         .sow-grid {
           max-width: 1200px; width: 100%; display: grid;
           grid-template-columns: 1fr; gap: 2.5rem; align-items: center;
           position: relative; z-index: 10;
         }
         @media (min-width: 1024px) {
-          /* 👈 Left 0.85fr (chinna), Right 1.15fr (pedda) */
+         
           .sow-grid { grid-template-columns: 0.85fr 1.15fr; gap: 2.5rem; }
         }
 
-        /* ============================
-           LEFT SECTION (Text size thagginchaanu)
-           ============================ */
+       
         .sow-left { display: flex; flex-direction: column; max-width: 500px; }
         .sow-badge-wrap { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
         .sow-badge {
           background-color: #ecfdf5; color: #047857;
-          font-size: 0.65rem;                    /* 👈 0.75rem → 0.65rem */
+          font-size: 0.65rem;                
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          padding: 0.3rem 0.85rem;               /* 👈 chinna padding */
+          padding: 0.3rem 0.85rem;              
           border-radius: 9999px;
         }
         .sow-badge-line { height: 1px; width: 3rem; background-color: #a7f3d0; }
 
         .sow-heading {
-          font-size: 1.85rem;                    /* 👈 2.25rem → 1.85rem */
+          font-size: 1.85rem;                 
           font-weight: 800;
           line-height: 1.2;
           margin-bottom: 0.85rem;
@@ -115,12 +111,12 @@ export default function ServicesOverview() {
         }
         .sow-heading span { color: #064e3b; }
         @media (min-width: 1024px) {
-          .sow-heading { font-size: 2.25rem; }   /* 👈 3rem → 2.25rem */
+          .sow-heading { font-size: 2.25rem; } 
         }
 
         .sow-para {
           color: #64748b;
-          font-size: 0.9rem;                     /* 👈 1rem → 0.9rem */
+          font-size: 0.9rem;                  
           line-height: 1.6;
           margin-bottom: 1.25rem;
         }
@@ -138,7 +134,7 @@ export default function ServicesOverview() {
 
         .sow-feature-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.4rem; }
         .sow-feature-icon {
-          width: 2.5rem;                         /* 👈 3rem → 2.5rem */
+          width: 2.5rem;                        
           height: 2.5rem;
           background-color: #ecfdf5;
           border: 1px solid rgba(167, 243, 208, 0.5);
@@ -147,7 +143,7 @@ export default function ServicesOverview() {
           color: #047857;
         }
         .sow-feature-item span {
-          font-size: 0.72rem;                    /* 👈 0.8rem → 0.72rem */
+          font-size: 0.72rem;                    
           font-weight: 600;
           color: #334155;
           line-height: 1.2;
@@ -157,10 +153,10 @@ export default function ServicesOverview() {
         .sow-buttons { display: flex; flex-wrap: wrap; gap: 0.75rem; }
         .sow-btn-primary, .sow-btn-secondary {
           display: flex; align-items: center; gap: 0.45rem;
-          padding: 0.65rem 1.25rem;              /* 👈 chinna padding */
+          padding: 0.65rem 1.25rem;             
           border-radius: 9999px;
           font-weight: 600;
-          font-size: 0.85rem;                    /* 👈 0.9rem → 0.85rem */
+          font-size: 0.85rem;                   
           cursor: pointer;
           transition: all 0.2s ease;
           border: none;
@@ -180,9 +176,7 @@ export default function ServicesOverview() {
         }
         .sow-btn-secondary:hover { background-color: #f8fafc; }
 
-        /* ============================
-           RIGHT SECTION — IMAGE (PEDDAGA)
-           ============================ */
+    
         .sow-right {
           width: 100%;
           display: flex;
@@ -192,7 +186,7 @@ export default function ServicesOverview() {
 
         .sow-image-frame {
           width: 100%;
-          height: 400px;                         /* 👈 460px → 560px (pedda) */
+          height: 400px;                        
           border-radius: 1.5rem;
           overflow: hidden;
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
@@ -200,7 +194,7 @@ export default function ServicesOverview() {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0.5rem;                       /* 👈 0.75rem → 0.5rem (chinna gap) */
+          padding: 0.5rem;                      
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 

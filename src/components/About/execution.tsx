@@ -75,9 +75,7 @@ const styles = `
   }
 `;
 
-// ==========================================
-// 2. SVG ICONS
-// ==========================================
+
 const TargetIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F3D2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" />
@@ -103,9 +101,7 @@ const DiamondIcon = () => (
   </svg>
 );
 
-// ==========================================
-// 3. DATA FOR CARDS
-// ==========================================
+
 const mvgData = [
   {
     icon: <TargetIcon />,
@@ -124,9 +120,7 @@ const mvgData = [
   }
 ];
 
-// ==========================================
-// 4. MAIN COMPONENT
-// ==========================================
+
 const MissionVisionGoalSection = () => {
   return (
     <>

@@ -119,7 +119,7 @@ const OurImpact: React.FC = () => {
           display: flex;
           flex-direction: column;
           
-          /* మొబైల్ లో కంటెంట్ center చేయడానికి */
+    
           align-items: center;
           text-align: center;
         }
@@ -223,7 +223,7 @@ const OurImpact: React.FC = () => {
             grid-template-columns: repeat(4, 1fr);
           }
 
-          /* డెస్క్‌టాప్ లో మళ్ళీ Left Align కి మార్చడం */
+          
           .oi-card {
             align-items: flex-start;
             text-align: left;

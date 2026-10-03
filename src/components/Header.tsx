@@ -41,37 +41,31 @@ export default function Header() {
     setServicesOpen((prev) => !prev);
   };
 
-  // =====================================================
-  // Detect touch device — disables hover handlers on mobile
-  // =====================================================
+
   const isTouchDevice = () => {
     if (typeof window === "undefined") return false;
     return window.matchMedia("(hover: none)").matches;
   };
 
   const handleMouseEnter = () => {
-    if (isTouchDevice()) return; // mobile లో hover ignore
+    if (isTouchDevice()) return; 
     setServicesOpen(true);
   };
 
   const handleMouseLeave = () => {
-    if (isTouchDevice()) return; // mobile లో hover ignore
+    if (isTouchDevice()) return; 
     setServicesOpen(false);
   };
 
   return (
     <>
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
+  
 
       <header className="site-header">
 
         <div className="header-container">
 
-          {/* =================================================
-              LOGO
-          ================================================= */}
+         
 
           <NavLink
             to="/"
@@ -79,16 +73,14 @@ export default function Header() {
             onClick={closeMenu}
           >
             <img
-              src="/Images/header.png"
+              src="/Images/header.webp"
               alt="Alpha Zeta World"
               className="header-logo"
             />
           </NavLink>
 
 
-          {/* =================================================
-              MOBILE MENU BUTTON
-          ================================================= */}
+          
 
           <button
             type="button"
@@ -104,9 +96,7 @@ export default function Header() {
           </button>
 
 
-          {/* =================================================
-              NAVIGATION
-          ================================================= */}
+    
 
           <nav
             className={
@@ -146,9 +136,7 @@ export default function Header() {
             </NavLink>
 
 
-            {/* =================================================
-                SERVICES DROPDOWN
-            ================================================= */}
+          
 
             <div
               className="header-dropdown"
@@ -268,15 +256,11 @@ export default function Header() {
       </header>
 
 
-      {/* =====================================================
-          CSS
-      ===================================================== */}
+      
 
       <style>{`
 
-        /* =====================================================
-           HEADER RESET
-        ===================================================== */
+    
 
         .site-header,
         .site-header *,
@@ -286,9 +270,7 @@ export default function Header() {
         }
 
 
-        /* =====================================================
-           MAIN HEADER
-        ===================================================== */
+   
 
         .site-header {
           position: sticky;
@@ -318,9 +300,7 @@ export default function Header() {
         }
 
 
-        /* =====================================================
-           HEADER CONTAINER
-        ===================================================== */
+        
 
         .header-container {
           width: 100%;
@@ -340,9 +320,7 @@ export default function Header() {
         }
 
 
-        /* =====================================================
-           LOGO
-        ===================================================== */
+       
 
         .site-header .header-brand {
           width: auto;
@@ -381,10 +359,7 @@ export default function Header() {
         }
 
 
-        /* =====================================================
-           DESKTOP NAVIGATION
-           ✅ GAP INCREASED: 1.25rem → 2rem
-        ===================================================== */
+       
 
         .site-header .header-nav {
           height: 64px;

@@ -24,7 +24,7 @@ const DigitalSolutionsHero: React.FC = () => {
           margin: 0 auto;
           display: grid;
           grid-template-columns: 48% 52%;
-          align-items: center; /* కంటెంట్ ని నిలువుగా మధ్యలో ఉంచడానికి */
+          align-items: center; 
         }
 
         /* ==========================================
@@ -134,10 +134,10 @@ const DigitalSolutionsHero: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 40px 40px 40px 20px; /* కార్డ్ కి space ఇవ్వడానికి padding */
+          padding: 40px 40px 40px 20px; 
         }
 
-        /* ఇమేజ్ కార్డ్ స్టైల్ */
+        
         .digital-image-card {
           width: 100%;
           height: 100%;
@@ -238,7 +238,7 @@ const DigitalSolutionsHero: React.FC = () => {
             min-width: 105px;
           }
 
-          /* మొబైల్ లో ఇమేజ్ కార్డ్ */
+        
           .digital-right {
             order: 2;
             width: 100%;
@@ -278,9 +278,7 @@ const DigitalSolutionsHero: React.FC = () => {
       <section className="digital-hero">
         <div className="digital-hero-container">
 
-          {/* ======================================
-              LEFT CONTENT
-          ====================================== */}
+     
 
           <div className="digital-left">
 
@@ -338,7 +336,7 @@ const DigitalSolutionsHero: React.FC = () => {
           <div className="digital-right">
             <div className="digital-image-card">
               <img
-                src="/Images/digitalhero.png"
+                src="/Images/digitalhero.webp"
                 alt="Digital solutions dashboard"
               />
             </div>

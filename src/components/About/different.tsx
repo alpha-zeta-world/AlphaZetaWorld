@@ -51,7 +51,7 @@ const styles = `
     background-color: #9CA3AF;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'different-heading' అని మార్చాను */
+ 
   .different-heading {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 38px;
@@ -294,9 +294,7 @@ const diffData = [
   }
 ];
 
-// ==========================================
-// 4. MAIN COMPONENT
-// ==========================================
+
 const WhatMakesUsDifferentSection = () => {
   return (
     <>
@@ -313,7 +311,7 @@ const WhatMakesUsDifferentSection = () => {
               <div className="different-line"></div>
             </div>
 
-            {/* 👈 ఇక్కడ క్లాస్ పేరు 'different-heading' అని మార్చాను */}
+           
             <h2 className="different-heading">
               A Smarter Approach to <span className="different-highlight">Real Results</span>
             </h2>

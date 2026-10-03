@@ -15,7 +15,7 @@ const PlatformsWeOptimize: React.FC = () => {
     {
       name: "Perplexity",
       type: "AI",
-      // Perplexity కి ఫ్రీ లోగో లేకపోవడం వల్ల ఒక సింపుల్ SVG వాడాను
+   
       logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A4D3F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>"
     },
     {
@@ -26,7 +26,7 @@ const PlatformsWeOptimize: React.FC = () => {
     {
       name: "Google",
       type: "SGE",
-      // Google SGE కి స్టార్ లాంటి ఐకాన్
+      
       logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'><path d='M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z'/></svg>"
     },
     {

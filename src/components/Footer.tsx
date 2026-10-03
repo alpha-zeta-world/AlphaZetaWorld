@@ -58,7 +58,7 @@ const socialLinks = [
 ];
 
 const Footer: React.FC = () => {
-  const logoUrl = "/Images/logo.png";
+  const logoUrl = "/Images/logo.webp";
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -257,7 +257,7 @@ const Footer: React.FC = () => {
           overflow: hidden;
         }
 
-        /* Subtle gradient overlay for depth */
+   
         .ft-footer::before {
           content: "";
 
@@ -399,9 +399,7 @@ const Footer: React.FC = () => {
           width: 100%;
         }
 
-        /* =========================
-           🎯 FLOATING SOCIAL ICONS — RIGHT SIDE
-        ========================= */
+       
 
         .ft-social-row {
           display: flex;
@@ -625,9 +623,7 @@ const Footer: React.FC = () => {
           font-size: 0.875rem;
         }
 
-        /* =========================
-           VISIBLE STATE — Animations
-        ========================= */
+       
 
         .ft-footer.ft-visible .ft-logo {
           animation:
@@ -656,7 +652,7 @@ const Footer: React.FC = () => {
             forwards;
         }
 
-        /* 🎯 Social icons — staggered pop-in from right */
+       
         .ft-footer.ft-visible .ft-social-row {
           animation:
             ftSocialRowIn
@@ -1060,9 +1056,8 @@ const Footer: React.FC = () => {
             gap: 0.75rem;
           }
 
-          /* 🎯 Social icons — mobile (right side alignment removed, centered) */
           .ft-social-row {
-            order: -1;         /* Moves social icons to TOP of bottom section */
+            order: -1;    
             justify-content: center;
             gap: 0.6rem;
           }

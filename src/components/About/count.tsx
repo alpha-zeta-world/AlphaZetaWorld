@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// ==========================================
-// 1. CSS STYLES
-// ==========================================
 const styles = `
   .achievements-section {
     width: 100%;
@@ -18,9 +15,7 @@ const styles = `
     margin: 0 auto;
   }
 
-  /* ============================
-     HEADER SECTION
-     ============================ */
+ 
   .achievements-header {
     text-align: center;
     margin-bottom: 64px;
@@ -29,7 +24,7 @@ const styles = `
     align-items: center;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-label' అని మార్చాను */
+  
   .achievements-label {
     display: flex;
     align-items: center;
@@ -46,14 +41,14 @@ const styles = `
     font-size: 13px;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-line' అని మార్చాను */
+ 
   .achievements-line {
     height: 1px;
     width: 40px;
     background-color: #9CA3AF;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-heading' అని మార్చాను */
+
   .achievements-heading {
     font-size: 36px;
     font-weight: 800;
@@ -68,12 +63,10 @@ const styles = `
     .achievements-heading { font-size: 48px; }
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-highlight' అని మార్చాను */
   .achievements-highlight {
     color: #0F3D2E;
   }
 
-  /* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-description' అని మార్చాను */
   .achievements-description {
     color: #4B5563;
     font-size: 17px;
@@ -83,9 +76,7 @@ const styles = `
     text-align: center;
   }
 
-  /* ============================
-     STATS GRID
-     ============================ */
+ 
   .stats-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -100,7 +91,7 @@ const styles = `
     .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 0; }
   }
 
-  /* Individual Stat Item */
+  
   .stat-item {
     display: flex;
     flex-direction: column;
@@ -164,9 +155,7 @@ const styles = `
   }
 `;
 
-// ==========================================
-// 2. COUNT-UP COMPONENT
-// ==========================================
+
 interface CountUpProps {
   end: number;
   duration?: number;
@@ -224,9 +213,7 @@ const CountUp: React.FC<CountUpProps> = ({ end, duration = 2000, suffix = '' }) 
   return <div ref={elementRef}>{count}{suffix}</div>;
 };
 
-// ==========================================
-// 3. DATA FOR STATS
-// ==========================================
+
 const statsData = [
   { number: 150, suffix: '+', label: 'Projects Delivered' },
   { number: 100, suffix: '+', label: 'Happy Clients' },
@@ -234,9 +221,7 @@ const statsData = [
   { number: 98, suffix: '%', label: 'Client Satisfaction' }
 ];
 
-// ==========================================
-// 4. MAIN COMPONENT
-// ==========================================
+
 const AchievementsSection = () => {
   return (
     <>
@@ -247,19 +232,19 @@ const AchievementsSection = () => {
           
           {/* Header */}
           <div className="achievements-header">
-            {/* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-label' అని మార్చాను */}
+           
             <div className="achievements-label">
               <div className="achievements-line"></div>
               <span>Our Achievements</span>
               <div className="achievements-line"></div>
             </div>
 
-            {/* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-heading' అని మార్చాను */}
+       
             <h2 className="achievements-heading">
               Numbers That Tell <span className="achievements-highlight">Our Story</span>
             </h2>
 
-            {/* 👈 ఇక్కడ క్లాస్ పేరు 'achievements-description' అని మార్చాను */}
+         
             <p className="achievements-description">
               These numbers reflect the trust our clients place in us and the impact we've created together.
             </p>

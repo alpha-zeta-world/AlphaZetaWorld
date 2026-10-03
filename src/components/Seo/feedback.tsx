@@ -77,7 +77,7 @@ const Testimonials: React.FC = () => {
           border-color: #1A4D3F;
         }
 
-        /* --- Testimonials Grid --- */
+      
         .tst-grid {
           display: grid;
           grid-template-columns: 1fr;

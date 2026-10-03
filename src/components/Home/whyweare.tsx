@@ -7,7 +7,7 @@ const styles = `
   .why-choose-section {
     width: 100%;
     background-color: #FAFAF9;
-    padding: 30px 20px; /* Padding inka thagginchamu */
+    padding: 30px 20px;
     font-family: system-ui, -apple-system, sans-serif;
     box-sizing: border-box;
     overflow: hidden;
@@ -42,7 +42,7 @@ const styles = `
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 12px; /* Margin thagginchamu */
+    margin-bottom: 12px; 
   }
 
   .section-label span {
@@ -60,15 +60,15 @@ const styles = `
   }
 
   .main-heading {
-    font-size: 30px; /* Font size thagginchamu */
+    font-size: 30px; 
     font-weight: 800;
     color: #111827;
     line-height: 1.15;
-    margin: 0 0 12px 0; /* Margin thagginchamu */
+    margin: 0 0 12px 0; 
   }
 
   @media (min-width: 768px) {
-    .main-heading { font-size: 38px; } /* Font size thagginchamu */
+    .main-heading { font-size: 38px; } 
   }
 
   .highlight-green {
@@ -77,16 +77,16 @@ const styles = `
 
   .description {
     color: #4B5563;
-    font-size: 15px; /* Font size thagginchamu */
+    font-size: 15px; 
     line-height: 1.5;
-    margin-bottom: 20px; /* Margin thagginchamu */
+    margin-bottom: 20px; 
     max-width: 450px;
   }
 
   .story-btn {
     background-color: #0F3D2E;
     color: white;
-    padding: 10px 20px; /* Padding thagginchamu */
+    padding: 10px 20px; 
     border-radius: 8px;
     font-weight: 500;
     font-size: 14px;
@@ -97,7 +97,7 @@ const styles = `
     cursor: pointer;
     transition: background-color 0.3s;
     width: fit-content;
-    margin-bottom: 24px; /* Margin thagginchamu */
+    margin-bottom: 24px; 
   }
 
   .story-btn:hover {
@@ -126,7 +126,7 @@ const styles = `
   .main-image {
     position: relative;
     width: 100%;
-    height: 220px; /* Image height inka thagginchamu */
+    height: 220px; 
     object-fit: cover;
     border-radius: 20px;
     z-index: 2;
@@ -139,7 +139,7 @@ const styles = `
     bottom: -12px;
     right: -12px;
     background-color: white;
-    padding: 10px 14px; /* Padding thagginchamu */
+    padding: 10px 14px; 
     border-radius: 12px;
     box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
     display: flex;
@@ -319,9 +319,7 @@ const GrowthIcon = () => (
   </svg>
 );
 
-// ==========================================
-// 3. DATA FOR FEATURE CARDS
-// ==========================================
+
 const featuresData = [
   {
     icon: <UsersGroupIcon />,
@@ -391,7 +389,7 @@ const WhyChooseSection = () => {
             <div className="image-block-wrapper">
               <div className="image-bg-patch"></div>
               <img 
-                src="/Images/why.png" 
+                src="/Images/why.webp" 
                 alt="Team working together" 
                 className="main-image"
               />

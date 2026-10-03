@@ -18,13 +18,13 @@ const DigitalSolutionsHero: React.FC = () => {
         .digital-hero-container {
           width: 100%;
           max-width: 1440px;
-          /* Height తగ్గించాను (620px -> 520px) */
+       
           min-height: 520px;
           margin: 0 auto;
 
           display: grid;
           grid-template-columns: 48% 52%;
-          align-items: center; /* Content ని నిలువుగా మధ్యలో ఉంచడానికి */
+          align-items: center; 
 
           position: relative;
         }
@@ -135,9 +135,7 @@ const DigitalSolutionsHero: React.FC = () => {
             box-shadow 0.25s ease;
         }
 
-        /* =================================
-           PRIMARY BUTTON
-        ================================= */
+        
 
         .primary-btn {
           min-width: 185px;
@@ -155,9 +153,7 @@ const DigitalSolutionsHero: React.FC = () => {
             0 8px 22px rgba(7, 92, 77, 0.18);
         }
 
-        /* =================================
-           SECONDARY BUTTON
-        ================================= */
+        
 
         .secondary-btn {
           min-width: 115px;
@@ -180,9 +176,7 @@ const DigitalSolutionsHero: React.FC = () => {
           line-height: 1;
         }
 
-        /* =================================
-           RIGHT IMAGE (AS CARD)
-        ================================= */
+        
 
         .digital-hero-image-wrap {
           position: relative;
@@ -193,11 +187,11 @@ const DigitalSolutionsHero: React.FC = () => {
           align-items: center;
           justify-content: center;
 
-          /* కార్డ్ కి space ఇవ్వడానికి padding */
+        
           padding: 40px 40px 40px 20px;
         }
 
-        /* ఇమేజ్ కార్డ్ స్టైల్ */
+      
         .digital-hero-image-card {
           width: 100%;
           height: 100%;
@@ -469,7 +463,7 @@ const DigitalSolutionsHero: React.FC = () => {
             <div className="digital-hero-image-card">
 
               <img
-                src="/Images/seohero.png"
+                src="/Images/seohero.webp"
                 alt="Digital solutions dashboard"
               />
 
